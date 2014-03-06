@@ -28,5 +28,4 @@ public class FailureDAO {
             em.persist(failure);
         }
     }
-    
 }
