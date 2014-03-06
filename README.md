@@ -1,0 +1,28 @@
+#GIT Commands
+
+##Get your current status
+	$ git status
+
+##Show all branches. (* denotes the branch that is currently checked out.)
+	$ git branch
+
+##Create a branch
+	$ git branch <name of branch>
+
+##While still on branch 'master', push the new branch to the remote server
+	$ git push origin <name of branch>
+
+##Checkout the new branch
+	$ git checkout <name of branch>
+
+##Add files to the staging area
+	$ git add <filename>
+
+##Commit changes with a descriptive message
+	$ git commit -m "<message>"
+
+##Push changes to remote branch
+	$ git push
+
+##Pull changes from remote branch
+	$ git pull origin <name of branch>
