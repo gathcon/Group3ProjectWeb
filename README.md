@@ -1,3 +1,8 @@
+#GIT Best Practices
+1. Create a branch for each issue/task you are taking on
+2. Work on that branch fo that issue only
+3. Merge back into master **if and only if** all tests pass
+
 #GIT Commands
 
 ##Get your current status
