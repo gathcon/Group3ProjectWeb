@@ -15,7 +15,7 @@ import model.User;
 @LocalBean
 public class UserDAO {
 
-    @PersistenceContext(unitName = "tutorial")
+    @PersistenceContext(unitName = "project")
     private EntityManager em;
     
     public User getUser(String userName) {

@@ -1,10 +1,14 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.List;
 
 @Entity
+@XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Event_Cause.findAll", query = "SELECT e FROM Event_Cause e"),
 		@NamedQuery(name = "Event_Cause.findById", query = "SELECT e FROM Event_Cause e where e.id=:id"), })

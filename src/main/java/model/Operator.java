@@ -1,10 +1,14 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.List;
 
 @Entity
+@XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Operator.findAll", query = "SELECT o FROM Operator o"),
 		@NamedQuery(name = "Operator.findById", query = "SELECT o FROM Operator o where o.id=:id"), })

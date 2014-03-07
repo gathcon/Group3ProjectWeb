@@ -9,24 +9,24 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.Operator;
-import model.OperatorPK;
+import model.Event_Cause;
+import model.Event_CausePK;
 
 @Stateless
 @LocalBean
-public class OperatorDAO {
+public class Event_CauseDAO {
 
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
-    public Operator getOperator(OperatorPK oPK) {
-    	return em.find(Operator.class, oPK);
+    public Event_Cause getEvent_Cause(Event_CausePK ecPK) {
+    	return em.find(Event_Cause.class, ecPK);
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void addOperators(List<Operator> operators) {
-        for (Operator operator : operators) {
-            em.persist(operator);
+    public void addEvent_Causes(List<Event_Cause> event_Causes) {
+        for (Event_Cause event_Cause : event_Causes) {
+            em.persist(event_Cause);
         }
     }
 }

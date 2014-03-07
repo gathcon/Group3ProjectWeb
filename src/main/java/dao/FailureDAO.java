@@ -15,7 +15,7 @@ import model.Failure;
 @LocalBean
 public class FailureDAO {
 
-    @PersistenceContext(unitName = "tutorial")
+    @PersistenceContext(unitName = "project")
     private EntityManager em;
     
     public Failure getFailure(int id) {

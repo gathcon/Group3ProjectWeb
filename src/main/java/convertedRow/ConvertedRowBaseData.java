@@ -3,7 +3,7 @@ package convertedRow;
 import java.math.BigInteger;
 import java.util.Date;
 
-import dao.EventCauseDAO;
+import dao.Event_CauseDAO;
 import dao.FailureDAO;
 import dao.OperatorDAO;
 import dao.User_EquipmentDAO;
@@ -59,12 +59,12 @@ public class ConvertedRowBaseData extends ConvertedRow {
 		this.eventId = eventid;
 		this.causeId = causeid;
 		Event_CausePK ecPK = new Event_CausePK(causeId, eventId);
-		EventCauseDAO ecd = new EventCauseDAO();
-		eventCause = ecd.getEventCause(ecPK);
+		Event_CauseDAO ecd = new Event_CauseDAO();
+		eventCause = ecd.getEvent_Cause(ecPK);
 		
 		this.userEquipmentId = uetype;
 		User_EquipmentDAO ued = new User_EquipmentDAO();
-		userEquipment = ued.getUserEquipment(userEquipmentId);
+		userEquipment = ued.getUser_Equipment(userEquipmentId);
 		
 		this.mcc = mcc;
 		this.mnc = mnc;
