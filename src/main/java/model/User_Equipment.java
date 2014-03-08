@@ -1,10 +1,14 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.List;
 
 @Entity
+@XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "User_Equipment.findAll", query = "SELECT ue FROM User_Equipment ue"),
 		@NamedQuery(name = "User_Equipment.findById", query = "SELECT ue FROM User_Equipment ue where ue.userEquipmentId=:userEquipmentId"), })

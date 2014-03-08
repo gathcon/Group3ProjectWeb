@@ -15,7 +15,7 @@ import model.Failure;
 @LocalBean
 public class FailureDAO {
 
-    @PersistenceContext(unitName = "tutorial")
+    @PersistenceContext(unitName = "project")
     private EntityManager em;
     
     public Failure getFailure(int id) {
@@ -28,4 +28,11 @@ public class FailureDAO {
             em.persist(failure);
         }
     }
+
+	public List<Failure> getAllFailures() {
+		@SuppressWarnings("unchecked")
+		List<Failure> failures = (List<Failure>) em.createNamedQuery("Failure.findAll").getResultList();
+		
+		return failures;
+	}
 }

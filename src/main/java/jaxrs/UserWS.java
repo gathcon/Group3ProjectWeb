@@ -27,6 +27,12 @@ public class UserWS {
         return usersDao.getUser(userName);
     }
     
+    @GET
+    @Path("/all_Users/")
+    public List<User> getUserList() {
+        return usersDao.getAllUsers();
+    }
+    
     @POST
     public void addUsers(List<User> users) {
         usersDao.addUsers(users);

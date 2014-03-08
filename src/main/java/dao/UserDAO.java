@@ -15,7 +15,7 @@ import model.User;
 @LocalBean
 public class UserDAO {
 
-    @PersistenceContext(unitName = "tutorial")
+    @PersistenceContext(unitName = "project")
     private EntityManager em;
     
     public User getUser(String userName) {
@@ -28,4 +28,11 @@ public class UserDAO {
             em.persist(user);
         }
     }
+
+	public List<User> getAllUsers() {
+		@SuppressWarnings("unchecked")
+		List<User> users = (List<User>) em.createNamedQuery("User.findAll").getResultList();
+		
+		return users;
+	}
 }
