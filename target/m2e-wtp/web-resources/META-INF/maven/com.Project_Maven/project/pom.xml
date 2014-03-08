@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.Project_Maven</groupId>
 	<artifactId>project</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>Group3ProjectWeb</version>
 	<packaging>war</packaging>
 	<build>
 		<plugins>
