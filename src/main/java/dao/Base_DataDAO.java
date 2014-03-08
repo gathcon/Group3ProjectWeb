@@ -29,15 +29,15 @@ public class Base_DataDAO {
         }
     }
 
-//	public List<Base_Data> getBase_DataList(int failure) {
-//		@SuppressWarnings("unchecked")
-//		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByFailureId").
-//		setParameter("failure", failure).getResultList();
-//		if (Base_Data.size() == 0)
-//			return null;
-//		else 
-//			return Base_Data;	
-//	}
+	public List<Base_Data> getBase_DataByFailureId(int failureId) {
+		@SuppressWarnings("unchecked")
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByFailureId").
+		setParameter("failureId", failureId).getResultList();
+		if (Base_Data.size() == 0)
+			return null;
+		else 
+			return Base_Data;	
+	}
 
 	public List<Base_Data> getAllBase_Data() {
 		@SuppressWarnings("unchecked")

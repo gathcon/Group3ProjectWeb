@@ -33,6 +33,12 @@ public class Base_DataWS {
         return base_DatasDao.getAllBase_Data();
     }
     
+    @GET
+    @Path("/base_DataByFailureId/{failureId}")
+    public List<Base_Data> getBase_DataByFailureId(@PathParam("failureId") int failureId) {
+        return base_DatasDao.getBase_DataByFailureId(failureId);
+    }
+    
     @POST
     public void addBase_Datas(List<Base_Data> base_Datas) {
         base_DatasDao.addBase_Datas(base_Datas);
