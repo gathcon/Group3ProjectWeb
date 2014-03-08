@@ -28,4 +28,21 @@ public class Base_DataDAO {
             em.persist(base_Data);
         }
     }
+
+//	public List<Base_Data> getBase_DataList(int failure) {
+//		@SuppressWarnings("unchecked")
+//		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByFailureId").
+//		setParameter("failure", failure).getResultList();
+//		if (Base_Data.size() == 0)
+//			return null;
+//		else 
+//			return Base_Data;	
+//	}
+
+	public List<Base_Data> getAllBase_Data() {
+		@SuppressWarnings("unchecked")
+		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAll").getResultList();
+		
+		return base_Data;
+	}
 }

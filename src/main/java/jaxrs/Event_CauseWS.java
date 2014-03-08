@@ -33,6 +33,12 @@ public class Event_CauseWS {
         return event_CausesDao.getEvent_Cause(ecPK);
     }
     
+    @GET
+    @Path("/all_Event_Causes/")
+    public List<Event_Cause> getEvent_CauseList() {
+        return event_CausesDao.getAllEvent_Causes();
+    }
+    
     @POST
     public void addEvent_Causes(List<Event_Cause> event_Causes) {
         event_CausesDao.addEvent_Causes(event_Causes);

@@ -29,4 +29,11 @@ public class Event_CauseDAO {
             em.persist(event_Cause);
         }
     }
+
+	public List<Event_Cause> getAllEvent_Causes() {
+		@SuppressWarnings("unchecked")
+		List<Event_Cause> event_Causes = (List<Event_Cause>) em.createNamedQuery("Event_Cause.findAll").getResultList();
+		
+		return event_Causes;
+	}
 }

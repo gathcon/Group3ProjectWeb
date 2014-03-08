@@ -28,4 +28,11 @@ public class FailureDAO {
             em.persist(failure);
         }
     }
+
+	public List<Failure> getAllFailures() {
+		@SuppressWarnings("unchecked")
+		List<Failure> failures = (List<Failure>) em.createNamedQuery("Failure.findAll").getResultList();
+		
+		return failures;
+	}
 }

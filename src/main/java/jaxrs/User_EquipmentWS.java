@@ -27,6 +27,12 @@ public class User_EquipmentWS {
         return user_EquipmentsDao.getUser_Equipment(id);
     }
     
+    @GET
+    @Path("/all_User_Equipments/")
+    public List<User_Equipment> getOperatorList() {
+        return user_EquipmentsDao.getAllUser_Equipments();
+    }
+    
     @POST
     public void addUser_Equipments(List<User_Equipment> user_Equipments) {
         user_EquipmentsDao.addUser_Equipments(user_Equipments);

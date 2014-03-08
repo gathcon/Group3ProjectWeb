@@ -33,6 +33,12 @@ public class OperatorWS {
         return operatorsDao.getOperator(oPK);
     }
     
+    @GET
+    @Path("/all_Operators/")
+    public List<Operator> getOperatorList() {
+        return operatorsDao.getAllOperators();
+    }
+    
     @POST
     public void addOperators(List<Operator> operators) {
         operatorsDao.addOperators(operators);

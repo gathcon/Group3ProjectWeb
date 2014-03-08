@@ -27,6 +27,12 @@ public class FailureWS {
         return failuresDao.getFailure(id);
     }
     
+    @GET
+    @Path("/all_Failures/")
+    public List<Failure> getFailureList() {
+        return failuresDao.getAllFailures();
+    }
+    
     @POST
     public void addFailures(List<Failure> failures) {
         failuresDao.addFailures(failures);

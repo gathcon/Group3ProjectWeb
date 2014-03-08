@@ -28,4 +28,11 @@ public class UserDAO {
             em.persist(user);
         }
     }
+
+	public List<User> getAllUsers() {
+		@SuppressWarnings("unchecked")
+		List<User> users = (List<User>) em.createNamedQuery("User.findAll").getResultList();
+		
+		return users;
+	}
 }

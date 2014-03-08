@@ -29,4 +29,11 @@ public class OperatorDAO {
             em.persist(operator);
         }
     }
+
+	public List<Operator> getAllOperators() {
+		@SuppressWarnings("unchecked")
+		List<Operator> operators = (List<Operator>) em.createNamedQuery("Operator.findAll").getResultList();
+		
+		return operators;
+	}
 }

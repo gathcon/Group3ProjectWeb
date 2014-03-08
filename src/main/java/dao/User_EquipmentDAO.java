@@ -28,4 +28,11 @@ public class User_EquipmentDAO {
             em.persist(user_Equipment);
         }
     }
+
+	public List<User_Equipment> getAllUser_Equipments() {
+		@SuppressWarnings("unchecked")
+		List<User_Equipment> user_Equipments = (List<User_Equipment>) em.createNamedQuery("User_Equipment.findAll").getResultList();
+		
+		return user_Equipments;
+	}
 }
