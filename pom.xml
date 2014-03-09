@@ -102,6 +102,12 @@
 			<version>3.10-beta2</version>
 		</dependency>
 		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			
+		</dependency>
+		<dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-ejb3</artifactId>
 			<version>7.2.0.Final</version>
