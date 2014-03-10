@@ -12,5 +12,7 @@ ON the index page
 <a href="jaxrs/user_Equipments/100100">XML</a> <br>
 <a href="jaxrs/user_Equipments/jsp/100100">Return page</a> <br>
 
+<input type="button" value="Log Out" onClick="self.location='/project-Group3ProjectWeb/jaxrs/base_Datas/all_Base_Datas/'">
+
 </body>
 </html>
