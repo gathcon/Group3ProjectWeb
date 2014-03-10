@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -33,6 +34,17 @@ public class Base_DataDAO {
 		@SuppressWarnings("unchecked")
 		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByFailureId").
 		setParameter("failureId", failureId).getResultList();
+		if (Base_Data.size() == 0)
+			return null;
+		else 
+			return Base_Data;	
+	}
+	
+	public List<Base_Data> getBase_DataByDateRange(Date startDate, Date endDate) {
+		@SuppressWarnings("unchecked")
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByDateRange").
+		setParameter("startDate", startDate)
+		.setParameter("endDate", endDate).getResultList();
 		if (Base_Data.size() == 0)
 			return null;
 		else 
