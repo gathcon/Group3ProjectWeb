@@ -8,6 +8,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -58,6 +60,15 @@ public class Base_DataWS {
     @POST
     public void addBase_Datas(List<Base_Data> base_Datas) {
         base_DatasDao.addBase_Datas(base_Datas);
+    }
+    
+    @POST
+    @Path("/json")
+    //@Consumes(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
+   // @Produces(MediaType.APPLICATION_JSON)
+    public void getDateTime(@FormParam("datetimepicker") String dateTime) {
+       System.out.println("JSON date " + dateTime);
     }
     
 }
