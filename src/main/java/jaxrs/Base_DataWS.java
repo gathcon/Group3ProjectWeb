@@ -30,6 +30,7 @@ public class Base_DataWS {
 
     @GET
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Base_Data getBase_Data(@PathParam("id") int id) {
         return base_DatasDao.getBase_Data(id);
     }
