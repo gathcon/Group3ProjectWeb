@@ -1,5 +1,6 @@
 package jaxrs;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,7 +49,16 @@ public class Base_DataWS {
     }
     
     @GET
+<<<<<<< HEAD
     @Produces(MediaType.APPLICATION_JSON)
+=======
+    @Path("/eventID_CauseCodeByImsi/{imsi}")
+    public List<Integer> getEventID_CauseCodeByImsi(@PathParam("imsi") BigInteger imsi) {
+        return base_DatasDao.getEventID_CauseCodeByImsi(imsi);
+    }
+    
+    @GET
+>>>>>>> ed0c723c62239f7b283bde0a4d1dd0129941baec
     @Path("/base_DataByDateRange/{startDateString}/{endDateString}")
     public List<Base_Data> getBase_DataByDateRange(@PathParam("startDateString") String startDateString,
     		@PathParam("endDateString") String endDateString) throws ParseException {
