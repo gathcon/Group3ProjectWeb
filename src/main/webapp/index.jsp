@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
- 	<link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css"/>
 </head>
 <body>
-    <form id="mydateform" action="jaxrs/base_Datas/json" title="" method="post">
-        <div>
-      		<input id="datetimepicker" name="datetimepicker" type="text" >
-
-        </div>
-        
-        <div>
-            <input type="submit" id="submitButton"  name="submitButton" value="Submit">
-        </div>
- 	</form>
- 
-
+ 	
+ 	<h>Login was successful.</h>
+ 	<br>
+ 	<input type="button" value="Go to Query Page" onClick="self.location='IMSIWithFailuresQuery.jsp'">
 
 <script src="jquery-1.11.0.js"></script>
-<script src="jquery.datetimepicker.js"></script>
-<script type='text/javascript'>$('#datetimepicker').datetimepicker();</script>
 
 
 </body>
