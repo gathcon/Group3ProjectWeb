@@ -56,6 +56,7 @@ public class Base_DataWS {
     }
     
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/base_DataByDateRange/{startDateString}/{endDateString}")
     public List<Base_Data> getBase_DataByDateRange(@PathParam("startDateString") String startDateString,
     		@PathParam("endDateString") String endDateString) throws ParseException {
