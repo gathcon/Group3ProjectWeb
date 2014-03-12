@@ -79,4 +79,19 @@ public class Base_DataWS {
        System.out.println("JSON date " + dateTime);
     }
     
+    @POST
+    @Path("/imsifailure")
+    //@Consumes(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Number checkForImsiFailuresBetweenDates(@FormParam("startDate") String startDate, @FormParam("endDate") String endDate, @FormParam("imsi") String imsi) throws ParseException {
+    	//System.out.println("Hello " + startDate + " " + endDate + " " + imsi);
+    	Date startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
+    	//String endDateString = "2013-01-11 17:22:00.0";
+    	Date endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);   	
+    	
+    	BigInteger imsibigint = BigInteger.valueOf(Long.parseLong(imsi));
+    	return base_DatasDao.imsiFailureCountBetweenDates(startD, endD, imsibigint);
+    }
+    
 }
