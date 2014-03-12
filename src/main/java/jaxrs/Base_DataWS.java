@@ -1,5 +1,6 @@
 package jaxrs;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,6 +46,12 @@ public class Base_DataWS {
     @Path("/base_DataByFailureId/{failureId}")
     public List<Base_Data> getBase_DataByFailureId(@PathParam("failureId") int failureId) {
         return base_DatasDao.getBase_DataByFailureId(failureId);
+    }
+    
+    @GET
+    @Path("/eventID_CauseCodeByImsi/{imsi}")
+    public List<Integer> getEventID_CauseCodeByImsi(@PathParam("imsi") BigInteger imsi) {
+        return base_DatasDao.getEventID_CauseCodeByImsi(imsi);
     }
     
     @GET

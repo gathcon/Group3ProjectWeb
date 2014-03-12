@@ -1,5 +1,6 @@
 package dao;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -56,5 +57,15 @@ public class Base_DataDAO {
 		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAll").getResultList();
 		
 		return base_Data;
+	}
+
+	public List<Integer> getEventID_CauseCodeByImsi(BigInteger imsi) {
+		@SuppressWarnings("unchecked")
+		List<Integer> Base_Data = (List<Integer>) em.createNamedQuery("Base_Data.findEventID_CauseCodeByImsi").
+		setParameter("imsi", imsi).getResultList();
+		if (Base_Data.size() == 0)
+			return null;
+		else 
+			return Base_Data;
 	}
 }
