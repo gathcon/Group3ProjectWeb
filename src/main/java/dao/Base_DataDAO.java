@@ -68,4 +68,11 @@ public class Base_DataDAO {
 		else 
 			return Base_Data;
 	}
+	
+	public Number imsiFailureCountBetweenDates(Date startDate, Date endDate, BigInteger imsi){
+		Number number = null;
+		number = (Number) em.createNamedQuery("Base_Data.findFailuresByImsiAndByDateRange").setParameter("imsi", imsi).setParameter("startDate", startDate).setParameter("endDate", endDate).getSingleResult();
+		return number;
+	}
+	
 }
