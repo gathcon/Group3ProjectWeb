@@ -57,13 +57,13 @@ public class Base_DataWS {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/base_DataByDateRange/{startDateString}/{endDateString}")
-    public List<Base_Data> getBase_DataByDateRange(@PathParam("startDateString") String startDateString,
+    @Path("/IMSIByDateRange/{startDateString}/{endDateString}")
+    public List<Base_Data> getIMSIByDateRange(@PathParam("startDateString") String startDateString,
     		@PathParam("endDateString") String endDateString) throws ParseException {
     	
     	Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(startDateString);
     	Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(endDateString);
-        return base_DatasDao.getBase_DataByDateRange(startDate, endDate);
+        return base_DatasDao.getIMSIByDateRange(startDate, endDate);
     }
     
     @POST

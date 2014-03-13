@@ -1,32 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="jquery-1.11.0.js"></script>
+<script>
+
+	function getJSON(url) {
+
+		var JSONRequest = new XMLHttpRequest();
+
+		JSONRequest.open("GET", url, false);
+		JSONRequest.send(null);
+
+		//document.write("JSON Response Text =" + JSONRequest.responseText);
+		var txt = JSONRequest.responseText;
+		var obj = eval("(" + txt + ")");
+		var size = obj.length;
+		
+		var imsi = obj[0].imsi;
+
+		document.getElementById("objects").innerHTML = obj;
+		document.getElementById("imsi").innerHTML = imsi;
+		document.getElementById("allText").innerHTML = txt;	
+		document.getElementById("size").innerHTML = size;
+	}
+</script>
 </head>
 
 <body>
 	<h> <b>Get IMSIs with failures between date range.</b></h>
 	<hr>
 
-	<form id="myDateRangeForm"
-		onsubmit="location.href='jaxrs/base_Datas/base_DataByDateRange/' + 
-			document.getElementById('startdatetimepicker').value + '/' + document.getElementById('enddatetimepicker').value; return false;"
-		title="" method="get">
-		<div>
-			<label for="startDate">Start Date</label> 
-				<input id="startdatetimepicker" name="startDate" type="text"
-				value="YYYY-MM-DD HH:mm:ss.S"> 
-				
-			<label for="endDate">End Date</label> 
-				<input id="enddatetimepicker" name="endDate" type="text"
-				value="YYYY-MM-DD HH:mm:ss.S">
-		</div>
+	<div>
+		<input id="startdatetime" name="startDate" type="text"
+			value="YYYY-MM-DD HH:mm:ss.S"> <label for="startDate">Start
+			Date</label> <input id="enddatetime" name="endDate" type="text"
+			value="YYYY-MM-DD HH:mm:ss.S"> <label for="endDate">End
+			Date</label>
+	</div>
 
-		<div>
-			<input type="submit" id="submitButton" name="submitButton"
-				value="Query">
-		</div>
-	</form>
+	<button type="button"
+		onclick="getJSON('jaxrs/base_Datas/IMSIByDateRange/' + 
+	document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value)">Do
+		Stuff</button>
 
+	<br>
+	
+	<!-- <div>
+	<table id="resultstable" style="width: 500px">
+		<tr>
+			<td>Failure Date Time</td>
+			<td>Failure IMSI</td>
+		</tr>
+	</table>
+	</div> -->
+	
+	<br>
+	<p id="objects">Objects</p>
+	<p id="imsi">IMSI:</p>
+	<p id="allText">Date Time:</p>
+	<p id="size">Size</p>	
+	
 </body>
 </html>
