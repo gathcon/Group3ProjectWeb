@@ -1,33 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<script>
+
+	function getJSON(url) {
+
+		var JSONRequest = new XMLHttpRequest();
+
+		JSONRequest.open("GET", url, false);
+		JSONRequest.send(null);
+
+		//document.write("JSON Response Text =" + JSONRequest.responseText);
+		var txt = JSONRequest.responseText;
+		var obj = eval("(" + txt + ")");
+		
+		
+		
+
+		document.getElementById("msg").innerHTML = "The number of failures for this imsi";
+		document.getElementById("count").innerHTML = obj;
+		
+	}
+</script>
 </head>
+
 <body>
-	<b>Get IMSIs with failures between date range.</b></h>
-	<hr>
+	 <b>Get the count of failures for an imsi between date range.</b>
+	<br>
 
-	<form id="myDateRangeForm" action="jaxrs/base_Datas/imsifailure" title="" method="post">
-		<div>
-			<label for="imsi">imsi</label> 
-			<input id="imsi" name="imsi" type="text"> 
-				
-			<label for="startDate">Start Date</label> 
-				<input id="startdatetimepicker" name="startDate" type="text"
-				value="YYYY-MM-DD HH:mm:ss"> 
-				
-			<label for="endDate">End Date</label> 
-				<input id="enddatetimepicker" name="endDate" type="text"
-				value="YYYY-MM-DD HH:mm:ss">
-		</div>
+	<div>
+	 <label for="imsi">imsi</label> 
+		<input id="imsi" name="imsi" type="text"
+			value=""> <br>
+			
+			<label for="startDate">Start
+			Date</label>
+		<input id="startdatetime" name="startDate" type="text"
+			value="YYYY-MM-DD HH:mm:ss"> <br> 
+			
+			<label for="endDate">End
+			Date</label>
+			<input id="enddatetime" name="endDate" type="text"
+			value="YYYY-MM-DD HH:mm:ss"> 
+	</div>
 
-		<div>
-			<input type="submit" id="submitButton" name="submitButton"
-				value="Query">
-		</div>
-	</form>
+	<button type="button"
+		onclick="getJSON('jaxrs/base_Datas/imsifailure/' + 
+	document.getElementById('imsi').value + '/' + document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value)">Query DB</button>
+
+	<br>
+	
+	
+	
+	<br>
+	<p id="msg"></p>
+	<p id="count"></p>
+	
+	
 </body>
 </html>
