@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="jquery-1.11.0.js"></script>
+<script Language="javascript" src="jquery-1.11.0.js">
+
+</script>
 </head>
 
 <body>
@@ -9,7 +11,7 @@
 	<hr>
 
 	<form id="myDateRangeForm"
-		onsubmit="location.href='jaxrs/base_Datas/base_DataByDateRange/' + 
+		onsubmit="location.href='jaxrs/base_Datas/IMSIByDateRange/' + 
 			document.getElementById('startdatetimepicker').value + '/' + document.getElementById('enddatetimepicker').value; return false;"
 		title="" method="get">
 		<div>

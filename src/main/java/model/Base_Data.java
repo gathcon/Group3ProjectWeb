@@ -15,7 +15,7 @@ import java.util.Date;
 		@NamedQuery(name = "Base_Data.findAll", query = "SELECT b FROM Base_Data b"),
 		@NamedQuery(name = "Base_Data.findById", query = "SELECT b FROM Base_Data b where b.dataId=:dataId"),
 		@NamedQuery(name = "Base_Data.findByFailureId", query = "SELECT b FROM Base_Data b where b.failure.failureId=:failureId"),
-		@NamedQuery(name = "Base_Data.findByDateRange", query = "SELECT b.imsi FROM Base_Data b WHERE b.dateTime BETWEEN :startDate AND :endDate")})
+		@NamedQuery(name = "Base_Data.findIMSIByDateRange", query = "SELECT b FROM Base_Data b WHERE b.dateTime BETWEEN :startDate AND :endDate")})
 public class Base_Data extends TableRow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
