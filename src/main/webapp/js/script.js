@@ -7,7 +7,7 @@ function getJSON(url) {
 	var obj = null;
 	
 	if (JSONRequest.responseText == "") {
-		document.getElementById("error").innerHTML="Not a user";
+		document.getElementById("error").innerHTML="No data";
 	}
 	else {
 		txt = JSONRequest.responseText;
@@ -47,7 +47,7 @@ function goToView(JSONObject) {
 	switch (JSONObject.userType) {
 	case 'Network Engineer':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./userInfo.jsp");
+		window.location.replace("./viewSysAdmin.jsp");
 		break;
 	case 'System Administrator':
 		document.write("Loading the page for a " + JSONObject.userType);
@@ -80,4 +80,12 @@ function login() {
 		document.getElementById("error").innerHTML="Invalid Username";
 	}
 
+}
+
+function methodcall() {
+	var obj = getJSON("./jaxrs/users");
+	document.getElementById("userlist").innerHTML= "This: " + obj;
+	for (var i=0; i < obj.length; i++) {
+		document.getElementById("userlist").innerHTML="<p>"+obj[i].username+"</p>";
+	}
 }
