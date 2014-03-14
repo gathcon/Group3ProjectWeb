@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -21,7 +22,7 @@ import reader.Loader;
 @LocalBean
 public class DataLoaderWS {
  
-	@EJB
+	@Inject
 	private Loader loader;
 	
 	@POST
@@ -42,7 +43,7 @@ public class DataLoaderWS {
 		System.out.println("Done");
  
 		
-	//	loader.loadFile(fileName);
+		loader.loadFile(fileName);
 		
 		return Response.status(200)
 		    .entity("uploadFile is called, Uploaded file name : " + fileName).build();
