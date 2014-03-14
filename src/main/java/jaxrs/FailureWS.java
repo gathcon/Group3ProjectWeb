@@ -24,7 +24,9 @@ public class FailureWS {
     @GET
     @Path("/{id}")
     public Failure getFailure(@PathParam("id") int id) {
-        return failuresDao.getFailure(id);
+       
+    	System.out.println("Service class reached");
+    	return failuresDao.getFailure(id);
     }
     
     @GET

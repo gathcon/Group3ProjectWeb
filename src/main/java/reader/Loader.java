@@ -3,29 +3,53 @@ package reader;
 import java.io.FileInputStream;
 import java.io.IOException;
   
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import logger.ErrorLogger;
+import model.Failure;
 import model.TableRow;
   
+
+
+
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
   
+
+
+
+
 import persistence.PersistenceUtil;
 import convertedRow.ConvertedRow;
 import convertedRow.RowConverter;
 import entityCreator.EntityCreator;
 import entityCreator.EntityType;
-  
+
+@Stateless
+@LocalBean
 public class Loader {
       
     private DomainTableReader reader;
     private BaseDataTableReader baseReader;
     private ErrorLogger errorLogger;
     private int[] rowsInTables;
-      
+    
+    @EJB
+    private EntityPersistenceDistribution epd;
+    
+    private List<Failure> failures;
+    
+    
     public Loader(){
         errorLogger = new ErrorLogger();
+       // epd = new EntityPersistenceDistribution();
     }
       
     public void loadFile(String excelWorkBookLocation)  {
@@ -100,7 +124,10 @@ public class Loader {
                 RowConverter converter = new RowConverter();
                 convertedRow = converter.convert(row, e);
                 TableRow entity = EntityCreator.getEntity(convertedRow);
-                PersistenceUtil.persist(entity);
+               
+                
+                //PersistenceUtil.persist(entity);
+                epd.find(entity, e);
             }       
         }
         System.out.println(e.toString() + " Entities persisted");

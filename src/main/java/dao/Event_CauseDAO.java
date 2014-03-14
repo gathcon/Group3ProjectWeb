@@ -36,4 +36,9 @@ public class Event_CauseDAO {
 		
 		return event_Causes;
 	}
+
+	public void addEvent_Cause(Object entity) {
+		em.persist(entity);
+		
+	}
 }
