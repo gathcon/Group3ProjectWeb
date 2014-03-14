@@ -58,13 +58,13 @@ public class Base_DataWS {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/base_DataByDateRange/{startDateString}/{endDateString}")
-    public List<Base_Data> getBase_DataByDateRange(@PathParam("startDateString") String startDateString,
+    @Path("/IMSIByDateRange/{startDateString}/{endDateString}")
+    public List<Base_Data> getIMSIByDateRange(@PathParam("startDateString") String startDateString,
     		@PathParam("endDateString") String endDateString) throws ParseException {
     	
     	Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(startDateString);
     	Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(endDateString);
-        return base_DatasDao.getBase_DataByDateRange(startDate, endDate);
+        return base_DatasDao.getIMSIByDateRange(startDate, endDate);
     }
     
     @POST
@@ -72,24 +72,17 @@ public class Base_DataWS {
         base_DatasDao.addBase_Datas(base_Datas);
     }
     
-    @POST
-    @Path("/json")
-    //@Consumes(MediaType.APPLICATION_JSON)
-    @Consumes("application/x-www-form-urlencoded")
-   // @Produces(MediaType.APPLICATION_JSON)
-    public void getDateTime(@FormParam("datetimepicker") String dateTime) {
-       System.out.println("JSON date " + dateTime);
-    }
+ 
     
-    @POST
-    @Path("/imsifailure")
-    //@Consumes(MediaType.APPLICATION_JSON)
-    @Consumes("application/x-www-form-urlencoded")
+    @GET
+    @Path("/imsifailure/{imsi}/{startDate}/{endDate}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Number checkForImsiFailuresBetweenDates(@FormParam("startDate") String startDate, @FormParam("endDate") String endDate, @FormParam("imsi") String imsi) throws ParseException {
-    	//System.out.println("Hello " + startDate + " " + endDate + " " + imsi);
+    public Number checkForAnImsisFailuresBetweenDates(@PathParam("imsi") String imsi,@PathParam("startDate") String startDate,
+    		@PathParam("endDate") String endDate) throws ParseException {
+    		
+    	System.out.println(" imsi " + imsi + " start " + startDate + "end " + endDate);
+    	
     	Date startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
-    	//String endDateString = "2013-01-11 17:22:00.0";
     	Date endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);   	
     	
     	BigInteger imsibigint = BigInteger.valueOf(Long.parseLong(imsi));

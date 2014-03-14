@@ -42,9 +42,9 @@ public class Base_DataDAO {
 			return Base_Data;	
 	}
 	
-	public List<Base_Data> getBase_DataByDateRange(Date startDate, Date endDate) {
+	public List<Base_Data> getIMSIByDateRange(Date startDate, Date endDate) {
 		@SuppressWarnings("unchecked")
-		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByDateRange").
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findIMSIByDateRange").
 		setParameter("startDate", startDate)
 		.setParameter("endDate", endDate).getResultList();
 		if (Base_Data.size() == 0)
