@@ -4,6 +4,7 @@
 <script>
 	function getJSON(url) {
 
+		try{
 		var JSONRequest = new XMLHttpRequest();
 
 		JSONRequest.open("GET", url, false);
@@ -24,6 +25,11 @@
 		myTable += "</table>";
 
 		document.getElementById("tablespace").innerHTML = myTable;
+
+		}
+		catch(err){
+			document.getElementById("tablespace").innerHTML = "No record found for date range submitted ";
+			}
 	}
 </script>
 </head>
