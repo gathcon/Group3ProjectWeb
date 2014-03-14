@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import model.Base_Data;
+import model.Event_Cause;
 import dao.Base_DataDAO;
 
 @Path("/base_Datas")
@@ -51,7 +52,7 @@ public class Base_DataWS {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/eventID_CauseCodeByImsi/{imsi}")
-    public List<Integer> getEventID_CauseCodeByImsi(@PathParam("imsi") BigInteger imsi) {
+    public List<Event_Cause> getEventID_CauseCodeByImsi(@PathParam("imsi") BigInteger imsi) {
         return base_DatasDao.getEventID_CauseCodeByImsi(imsi);
     }
     
@@ -71,24 +72,17 @@ public class Base_DataWS {
         base_DatasDao.addBase_Datas(base_Datas);
     }
     
-    @POST
-    @Path("/json")
-    //@Consumes(MediaType.APPLICATION_JSON)
-    @Consumes("application/x-www-form-urlencoded")
-   // @Produces(MediaType.APPLICATION_JSON)
-    public void getDateTime(@FormParam("datetimepicker") String dateTime) {
-       System.out.println("JSON date " + dateTime);
-    }
+ 
     
-    @POST
-    @Path("/imsifailure")
-    //@Consumes(MediaType.APPLICATION_JSON)
-    @Consumes("application/x-www-form-urlencoded")
+    @GET
+    @Path("/imsifailure/{imsi}/{startDate}/{endDate}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Number checkForImsiFailuresBetweenDates(@FormParam("startDate") String startDate, @FormParam("endDate") String endDate, @FormParam("imsi") String imsi) throws ParseException {
-    	//System.out.println("Hello " + startDate + " " + endDate + " " + imsi);
+    public Number checkForAnImsisFailuresBetweenDates(@PathParam("imsi") String imsi,@PathParam("startDate") String startDate,
+    		@PathParam("endDate") String endDate) throws ParseException {
+    		
+    	System.out.println(" imsi " + imsi + " start " + startDate + "end " + endDate);
+    	
     	Date startD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
-    	//String endDateString = "2013-01-11 17:22:00.0";
     	Date endD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);   	
     	
     	BigInteger imsibigint = BigInteger.valueOf(Long.parseLong(imsi));

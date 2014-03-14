@@ -36,4 +36,9 @@ public class OperatorDAO {
 		
 		return operators;
 	}
+
+	public void addOperator(Object entity) {
+		em.persist(entity);
+		
+	}
 }

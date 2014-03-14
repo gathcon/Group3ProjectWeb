@@ -5,10 +5,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 import model.User;
 import dao.UserDAO;
@@ -23,12 +21,13 @@ public class UserWS {
 
     @GET
     @Path("/{userName}")
+    @Produces(MediaType.APPLICATION_JSON)
     public User getUser(@PathParam("userName") String userName) {
         return usersDao.getUser(userName);
     }
     
     @GET
-    @Path("/all_Users/")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUserList() {
         return usersDao.getAllUsers();
     }

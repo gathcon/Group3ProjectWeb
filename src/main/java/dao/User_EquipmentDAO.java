@@ -35,4 +35,9 @@ public class User_EquipmentDAO {
 		
 		return user_Equipments;
 	}
+
+	public void addUser_Equipment(Object entity) {
+		em.persist(entity);
+		
+	}
 }
