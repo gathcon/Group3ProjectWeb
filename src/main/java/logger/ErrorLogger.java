@@ -52,7 +52,7 @@ public class ErrorLogger implements Serializable
 		try
 		{
 			Date date = new Date();
-			name = "log/log" + date.toString() + ".txt";
+			name = "/home/log" + date.toString() + ".txt";
 			file = new PrintWriter(name);
 			for (int i = 0; i < cellVectorHolder.size(); i++)
 			{

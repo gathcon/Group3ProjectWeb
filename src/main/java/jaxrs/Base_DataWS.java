@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import model.Base_Data;
+import model.Event_Cause;
 import dao.Base_DataDAO;
 
 @Path("/base_Datas")
@@ -51,7 +52,7 @@ public class Base_DataWS {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/eventID_CauseCodeByImsi/{imsi}")
-    public List<Integer> getEventID_CauseCodeByImsi(@PathParam("imsi") BigInteger imsi) {
+    public List<Event_Cause> getEventID_CauseCodeByImsi(@PathParam("imsi") BigInteger imsi) {
         return base_DatasDao.getEventID_CauseCodeByImsi(imsi);
     }
     

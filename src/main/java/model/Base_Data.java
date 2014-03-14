@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @XmlRootElement
 @NamedQueries({
-		@NamedQuery(name = "Base_Data.findEventID_CauseCodeByImsi", query = "SELECT b.eventCause.id.eventId, b.eventCause.id.causeCode FROM Base_Data b where b.imsi=:imsi"),
+		@NamedQuery(name = "Base_Data.findEventID_CauseCodeByImsi", query = "SELECT b.eventCause FROM Base_Data b where b.imsi=:imsi"),
 		@NamedQuery(name = "Base_Data.findAll", query = "SELECT b FROM Base_Data b"),
 		@NamedQuery(name = "Base_Data.findById", query = "SELECT b FROM Base_Data b where b.dataId=:dataId"),
 		@NamedQuery(name = "Base_Data.findByFailureId", query = "SELECT b FROM Base_Data b where b.failure.failureId=:failureId"),

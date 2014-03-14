@@ -35,4 +35,9 @@ public class FailureDAO {
 		
 		return failures;
 	}
+
+	public void addFailure(Failure failure) {
+		em.persist(failure);
+		
+	}
 }

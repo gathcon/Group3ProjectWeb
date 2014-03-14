@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Base_Data;
+import model.Event_Cause;
 
 @Stateless
 @LocalBean
@@ -59,20 +60,25 @@ public class Base_DataDAO {
 		return base_Data;
 	}
 
-	public List<Integer> getEventID_CauseCodeByImsi(BigInteger imsi) {
+	public List<Event_Cause> getEventID_CauseCodeByImsi(BigInteger imsi) {
 		@SuppressWarnings("unchecked")
-		List<Integer> Base_Data = (List<Integer>) em.createNamedQuery("Base_Data.findEventID_CauseCodeByImsi").
+		List<Event_Cause> Event_Cause = (List<Event_Cause>) em.createNamedQuery("Base_Data.findEventID_CauseCodeByImsi").
 		setParameter("imsi", imsi).getResultList();
-		if (Base_Data.size() == 0)
+		if (Event_Cause.size() == 0)
 			return null;
 		else 
-			return Base_Data;
+			return Event_Cause;
 	}
 	
 	public Number imsiFailureCountBetweenDates(Date startDate, Date endDate, BigInteger imsi){
 		Number number = null;
 		number = (Number) em.createNamedQuery("Base_Data.findFailuresByImsiAndByDateRange").setParameter("imsi", imsi).setParameter("startDate", startDate).setParameter("endDate", endDate).getSingleResult();
 		return number;
+	}
+
+	public void addBase_Data(Object base_Data) {
+		em.persist(base_Data);
+		
 	}
 	
 }
