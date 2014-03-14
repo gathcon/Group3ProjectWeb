@@ -11,17 +11,13 @@
 <body>
 	<h1>Login Page</h1>
 	<hr>
-	<h2>User Login</h2>
-	<form action="" method="post" name="myForm">
+	<form name="myForm">
 		<fieldset>
-			<input type="text" name="username" size="20" maxlength="45" id="uname"><br>
-			<input type="password" name="password" size="20" maxlength="45" id="pword"><br>
-			<input type="button" onclick="login()" value="Login" size="20" />
+			<label for="username">Username:</label> <input type="text" name="username" size="20" maxlength="45" id="uname"><br>
+			<label for="password">Password:</label><input type="password" name="password" size="20" maxlength="45" id="pword"><br>
+			<label for="submit"></label><input type="button" onclick="login()" value="Login" size="20" />
 			<p id="error"></p>
 		</fieldset>
 	</form>
 </body>
 </html>
-
-
-

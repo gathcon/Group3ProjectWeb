@@ -27,7 +27,7 @@ public class UserWS {
     }
     
     @GET
-    @Path("/all_Users/")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUserList() {
         return usersDao.getAllUsers();
     }
