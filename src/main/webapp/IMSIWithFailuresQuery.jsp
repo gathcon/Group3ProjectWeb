@@ -2,7 +2,6 @@
 <html>
 <head>
 <script>
-
 	function getJSON(url) {
 
 		var JSONRequest = new XMLHttpRequest();
@@ -10,17 +9,21 @@
 		JSONRequest.open("GET", url, false);
 		JSONRequest.send(null);
 
-		//document.write("JSON Response Text =" + JSONRequest.responseText);
 		var txt = JSONRequest.responseText;
 		var obj = eval("(" + txt + ")");
-		var size = obj.length;
-		
-		var imsi = obj[0].imsi;
 
-		document.getElementById("objects").innerHTML = obj;
-		document.getElementById("imsi").innerHTML = imsi;
-		document.getElementById("allText").innerHTML = txt;	
-		document.getElementById("size").innerHTML = size;
+		var size = obj.length;
+
+		var myTable = "<table style=\'width: 500px\' border=\"1\">";
+		myTable += "<tr><td><u>IMSIs</u></td></tr>";
+
+		for (var i = 0; i < size; i++) {
+			var imsi = obj[i].imsi;
+			myTable += "<tr><td>" + imsi + "</td></tr>";
+		}
+		myTable += "</table>";
+
+		document.getElementById("tablespace").innerHTML = myTable;
 	}
 </script>
 </head>
@@ -39,25 +42,11 @@
 
 	<button type="button"
 		onclick="getJSON('jaxrs/base_Datas/IMSIByDateRange/' + 
-	document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value)">Do
-		Stuff</button>
+	document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value)">Query</button>
 
 	<br>
-	
-	<!-- <div>
-	<table id="resultstable" style="width: 500px">
-		<tr>
-			<td>Failure Date Time</td>
-			<td>Failure IMSI</td>
-		</tr>
-	</table>
-	</div> -->
-	
-	<br>
-	<p id="objects">Objects</p>
-	<p id="imsi">IMSI:</p>
-	<p id="allText">Date Time:</p>
-	<p id="size">Size</p>	
-	
+
+	<div id="tablespace"></div>
+
 </body>
 </html>

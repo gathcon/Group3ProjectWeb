@@ -23,7 +23,7 @@ INSERT INTO Operator (mcc, mnc, country, operator_name) VALUES ('238','1','Denma
 INSERT INTO Failure (failure_id, description) VALUES ('0','EMERGENCY');
 
 INSERT INTO Base_Data (data_id, date_time, event_id, failure_id, ue_id, mcc, mnc, cell_id, duration, cause_code, ne_version, imsi, hier3_id, hier32_id, hier321_id) 
-VALUES ('3','2013-01-11 17:46:00','4097', '1', '100100', '238','1','4','1000', '0', '11B', '344930000000011', '4.80953208161499E+018', '8.22689636094747E+018', '1.15044494090948E+018');
+VALUES ('6','2013-01-11 17:30:00','4097', '1', '100100', '238','1','4','1000', '0', '11B', '344930000000012', '4.80953208161499E+018', '8.22689636094747E+018', '1.15044494090948E+018');
 
 
 
