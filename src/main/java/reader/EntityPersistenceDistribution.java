@@ -20,7 +20,7 @@ import entityCreator.EntityType;
 @LocalBean
 public class EntityPersistenceDistribution {
 	
-	private ArrayList<Failure> failures;
+	//private ArrayList<Failure> failures;
 	
 	@EJB
 	private Base_DataDAO bd;
@@ -34,9 +34,7 @@ public class EntityPersistenceDistribution {
 	private 
 	Event_CauseDAO ec;
 	
-	public EntityPersistenceDistribution(){
-		failures = new ArrayList<Failure>();
-	}
+	
 	
 	public void find(Object entity, EntityType e){
 		System.out.println("in find");

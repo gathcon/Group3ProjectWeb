@@ -47,13 +47,11 @@ public class Loader {
     private List<Failure> failures;
     
     
-    public Loader(){
-        errorLogger = new ErrorLogger();
-       // epd = new EntityPersistenceDistribution();
-    }
+    
       
     public void loadFile(String excelWorkBookLocation)  {
         try {
+        	errorLogger = new ErrorLogger();
             HSSFWorkbook workBook = getFileFrom(excelWorkBookLocation);
             if(workBook==null){return;}
             readAll(workBook);

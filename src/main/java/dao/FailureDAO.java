@@ -36,6 +36,7 @@ public class FailureDAO {
 		return failures;
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addFailure(Failure failure) {
 		em.persist(failure);
 		
