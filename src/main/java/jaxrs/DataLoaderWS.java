@@ -22,7 +22,7 @@ import reader.Loader;
 @LocalBean
 public class DataLoaderWS {
  
-	@Inject
+	@EJB
 	private Loader loader;
 	
 	@POST
@@ -42,8 +42,9 @@ public class DataLoaderWS {
  
 		System.out.println("Done");
  
-		
-		loader.loadFile(fileName);
+		//For now data is uploaded onto local computer in the home directory, 
+		//Need to complete troubleshooting the loader class issues
+		//loader.loadFile(fileName);
 		
 		return Response.status(200)
 		    .entity("uploadFile is called, Uploaded file name : " + fileName).build();

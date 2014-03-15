@@ -20,7 +20,7 @@ import entityCreator.EntityType;
 @LocalBean
 public class EntityPersistenceDistribution {
 	
-	//private ArrayList<Failure> failures;
+	
 	
 	@EJB
 	private Base_DataDAO bd;
@@ -45,10 +45,7 @@ public class EntityPersistenceDistribution {
 		        break;
 		  case FAILURE:
 			  System.out.println("inside switch statement failure");
-			
-			 //	failures.add((Failure) entity);
 		        f.addFailure((Failure) entity);
-		     //   failures.clear();
 		        break;   
 		  case EVENTCAUSE:
 			  	

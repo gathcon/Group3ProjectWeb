@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Customer Service Rep Query Menu</title>
 </head>
 <body>
 
@@ -15,11 +15,11 @@
 
 	<div><button type="button"
 		onclick="location.href='CustomerServiceQuery1.jsp'">
-		Caoimhin</button>
+		All Event ID and Cause Codes associated by Imsi</button>
 	</div>
 	<div><button type="button"
 		onclick="location.href='failcountdates.jsp'">
-		Tony</button>
+		Number of Failures by Date</button>
 	</div>
 
 </body>
