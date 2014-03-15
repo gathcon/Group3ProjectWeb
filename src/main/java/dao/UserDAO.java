@@ -23,6 +23,11 @@ public class UserDAO {
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void addUser(User user) {
+            em.persist(user);
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addUsers(List<User> users) {
         for (User user : users) {
             em.persist(user);
@@ -32,7 +37,6 @@ public class UserDAO {
 	public List<User> getAllUsers() {
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>) em.createNamedQuery("User.findAll").getResultList();
-		
 		return users;
 	}
 }

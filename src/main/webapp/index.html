@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Web App</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/loginandregister.js"></script>
+</head>
+<body>
+	<h1>Login Page</h1>
+	<hr>
+	<form name="myForm">
+		<fieldset>
+			<label for="username">Username:</label> <input type="text" name="username" maxlength="45" id="uname"><br>
+			<label for="password">Password:</label><input type="password" name="password" maxlength="45" id="pword"><br>
+			<label for="button"></label><input type="button" name="button" onclick="login()" value="Login" />
+			<p id="error"></p>
+		</fieldset>
+	</form>
+</body>
+</html>
