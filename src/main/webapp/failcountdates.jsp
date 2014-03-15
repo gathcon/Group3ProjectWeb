@@ -21,6 +21,38 @@
 		document.getElementById("count").innerHTML = obj;
 		
 	}
+
+	function processData(){
+
+		if ( validate( document.getElementById('imsi').value, document.getElementById('startdatetime').value, document.getElementById('enddatetime').value) ){
+			alert('You entered invalid content');
+		} else {
+			getJSON('jaxrs/base_Datas/imsifailure/' + 
+					document.getElementById('imsi').value + '/' + document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value);
+		}
+	}
+
+
+
+	function validate(imsi, startDate, endDate) {
+				if(imsi == ' ' || startDate == ' ' || endDate == ' '){
+					return true;
+				}
+				else if(imsi.match(/^[0-9]+$/) == null){
+					return true;
+				}
+				else if ((!(/^[0-9 -:.]+$/.test(startDate))) || (!(/^[0-9 -:.]+$/.test(endDate)))) {
+					return true;
+				} 
+
+				else if (startDate.length != 19 || endDate.length != 19) {
+					return true;
+
+				} else {
+					return false;
+				}
+
+	}	
 </script>
 </head>
 
@@ -45,8 +77,8 @@
 	</div>
 
 	<button type="button"
-		onclick="getJSON('jaxrs/base_Datas/imsifailure/' + 
-	document.getElementById('imsi').value + '/' + document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value)">Query DB</button>
+		onclick="processData()"
+	>Query DB</button>
 
 	<br>
 	
