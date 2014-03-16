@@ -27,12 +27,12 @@
 					</execution>
 					<!-- Deploy the application on install -->
 					<execution>
-                        <id>deploy</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
+						<id>deploy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			<!-- Setting the build target to JDK 1.7 -->
@@ -85,6 +85,30 @@
 	</repositories>
 	<dependencies>
 		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>1.1.2.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<version>1.1.2.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
 			<version>3.0.6.Final</version>
@@ -105,7 +129,6 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.as</groupId>
@@ -113,26 +136,18 @@
 			<version>7.2.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
-
-
-
- 
-	<dependency>
-		<groupId>org.jboss.resteasy</groupId>
-		<artifactId>resteasy-multipart-provider</artifactId>
-		<version>2.2.0.GA</version>
-		<scope>provided</scope>
-	</dependency>
- 
-
-	 <dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>2.0.1</version>
-		<scope>provided</scope>
-	 </dependency> 
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+			<version>2.2.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
-
-
 	<name>project</name>
 </project>
