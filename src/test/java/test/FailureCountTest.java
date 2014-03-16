@@ -48,7 +48,7 @@ public class FailureCountTest {
 		
 		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-20 17:00:00");
 		BigInteger imsi = BigInteger.valueOf(Long.parseLong("344930000000011"));
-		Number number = new Integer(2);
+		Number number = new Integer(1);
 		assertEquals(baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue(), number.intValue());
 	}
 }
