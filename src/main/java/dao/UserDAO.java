@@ -23,6 +23,11 @@ public class UserDAO {
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void removeUser(User user) {
+    	em.remove(em.merge(user));
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addUser(User user) {
             em.persist(user);
     }

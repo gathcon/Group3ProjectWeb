@@ -74,8 +74,8 @@ public class BaseDataThroughTest {
 		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2000-01-11 16:00:00");
 		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2015-01-20 17:00:00");
 		BigInteger imsi = BigInteger.valueOf(Long.parseLong("344930000000011"));
-		Number number = new Integer(2);
-		assertEquals(baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue(), number.intValue());
+		Number number = new Integer(5);
+		assertEquals(number.intValue(), baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue());
 	}
 	
 	

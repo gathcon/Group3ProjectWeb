@@ -69,6 +69,8 @@
 						</goals>
 						<configuration>
 							<ignoreMissingDeployment>true</ignoreMissingDeployment>
+							<username>group3</username>
+ 							<password>airwolf</password>
 						</configuration>
 					</execution>
 					<!-- Deploy the application on install -->
@@ -78,6 +80,10 @@
                         <goals>
                             <goal>deploy</goal>
                         </goals>
+                        <configuration>
+ 							<username>group3</username>
+ 							<password>airwolf</password>
+ 						</configuration>
                     </execution>
 				</executions>
 			</plugin>
