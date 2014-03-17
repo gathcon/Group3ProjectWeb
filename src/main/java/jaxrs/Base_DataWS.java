@@ -70,10 +70,10 @@ public class Base_DataWS {
         base_DatasDao.addBase_Datas(base_Datas);
     }
     
-    	@GET
+    @GET
 	@Path("/TotalFailuresDurationForIMSIs/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Number checkForIMSIFailuresDurationBetweenDates(@PathParam("startDate") String startDate,
+	public List<Base_Data> checkForIMSIFailuresDurationBetweenDates(@PathParam("startDate") String startDate,
 		@PathParam("endDate") String endDate) throws ParseException {
 
 		Date start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
