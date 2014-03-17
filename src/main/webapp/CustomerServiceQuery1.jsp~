@@ -32,8 +32,8 @@
 
 			for (var i = 0; i < size; i++) {
 
-				var eventId = obj[i].id.eventId;
-				var causeCode = obj[i].id.causeCode;
+				var eventId = obj[0].id.eventId;
+				var causeCode = obj[0].id.causeCode;
 
 				myTable += "<tr><td>" + eventId + "</td><td>" + causeCode
 						+ "</td></tr>";
