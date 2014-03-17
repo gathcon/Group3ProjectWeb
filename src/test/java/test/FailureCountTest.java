@@ -7,7 +7,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import model.*;
+
+
+
+
+
+
+
+
+
+
+
+
+import model.Base_Data;
+import model.Event_Cause;
+import model.Event_CausePK;
+import model.Failure;
+import model.Operator;
+import model.OperatorPK;
+import model.TableRow;
+import model.User;
+import model.User_Equipment;
 
 import org.junit.Test;
 
@@ -25,6 +45,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import dao.Base_DataDAO;
+
 
 @RunWith(Arquillian.class)
 public class FailureCountTest {
@@ -48,7 +69,7 @@ public class FailureCountTest {
 		
 		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-20 17:00:00");
 		BigInteger imsi = BigInteger.valueOf(Long.parseLong("344930000000011"));
-		Number number = new Integer(1);
+		Number number = new Integer(2);
 		assertEquals(baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue(), number.intValue());
 	}
 }

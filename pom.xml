@@ -55,7 +55,7 @@
 		<plugins>
 			<!-- Allows us to automatcially deploy to a running JBoss instance at 
 				the install phase -->
-			<plugin>
+		<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
 				<version>7.5.Final</version>
@@ -69,25 +69,16 @@
 						</goals>
 						<configuration>
 							<ignoreMissingDeployment>true</ignoreMissingDeployment>
-							<force />
-							<hostname />
-							<port />
-							<username>group3</username>
-							<password>airwolf</password>
 						</configuration>
 					</execution>
 					<!-- Deploy the application on install -->
 					<execution>
-						<id>deploy</id>
-						<phase>install</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-						<configuration>
-							<username>group3</username>
-							<password>airwolf</password>
-						</configuration>
-					</execution>
+                        <id>deploy</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
 				</executions>
 			</plugin>
 			<!-- Setting the build target to JDK 1.7 -->
