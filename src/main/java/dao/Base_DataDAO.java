@@ -78,7 +78,7 @@ public class Base_DataDAO {
 
 	public List<Base_Data> totalFailuresDurationForImsiBetweenDates(Date startDate, Date endDate) {
 		@SuppressWarnings("unchecked")
-		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findFailures&DurationForIMSIsBetweenDates").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findFailuresDurationForIMSIsBetweenDates").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
 		if (Base_Data.size() == 0)
 			return null;
 		else 
