@@ -31,13 +31,6 @@ public class UserDAO {
     public void addUser(User user) {
             em.persist(user);
     }
-    
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void addUsers(List<User> users) {
-        for (User user : users) {
-            em.persist(user);
-        }
-    }
 
 	public List<User> getAllUsers() {
 		@SuppressWarnings("unchecked")

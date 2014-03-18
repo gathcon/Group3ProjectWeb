@@ -65,11 +65,6 @@ public class Base_DataWS {
         return base_DatasDao.getIMSIByDateRange(startDate, endDate);
     }
     
-    @POST
-    public void addBase_Datas(List<Base_Data> base_Datas) {
-        base_DatasDao.addBase_Datas(base_Datas);
-    }
-    
     @GET
 	@Path("/TotalFailuresDurationForIMSIs/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)

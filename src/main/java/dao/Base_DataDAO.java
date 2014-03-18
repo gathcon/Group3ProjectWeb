@@ -24,13 +24,6 @@ public class Base_DataDAO {
     public Base_Data getBase_Data(int id) {
     	return em.find(Base_Data.class, id);
     }
-    
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void addBase_Datas(List<Base_Data> base_Datas) {
-        for (Base_Data base_Data : base_Datas) {
-            em.persist(base_Data);
-        }
-    }
 
 	public List<Base_Data> getBase_DataByFailureId(int failureId) {
 		@SuppressWarnings("unchecked")

@@ -7,19 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import model.Base_Data;
 import model.Event_Cause;
 import model.Event_CausePK;
@@ -31,8 +18,6 @@ import model.User;
 import model.User_Equipment;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
 

@@ -30,7 +30,7 @@ function goToView(JSONObject) {
 		break;
 	case 'networkEng':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./NetworkEngineerMenu.jsp");
+		window.location.replace("./NetworkManagementEngineerMenu.jsp");
 		break;
 	case 'customerServiceRep':
 		document.write("Loading the page for a " + JSONObject.userType);

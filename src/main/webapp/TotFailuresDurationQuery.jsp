@@ -30,8 +30,8 @@
 
 			for (var i = 0; i < size; i++) {
 				var imsi = obj[i].id.imsi;
-				var failures = obj[i].imsi;
-				var duration = obj[i].id.duration;
+				var failures = obj[i].id.imsi;
+				var duration = obj[i].id.imsi;
 
 				myTable += "<tr><td>" + imsi + "</td><td>" + failures + "</td><td>" + duration + "</td></tr>";
 			}
