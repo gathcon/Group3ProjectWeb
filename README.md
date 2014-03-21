@@ -35,3 +35,6 @@
 ##Merge branch to master
 	$ git checkout master (first checkout master branch)
 	$ git merge <name of branch>
+	
+##Delete branch after merge
+	$ git branch -d <name of branch>
