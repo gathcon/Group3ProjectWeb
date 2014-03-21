@@ -31,3 +31,7 @@
 
 ##Pull changes from remote branch
 	$ git pull origin <name of branch>
+	
+##Merge branch to master
+	$ git checkout master (first checkout master branch)
+	$ git merge <name of branch>
