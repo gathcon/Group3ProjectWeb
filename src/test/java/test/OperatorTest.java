@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
 
-import model.Failure;
+import model.Operator;
+import model.OperatorPK;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -16,10 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import dao.FailureDAO;
+import dao.OperatorDAO;
 
 @RunWith(Arquillian.class)
-public class FailureTest {
+public class OperatorTest {
 	@Deployment
 	public static JavaArchive createTestArchive() {
 		return ShrinkWrap
@@ -31,29 +32,32 @@ public class FailureTest {
 	}
 
 	@EJB
-	private FailureDAO failuredao;
+	private OperatorDAO Operatordao;
 	
-	private Failure failure;
-	private static int failurePK = 101;
+	private Operator Operator;
+	private static OperatorPK operatorPK = new OperatorPK(100, 5);
 
 	@Before
 	public void persistdb() {
-		failure = new Failure();
-		failure.setFailureId(failurePK);
-		failure.setDescription("Test Failure");
-		failuredao.addFailure(failure);
+		Operator = new Operator();
+		Operator.setId(operatorPK);
+		Operator.setCountry("ireland");
+		Operator.setOperatorName("vodafone");
+		Operatordao.addOperator(Operator);
 	}
 
 	@After
 	public void removedb() {
-		failuredao.removeFailure(failure);
+		Operatordao.removeOperator(Operator);
 	}
 
 	@Test
-	public void testGetFailure() {
-		Failure f = failuredao.getFailure(failurePK);
-		assertNotNull(f);
-		assertNotNull(f.getFailureId());
-		assertNotNull(f.getDescription());
+	public void testGetOperator() {
+		Operator o = Operatordao.getOperator(operatorPK);
+		assertNotNull(o);
+		assertNotNull(o.getId());
+		assertNotNull(o.getCountry());
+		assertNotNull(o.getOperatorName());
+
 	}
 }
