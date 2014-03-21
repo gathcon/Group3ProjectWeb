@@ -3,8 +3,6 @@ package test;
 import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
-import javax.ws.rs.core.Response;
-
 import jaxrs.UserWS;
 import model.User;
 
