@@ -26,13 +26,6 @@ public class Base_DataWS {
 
     @EJB
     private Base_DataDAO base_DatasDao;
-
-    @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Base_Data getBase_Data(@PathParam("id") int id) {
-        return base_DatasDao.getBase_Data(id);
-    }
     
     @GET
     @Path("/all_Base_Datas/")

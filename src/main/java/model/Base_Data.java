@@ -76,10 +76,6 @@ public class Base_Data extends TableRow implements Serializable {
 		return this.dataId;
 	}
 
-	public void setDataId(int dataId) {
-		this.dataId = dataId;
-	}
-
 	public int getCellId() {
 		return this.cellId;
 	}

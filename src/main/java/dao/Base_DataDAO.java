@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -19,9 +21,21 @@ public class Base_DataDAO {
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
-    public Base_Data getBase_Data(int id) {
-    	return em.find(Base_Data.class, id);
-    }
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void addBase_Data(Base_Data base_Data) {
+		em.persist(base_Data);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void removeBase_Data(Base_Data base_Data) {
+		em.remove(em.merge(base_Data));
+	}
+    
+	public List<Base_Data> getAllBase_Data() {
+		@SuppressWarnings("unchecked")
+		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAll").getResultList();
+		return base_Data;
+	}
 
 	public List<Base_Data> getBase_DataByFailureId(int failureId) {
 		@SuppressWarnings("unchecked")
@@ -42,13 +56,6 @@ public class Base_DataDAO {
 			return null;
 		else 
 			return Base_Data;	
-	}
-
-	public List<Base_Data> getAllBase_Data() {
-		@SuppressWarnings("unchecked")
-		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAll").getResultList();
-		
-		return base_Data;
 	}
 
 	public List<Event_Cause> getEventID_CauseCodeByImsi(BigInteger imsi) {
@@ -74,14 +81,5 @@ public class Base_DataDAO {
 			return null;
 		else 
 			return Base_Data;	
-	}
-
-	public void addBase_Data(Object base_Data) {
-		em.persist(base_Data);
-	}
-	
-	public void removeBase_Data(Object base_Data) {
-		em.remove(em.merge(base_Data));
-	}
-	
+	}	
 }
