@@ -17,6 +17,10 @@ import model.TableRow;
 import model.User;
 import model.User_Equipment;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.ejb.EJB;
@@ -29,7 +33,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import dao.Base_DataDAO;
@@ -37,20 +40,89 @@ import dao.Base_DataDAO;
 
 @RunWith(Arquillian.class)
 public class BaseDataThroughTest {
-
-	@EJB
-	Base_DataDAO baseDataDao;
-	
-	@EJB
-	Base_DataWS baseDataWs;
 	
 	@Deployment
 	public static JavaArchive createDeployment() {
 	    return ShrinkWrap.create(JavaArchive.class, "test.jar")
 	    	.addAsResource("META-INF/persistence.xml")
-	        .addClasses(Base_DataWS.class,Base_DataDAO.class, Base_Data.class, TableRow.class,Event_Cause.class,Event_CausePK.class,Failure.class,Operator.class, OperatorPK.class,User_Equipment.class,User.class)
+	        .addClasses(Base_DataWS.class, Base_DataDAO.class, 
+	        		TableRow.class, Base_Data.class, Event_Cause.class, Event_CausePK.class, 
+	        		Failure.class, Operator.class, OperatorPK.class, User_Equipment.class, User.class)
 	        .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	       
+	}
+	
+	@EJB
+	private Base_DataDAO baseDataDao;
+	
+	@EJB
+	private Base_DataWS baseDataWs;
+	
+	private static Base_Data bd;
+		
+	@BeforeClass
+	public static void setupBaseData() {
+		Failure f = new Failure();
+		f.setFailureId(0);
+		f.setDescription("Test Failure");
+		
+		OperatorPK id = new OperatorPK(100, 100);
+		Operator o = new Operator();
+		o.setId(id);
+		o.setCountry("ireland");
+		o.setOperatorName("vodafone");
+		
+		Event_Cause ec = new Event_Cause();
+		Event_CausePK pkid = new Event_CausePK(1000, 1000);
+		ec.setId(pkid);
+		ec.setDescription("An event of sorts");
+		
+		User_Equipment ue = new User_Equipment();
+		ue.setUser_EquipmentId(100);
+		ue.setMarketingName("marketingName");
+		ue.setManufacturer("manufacturer");
+		ue.setAccessCapability("accessCapability");
+		ue.setModel("model");
+		ue.setVendorName("vendorName");
+		ue.setUeType("ueType");
+		ue.setOs("os");
+		ue.setInputMode("inputMode");
+		
+		bd = new Base_Data();
+		bd.setCellId(1);
+		bd.setDateTime(new Date(1000));
+		bd.setDuration(1000);
+		bd.setHier3Id(new BigInteger("1234"));
+		bd.setHier32Id(new BigInteger("1234"));
+		bd.setHier321Id(new BigInteger("1234"));
+		bd.setImsi(new BigInteger("1234"));
+		bd.setNeVersion("neVersion");
+		bd.setFailure(f);
+		bd.setUserEquipment(ue);
+		bd.setEventCause(ec);
+		bd.setOperator(o);
+		
+	}
+	
+	@Before
+	public void persisttodb() {
+		baseDataDao.addBase_Data(bd);
+	}
+	
+	@After
+	public void emptydb() {
+		baseDataDao.removeBase_Data(bd);
+	}
+	
+	@AfterClass
+	public static void teardownBaseData() {
+		
+	}
+	
+	@Test
+	public void testgetBase_Data(){
+		// pass in the primary key: value 3
+		assertNotNull(baseDataWs.getBase_Data(91808));
 	}
 	
 	@Ignore
@@ -63,7 +135,6 @@ public class BaseDataThroughTest {
 		assertEquals(number.intValue(), baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue());
 	}
 	
-	
 	@Test
 	public void testThroughTheLayers() throws ParseException {
 		
@@ -72,16 +143,9 @@ public class BaseDataThroughTest {
 		String imsi = "000000000000000";
 		String startDate = "2000-01-11 16:00:00";
 		String endDate = "2000-01-11 16:00:00";
-		System.out.println("Layers: " + baseDataWs.checkForAnImsisFailuresBetweenDates(imsi, startDate, endDate).intValue());
 		assertEquals(number.intValue(), baseDataWs.checkForAnImsisFailuresBetweenDates(imsi, startDate, endDate).intValue());
 	}
 	
-	@Test
-	public void testgetBase_Data(){
-		// pass in the primary key: value 3
-		assertNotNull(baseDataWs.getBase_Data(3));
-	}
-
 	@Test
 	public void testgetBase_DataByFailureId(){
 		// pass in the failure id out of failure table
@@ -96,7 +160,6 @@ public class BaseDataThroughTest {
 		assertNull(baseDataWs.getEventID_CauseCodeByImsi(imsi));
 	}
 	
-
 	@Test
 	public void testgetIMSIByDateRange() throws ParseException {
 		// pass in the dates
@@ -112,7 +175,7 @@ public class BaseDataThroughTest {
 		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2015-01-20 17:00:00");
 		BigInteger imsi = BigInteger.valueOf(Long.parseLong("0000000000000000"));
 		Number number = new Integer(0);
-		assertEquals(baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue(), number.intValue());
+		assertEquals(number.intValue(), baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue());
 	}
 	
 	@Test
@@ -123,6 +186,6 @@ public class BaseDataThroughTest {
 		BigInteger imsi = BigInteger.valueOf(Long.parseLong("0000000000000000"));
 		// give in a good imsi, specify that the returned number of records is not null
 		Number number = new Integer(0);
-		assertEquals(baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue(), number.intValue());
+		assertEquals(number.intValue(), baseDataDao.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue());
 	}
 }

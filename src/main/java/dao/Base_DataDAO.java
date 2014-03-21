@@ -80,7 +80,10 @@ public class Base_DataDAO {
 
 	public void addBase_Data(Object base_Data) {
 		em.persist(base_Data);
-		
+	}
+	
+	public void removeBase_Data(Object base_Data) {
+		em.remove(em.merge(base_Data));
 	}
 	
 }

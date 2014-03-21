@@ -37,7 +37,7 @@ public class Base_DataWS {
     
     @GET
     @Path("/all_Base_Datas/")
-    public List<Base_Data> getBase_DataList() {
+    public List<Base_Data> getAllBase_Data() {
         return base_DatasDao.getAllBase_Data();
     }
     
