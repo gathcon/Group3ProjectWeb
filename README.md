@@ -27,7 +27,7 @@
 	$ git commit -m "<message>"
 
 ##Push changes to remote branch
-	$ git push
+	$ git push origin <name of branch>
 
 ##Pull changes from remote branch
 	$ git pull origin <name of branch>
