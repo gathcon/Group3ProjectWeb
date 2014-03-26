@@ -3,14 +3,19 @@ package test;
 import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
+
 import jaxrs.UserWS;
 import model.User;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,15 +23,16 @@ import dao.UserDAO;
 
 @RunWith(Arquillian.class)
 public class UserTest {
+	
 	@Deployment
-	public static JavaArchive createTestArchive() {
-		return ShrinkWrap
-				.create(JavaArchive.class, "test.jar")
-				.addPackages(true, "dao", "jaxrs", "model", "restApp")
-				.addAsResource("META-INF/persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
+    public static WebArchive createTestArchive() {
+		MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+        
+		return ShrinkWrap.create(WebArchive.class, "test.war")
+        		.addPackages(true, "dao", "jaxrs", "model", "restApp")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
 
 	@EJB
 	private UserDAO userdao;

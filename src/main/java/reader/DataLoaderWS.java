@@ -1,4 +1,4 @@
-package jaxrs;
+package reader;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,8 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-
-import reader.Loader;
  
 @Path("/file")
 @Stateless
@@ -28,10 +26,9 @@ public class DataLoaderWS {
 	@Path("/upload")
 	@Consumes("multipart/form-data")
 	public Response uploadFile(@MultipartForm FileUploadForm form) {
- 
 		
 		String fileName = "/home/uploadedData.xls";
- 
+		
 		try {
 			writeFile(form.getData(), fileName);
 		} catch (IOException e) {
@@ -43,7 +40,7 @@ public class DataLoaderWS {
  
 		//For now data is uploaded onto local computer in the home directory, 
 		//Need to complete troubleshooting the loader class issues
-		//loader.loadFile(fileName);
+		loader.loadFile(fileName);
 		
 		return Response.status(200)
 		    .entity("uploadFile is called, Uploaded file name : " + fileName).build();
