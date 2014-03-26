@@ -23,7 +23,7 @@ public class Base_Data extends TableRow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "data_id")
 	private int dataId;
 

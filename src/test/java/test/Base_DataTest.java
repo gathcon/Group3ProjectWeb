@@ -125,9 +125,10 @@ public class Base_DataTest {
 
 	@Test
 	public void testgetAllBase_Data() {
-		List<Base_Data> bds = baseDataDAO.getAllBase_Data();
+		List<Base_Data> bds = baseDataWS.getAllBase_Data();
 		bd = bds.get(0);
 		assertNotNull(bd);
+		assertNotNull(bd.getDataId());
 		assertNotNull(bd.getCellId());
 		assertNotNull(bd.getDateTime());
 		assertNotNull(bd.getDuration());
