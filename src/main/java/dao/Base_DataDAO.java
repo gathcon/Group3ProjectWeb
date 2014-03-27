@@ -37,9 +37,9 @@ public class Base_DataDAO {
 		return base_Data;
 	}
 
-	public List<Base_Data> getBase_DataByFailureId(int failureId) {
+	public List<Base_Data> getIMSIByFailureId(int failureId) {
 		@SuppressWarnings("unchecked")
-		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByFailureId").
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findIMSIByFailureId").
 		setParameter("failureId", failureId).getResultList();
 		if (Base_Data.size() == 0)
 			return null;

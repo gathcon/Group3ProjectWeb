@@ -34,9 +34,10 @@ public class Base_DataWS {
     }
     
     @GET
-    @Path("/base_DataByFailureId/{failureId}")
-    public List<Base_Data> getBase_DataByFailureId(@PathParam("failureId") int failureId) {
-        return base_DatasDao.getBase_DataByFailureId(failureId);
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/IMSIByFailureId/{failureId}")
+    public List<Base_Data> getIMSIByFailureId(@PathParam("failureId") int failureId) {
+        return base_DatasDao.getIMSIByFailureId(failureId);
     }
     
     @GET
