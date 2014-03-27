@@ -90,10 +90,7 @@ public class Base_DataDAO {
 		if (base_Data.size() == 0)
 			return null;
 		else 
-<<<<<<< HEAD
 			return base_Data;
-=======
-			return Base_Data;	
 	}
 
 	public List<Object[]> getTop10ImsisByDate(Date startDate, Date endDate) {
@@ -114,8 +111,6 @@ public class Base_DataDAO {
 			return queryResult.subList(0, size);
 		} else {
 			return new ArrayList<>();
-		} 
-
->>>>>>> 49cc9837e186717a721384c69defacb12b6f86cf
+		}
 	}	
 }
