@@ -115,5 +115,18 @@ public class Base_DataWS {
 		return base_DatasDao.imsiFailureCountBetweenDates(startD, endD,
 				imsibigint);
 	}
+	@GET
+	@Path("/top10ImsiFailureCount/{startDate}/{endDate}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Object[]> getTop10ImsiFailureCountBetweenDates(
+			@PathParam("startDate") String startDate,
+			@PathParam("endDate") String endDate) throws ParseException {
+		System.out.println("Got in here new method");
 
+		Date start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse(startDate);
+		Date end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
+
+		return base_DatasDao.getTop10ImsisByDate(start, end);
+	}
 }
