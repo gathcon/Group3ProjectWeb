@@ -1,7 +1,11 @@
 package dao;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -81,5 +85,27 @@ public class Base_DataDAO {
 			return null;
 		else 
 			return Base_Data;	
+	}
+
+	public List<Object[]> getTop10ImsisByDate(Date startDate, Date endDate) {
+		List<Object[]> queryResult = null;
+		queryResult =  (List<Object[]>) em.createNamedQuery("Base_Data.findTop10ImsisWithinDateRange").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+		
+		Collections.sort(queryResult, new Comparator<Object[]>(){
+			@Override
+			public int compare(Object[] o1, Object[] o2) {
+				return ((Long) o2[1]).compareTo( (Long) o1[1]);
+			}
+		});
+		
+		int size = queryResult.size(); 
+		if(size >= 10){
+			return queryResult.subList(0, 10);
+		} else if (size >= 1 && size < 10) {
+			return queryResult.subList(0, size);
+		} else {
+			return new ArrayList<>();
+		} 
+
 	}	
 }
