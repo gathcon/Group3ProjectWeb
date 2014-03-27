@@ -34,6 +34,10 @@
 				var imsi = objects[0];
 				var failures = objects[1];
 				var duration = objects[2];
+				
+				//var imsi = obj[i].
+				//var failures = obj[i];
+				//var duration = obj[i];
 
 				myTable += "<tr><td>" + imsi + "</td><td>" + failures + "</td><td>" + duration + "</td></tr>";
 			}
@@ -42,7 +46,8 @@
 			document.getElementById("tablespace").innerHTML = myTable;
 
 		} catch (err) {
-			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
+			//print("No record found for inputs submitted: ", err);
+			document.getElementById("tablespace").innerHTML = print("No record found for inputs submitted: ", err);
 		}
 	}
 </script>
