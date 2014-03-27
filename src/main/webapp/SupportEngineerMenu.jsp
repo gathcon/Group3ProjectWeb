@@ -15,6 +15,16 @@
 		onclick="location.href='IMSIWithFailuresQuery.jsp'">
 		Find IMSIs with failures</button>
 	</div>
+	
+	<div><button type="button"
+		onclick="location.href='IMSIByFailureId.jsp'">
+		Find IMSIs by failure class</button>
+	</div>
+	
+	<div><button type="button"
+		onclick="location.href='FailureCountByModel.jsp'">
+		Find Failures by phone model</button>
+	</div>
 
 </body>
 </html>

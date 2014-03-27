@@ -2,14 +2,15 @@
 <html>
 <head>
 <script>
+
 	function validate(startDate, endDate) {
 
-		if ((!(/^[0-9 -:.]+$/.test(startDate))) || (!(/^[0-9 -:.]+$/.test(endDate)))) {
+		if ((!(/^[0-9 -:.]+$/.test(startDate)))
+				|| (!(/^[0-9 -:.]+$/.test(endDate)))) {
 			alert("Invalid input characters.");
-		} 
-		else if (startDate.length != 21 || endDate.length != 21) {
+		} else if (startDate.length != 21 || endDate.length != 21) {
 			alert("Invalid input length.");
-		} 
+		}
 	}
 
 	function getJSON(url) {

@@ -1,6 +1,6 @@
 SHOW tables;
 
-SELECT * from base_Data;
+SELECT * from Base_Data;
 
 INSERT INTO User (user_name, password, user_type) VALUES ('Eoin','password','Administrator');
 

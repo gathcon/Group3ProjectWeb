@@ -12,6 +12,9 @@ select * from Operator;
 select * from User_Equipment;
 select * from User;
 
+select ue_id, model from Base_Data, User_Equipment where (ue_id = 21060800) AND (Base_Data.ue_id = User_Equipment.user_equipment_id)
+SELECT COUNT(*) FROM Base_Data WHERE (User_Equipment.model="9109 PA") AND (date_time BETWEEN "2013-01-11 17:15:00.0" AND "2013-01-11 17:59:00.0")
+
 INSERT INTO User (user_name, password, user_type) VALUES ('conor','conor','sysAdmin');
 INSERT INTO User (user_name, password, user_type) VALUES ('eoin','eoin','supportEng');
 INSERT INTO User (user_name, password, user_type) VALUES ('tony','tony','customerServiceRep');

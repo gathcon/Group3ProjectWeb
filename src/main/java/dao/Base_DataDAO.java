@@ -41,9 +41,9 @@ public class Base_DataDAO {
 		return base_Data;
 	}
 
-	public List<Base_Data> getBase_DataByFailureId(int failureId) {
+	public List<Base_Data> getIMSIByFailureId(int failureId) {
 		@SuppressWarnings("unchecked")
-		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findByFailureId").
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findIMSIByFailureId").
 		setParameter("failureId", failureId).getResultList();
 		if (Base_Data.size() == 0)
 			return null;
@@ -60,6 +60,12 @@ public class Base_DataDAO {
 			return null;
 		else 
 			return Base_Data;	
+	}
+	
+	public Number failureCountByModelBetweenDates(Date startDate, Date endDate, String model){
+		Number number = null;
+		number = (Number) em.createNamedQuery("Base_Data.findFailureCountByModelAndByDateRange").setParameter("model", model).setParameter("startDate", startDate).setParameter("endDate", endDate).getSingleResult();
+		return number;
 	}
 
 	public List<Event_Cause> getEventID_CauseCodeByImsi(BigInteger imsi) {
