@@ -1,4 +1,4 @@
-package reader; 
+package redundant; 
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -7,10 +7,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 
 import validation.BaseDataValidator;
+import validation.ErrorLogger;
 
 import java.util.ArrayList;
-
-import logger.ErrorLogger;
 
 public class BaseDataTableReader extends TableReader {
     

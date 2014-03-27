@@ -1,4 +1,4 @@
-package reader;
+package redundant;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -14,7 +14,6 @@ import dao.Event_CauseDAO;
 import dao.FailureDAO;
 import dao.OperatorDAO;
 import dao.User_EquipmentDAO;
-import entityCreator.EntityType;
 
 @Stateless
 @LocalBean

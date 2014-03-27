@@ -1,4 +1,4 @@
-package reader;
+package redundant;
 
 import java.io.File;
 import java.io.FileOutputStream;

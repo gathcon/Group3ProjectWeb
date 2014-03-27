@@ -1,4 +1,4 @@
-package convertedRow;
+package redundant;
 
 public class ConvertedRowUser extends ConvertedRow{
 	

@@ -1,15 +1,8 @@
-package entityCreator;
+package redundant;
 
 import java.math.BigInteger;
 import java.util.Date;
 
-import convertedRow.ConvertedRow;
-import convertedRow.ConvertedRowBaseData;
-import convertedRow.ConvertedRowEventCause;
-import convertedRow.ConvertedRowFailure;
-import convertedRow.ConvertedRowOperator;
-import convertedRow.ConvertedRowUser;
-import convertedRow.ConvertedRowUserEquipment;
 import model.Base_Data;
 import model.Event_Cause;
 import model.Event_CausePK;

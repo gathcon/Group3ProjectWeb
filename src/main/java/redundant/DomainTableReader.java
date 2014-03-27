@@ -1,8 +1,6 @@
-package reader;
+package redundant;
 
 import java.util.ArrayList;
-
-import logger.ErrorLogger;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -10,7 +8,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Row;
 
 import validation.DomainTableValidator;
-import reader.SubReader;
+import validation.ErrorLogger;
+import redundant.SubReader;
 
 public class DomainTableReader extends SubReader {
 

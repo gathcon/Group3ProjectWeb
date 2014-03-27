@@ -1,10 +1,9 @@
-package convertedRow;
+package redundant;
 
 import java.math.BigInteger;
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-
-import entityCreator.EntityType;
 
 public class RowConverter {
 

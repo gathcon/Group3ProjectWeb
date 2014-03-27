@@ -1,4 +1,4 @@
-package reader;
+package redundant;
   
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,7 +7,6 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import logger.ErrorLogger;
 import model.TableRow;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -15,10 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 
-import convertedRow.ConvertedRow;
-import convertedRow.RowConverter;
-import entityCreator.EntityCreator;
-import entityCreator.EntityType;
+import validation.ErrorLogger;
 
 @Stateless
 @LocalBean
