@@ -4,6 +4,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,8 +22,13 @@ public class FailureDAO {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addFailure(Failure failure) {
-		em.persist(failure);
+	public DatabaseResponse addFailure(Failure failure) {
+		try {
+			em.persist(failure);
+			return DatabaseResponse.OK;
+		} catch (EntityExistsException e) {
+			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
+		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
