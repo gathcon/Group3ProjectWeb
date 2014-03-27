@@ -148,6 +148,20 @@ public class Base_DataTest {
 		assertNotNull(bd.getEventCause());
 		assertNotNull(bd.getOperator());
 	}
+	
+	@Test
+	public void testForFailuresCountByModelBetweenTwoDates()
+	throws ParseException {
+	Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+	.parse("2000-01-11 16:00:00");
+	Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+	.parse("2015-01-20 17:00:00");
+	String model = "Model That doesn't exist";
+	Number number = new Integer(0);
+	assertEquals(number.intValue(), baseDataDAO
+	.failureCountByModelBetweenDates(startDate, endDate, model)
+	.intValue());
+	}
 }
 
 // @Ignore
@@ -207,7 +221,7 @@ public class Base_DataTest {
 // gets back a list of imsis
 // assertNull(baseDataWs.getIMSIByFailureId("9"));
 // }
-//
+
 // @Test
 // public void testForAnImsisFailuresBetweenTwoDatesWithABadIMSI()
 // throws ParseException {

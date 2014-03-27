@@ -57,6 +57,12 @@ public class Base_DataDAO {
 		else 
 			return Base_Data;	
 	}
+	
+	public Number failureCountByModelBetweenDates(Date startDate, Date endDate, String model){
+		Number number = null;
+		number = (Number) em.createNamedQuery("Base_Data.findFailureCountByModelAndByDateRange").setParameter("model", model).setParameter("startDate", startDate).setParameter("endDate", endDate).getSingleResult();
+		return number;
+	}
 
 	public List<Event_Cause> getEventID_CauseCodeByImsi(BigInteger imsi) {
 		@SuppressWarnings("unchecked")
