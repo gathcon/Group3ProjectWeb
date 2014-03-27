@@ -3,9 +3,17 @@ package test;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import jaxrs.Base_DataWS;
 import model.Base_Data;
@@ -23,6 +31,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,7 +52,8 @@ public class NetManagerUserStoryTest {
 						"META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
-
+	
+	
 	@EJB private Base_DataDAO baseDataDAO;
 	@EJB private FailureDAO failureDAO;
 	@EJB private OperatorDAO operatorDAO;
@@ -327,12 +337,61 @@ public class NetManagerUserStoryTest {
 		user_EquipmentDAO.removeUser_Equipment(ue);
 		event_CauseDAO.removeEvent_Cause(ec);
 	}
+
+	@Test
+	public void testTheQueryListSize() throws ParseException {
+		assertEquals(10,baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00")).size());
+		
+	}
 	
 	@Test
-	public void testTheQuery() {
-		// call the BaseDataDAO method
-		//pass in the dates
-		// assertEquals 
+	public void testSortingOfDates(){
+		//loop through the list
+		//check each number is greater than last
+		// first ignore
+		// size 1 ignore
+		
+	}
+	
+	@Test
+	public void testBadDates(){
+		
+	}
+	@Ignore
+	@Test
+	public void testTheQuery() throws ParseException {
+	
+		List<Object[]> queryResult = baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00"));
+
+		BigInteger[] imsis =  new BigInteger[20];
+		Number[] numbers = new Number[20];
+		
+		imsis[0] = new BigInteger("344930000000015");
+		numbers[0] = new Long(10);		
+		imsis[1] = new BigInteger("344930000000012");
+		numbers[1] = new Long(9);
+		imsis[2] = new BigInteger("344930000000013");
+		numbers[2] = new Long(8);
+		imsis[3] = new BigInteger("344930000000014");
+		numbers[3] = new Long(7);
+		imsis[4] = new BigInteger("344930000000011");
+		numbers[4] = new Long(6);
+		imsis[5] = new BigInteger("344930000000016");
+		numbers[5] = new Long(5);
+		imsis[6] = new BigInteger("344930000000017");
+		numbers[6] = new Long(4);
+		imsis[7] = new BigInteger("344930000000018");
+		numbers[7] = new Long(3);
+		imsis[8] = new BigInteger("344930000000019");
+		numbers[8] = new Long(2);
+		imsis[9] = new BigInteger("344930000000020");
+		numbers[9] = new Long(1);
+		
+		for(int i=0; i< queryResult.size(); i++){
+			Object[] values =  queryResult.get(i);
+			assertEquals(imsis[i], values[0]);
+			assertEquals(numbers[i], values[1]);
+		}
 	}
 
 }

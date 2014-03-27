@@ -84,15 +84,12 @@ public class Base_DataDAO {
 		return number;
 	}
 
-	public List totalFailuresDurationForImsiBetweenDates(Date startDate, Date endDate) {
+	public List<Base_Data> totalFailuresDurationForImsiBetweenDates(Date startDate, Date endDate) {
 		@SuppressWarnings("unchecked")
-		List base_Data = em.createNamedQuery("Base_Data.findFailuresDurationForIMSIsBetweenDates").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
-		if (base_Data.size() == 0)
+		List<Base_Data> Base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findFailuresDurationForIMSIsBetweenDates").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+		if (Base_Data.size() == 0)
 			return null;
 		else 
-<<<<<<< HEAD
-			return base_Data;
-=======
 			return Base_Data;	
 	}
 
@@ -116,6 +113,5 @@ public class Base_DataDAO {
 			return new ArrayList<>();
 		} 
 
->>>>>>> 49cc9837e186717a721384c69defacb12b6f86cf
 	}	
 }
