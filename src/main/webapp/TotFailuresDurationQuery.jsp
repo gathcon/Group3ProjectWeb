@@ -4,12 +4,12 @@
 <script>
 	function validate(startDate, endDate) {
 
-		if ((!(/^[0-9 -:.]+$/.test(startDate))) || (!(/^[0-9 -:.]+$/.test(endDate)))) {
+		if ((!(/^[0-9 -:.]+$/.test(startDate)))
+				|| (!(/^[0-9 -:.]+$/.test(endDate)))) {
 			alert("Invalid input characters.");
-		} 
-		else if (startDate.length != 21 || endDate.length != 21) {
+		} else if (startDate.length != 21 || endDate.length != 21) {
 			alert("Invalid input length.");
-		} 
+		}
 	}
 
 	function getJSON(url) {
@@ -29,13 +29,14 @@
 			myTable += "<tr><td><u>IMSIs</u></td><td><u>Failures</u></td><td><u>Total Duration</u></td></tr>";
 
 			for (var i = 0; i < size; i++) {
-				
+
 				var objects = obj[i];
 				var imsi = objects[0];
 				var failures = objects[1];
 				var duration = objects[2];
 
-				myTable += "<tr><td>" + imsi + "</td><td>" + failures + "</td><td>" + duration + "</td></tr>";
+				myTable += "<tr><td>" + imsi + "</td><td>" + failures
+						+ "</td><td>" + duration + "</td></tr>";
 			}
 			myTable += "</table>";
 
@@ -49,20 +50,24 @@
 </head>
 
 <body>
-	<h> <b>Get IMSIs with the number of call failures and their total duration between date range.</b></h>
+	<h> <b>Get IMSIs with the number of call failures and their
+		total duration between date range.</b></h>
 	<hr>
 
 	<div>
-		<label for="startDate">Start Date</label> <input id="startdatetime"
-			name="startDate" type="text" value="YYYY-MM-DD HH:mm:ss.S"> <label
-			for="endDate">End Date</label> <input id="enddatetime" name="endDate"
-			type="text" value="YYYY-MM-DD HH:mm:ss.S">
+		<form name='inputForm'>
+			<fieldset>
+				<label for="startdatetime">Start DateTime:</label> <input
+					type="datetime-local" id="startdatetime" name="startDate">
+				<label for="enddatetime">End DateTime:</label> <input
+					type="datetime-local" id="enddatetime" name="endDate"> <label
+					for="submit"></label> <input type="button" name="submit"
+					onclick="getJSON('jaxrs/base_Datas/TotalFailuresDurationForIMSIs/' + document.getElementById('startdatetime').value 
+				+ '/' + document.getElementById('enddatetime').value);"
+					value="Query" size="20">
+			</fieldset>
+		</form>
 	</div>
-
-	<button type="button"
-		onclick="validate(document.getElementById('startdatetime').value, document.getElementById('enddatetime').value);
-			getJSON('jaxrs/base_Datas/TotalFailuresDurationForIMSIs/' + document.getElementById('startdatetime').value 
-			+ '/' + document.getElementById('enddatetime').value);">Query</button>
 
 	<br>
 

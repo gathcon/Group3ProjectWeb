@@ -106,15 +106,26 @@ public class Base_DataWS {
 	@Path("/TotalFailuresDurationForIMSIs/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List checkForIMSIFailuresDurationBetweenDates(
-			@PathParam("startDate") String startDate,
-			@PathParam("endDate") String endDate) throws ParseException {
+			@PathParam("startDate") String startDateString,
+			@PathParam("endDate") String endDateString) throws ParseException {
 
-		Date start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-				.parse(startDate);
-		Date end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(endDate);
+		SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat outFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
-		return base_DatasDao.totalFailuresDurationForImsiBetweenDates(start,
-				end);
+		Date startDateIn = inFormat.parse(startDateString);
+		String startDateOut = outFormat.format(startDateIn);
+
+		Date endDateIn = inFormat.parse(endDateString);
+		String endDateOut = outFormat.format(endDateIn);
+
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+				.parse(startDateOut);
+
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+				.parse(endDateOut);
+
+		return base_DatasDao.totalFailuresDurationForImsiBetweenDates(startDate,
+				endDate);
 	}
 
 	@GET
