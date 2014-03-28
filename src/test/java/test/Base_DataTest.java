@@ -110,7 +110,7 @@ public class Base_DataTest {
 		bd.setEventCause(ec);
 		bd.setOperator(o);
 		
-		failureDAO.addFailure(f);
+		failureDAO.persist(f);
 		operatorDAO.addOperator(o);
 		user_EquipmentDAO.addUser_Equipment(ue);
 		event_CauseDAO.addEvent_Cause(ec);

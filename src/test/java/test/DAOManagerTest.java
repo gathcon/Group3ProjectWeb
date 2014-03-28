@@ -74,7 +74,7 @@ public class DAOManagerTest {
 		Failure mockedFailureEntity = mock(Failure.class);
 		FailureDAO mockedFailureDAO = mock(FailureDAO.class);
 		daoManager.setFailureDAO(mockedFailureDAO);
-		when(mockedFailureDAO.addFailure(mockedFailureEntity)).thenReturn(
+		when(mockedFailureDAO.persist(mockedFailureEntity)).thenReturn(
 				DatabaseResponse.OK);
 		DatabaseResponse response = daoManager.persist(mockedFailureEntity);
 		assertEquals(DatabaseResponse.OK, response);

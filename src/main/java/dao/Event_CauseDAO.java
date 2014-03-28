@@ -10,10 +10,11 @@ import javax.persistence.PersistenceContext;
 
 import model.Event_Cause;
 import model.Event_CausePK;
+import model.TableRow;
 
 @Stateless
 @LocalBean
-public class Event_CauseDAO {
+public class Event_CauseDAO implements DAOInterface{
 	
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
@@ -23,7 +24,7 @@ public class Event_CauseDAO {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public DatabaseResponse addEvent_Cause(Event_Cause event_Cause) {
+	public DatabaseResponse persist(TableRow event_Cause) {
 		try {
 			em.persist(event_Cause);
 			return DatabaseResponse.OK;
