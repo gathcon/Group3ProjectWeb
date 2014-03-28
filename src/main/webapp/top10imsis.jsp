@@ -5,20 +5,36 @@
 
 	function getJSON(url) {
 
+		try {
 		var JSONRequest = new XMLHttpRequest();
 
 		JSONRequest.open("GET", url, false);
 		JSONRequest.send(null);
 
-		document.write("JSON Response Text =" + JSONRequest.responseText);
-		//var txt = JSONRequest.responseText;
-		//var obj = eval("(" + txt + ")");
-		
-		
-		
+		var txt = JSONRequest.responseText;
+		var obj = eval("(" + txt + ")");
 
-		//document.getElementById("msg").innerHTML = "The number of failures for this imsi";
-		//document.getElementById("count").innerHTML = obj;
+		var size = obj.length;
+
+		var myTable = "<table style=\'width: 500px\' border=\"1\">";
+		myTable += "<tr><td><u>IMSIs</u></td><td><u>Failure Count</u></td></tr>";
+
+		for (var i = 0; i < size; i++) {
+			
+			var objects = obj[i];
+			var imsi = objects[0];
+			var failures = objects[1];
+			
+
+			myTable += "<tr><td>" + imsi + "</td><td>" + failures + "</td></tr>";
+		}
+		myTable += "</table>";
+
+		document.getElementById("tablespace").innerHTML = myTable;
+
+	} catch (err) {
+		document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
+	}
 		
 	}
 
@@ -72,15 +88,14 @@
 	</div>
 
 	<button type="button"
-		onclick="getJSON('jaxrs/base_Datas/top10ImsiFailureCount/'  + document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value)">Query DB</button>
+		onclick="processData()">Query DB</button>
 
 	<br>
 	
 	
 	
 	<br>
-	<p id="msg"></p>
-	<p id="count"></p>
+	<div id="tablespace"></div>
 	
 	
 </body>
