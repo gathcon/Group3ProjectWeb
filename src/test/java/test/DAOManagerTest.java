@@ -63,7 +63,7 @@ public class DAOManagerTest {
 		Base_Data mockedBase_DataEntity = mock(Base_Data.class);
 		Base_DataDAO mockedBase_DataDAO = mock(Base_DataDAO.class);
 		daoManager.setBaseDataDAO(mockedBase_DataDAO);
-		when(mockedBase_DataDAO.addBase_Data(mockedBase_DataEntity))
+		when(mockedBase_DataDAO.persist(mockedBase_DataEntity))
 				.thenReturn(DatabaseResponse.OK);
 		DatabaseResponse response = daoManager.persist(mockedBase_DataEntity);
 		assertEquals(DatabaseResponse.OK, response);
@@ -87,7 +87,7 @@ public class DAOManagerTest {
 		daoManager.setUser_EquipmentDAO(mockedUser_EquipmentDAO);
 		when(
 				mockedUser_EquipmentDAO
-						.addUser_Equipment(mockedUser_EquipmentEntity))
+						.persist(mockedUser_EquipmentEntity))
 				.thenReturn(DatabaseResponse.OK);
 		DatabaseResponse response = daoManager
 				.persist(mockedUser_EquipmentEntity);
@@ -99,7 +99,7 @@ public class DAOManagerTest {
 		Event_Cause mockedEvent_CauseEntity = mock(Event_Cause.class);
 		Event_CauseDAO mockedEvent_CauseDAO = mock(Event_CauseDAO.class);
 		daoManager.setEvent_CauseDAO(mockedEvent_CauseDAO);
-		when(mockedEvent_CauseDAO.addEvent_Cause(mockedEvent_CauseEntity))
+		when(mockedEvent_CauseDAO.persist(mockedEvent_CauseEntity))
 				.thenReturn(DatabaseResponse.OK);
 		DatabaseResponse response = daoManager.persist(mockedEvent_CauseEntity);
 		assertEquals(DatabaseResponse.OK, response);
@@ -110,7 +110,7 @@ public class DAOManagerTest {
 		Operator mockedOperatorEntity = mock(Operator.class);
 		OperatorDAO mockedOperatorDAO = mock(OperatorDAO.class);
 		daoManager.setOperatorDAO(mockedOperatorDAO);
-		when(mockedOperatorDAO.addOperator(mockedOperatorEntity)).thenReturn(
+		when(mockedOperatorDAO.persist(mockedOperatorEntity)).thenReturn(
 				DatabaseResponse.OK);
 		DatabaseResponse response = daoManager.persist(mockedOperatorEntity);
 		assertEquals(DatabaseResponse.OK, response);

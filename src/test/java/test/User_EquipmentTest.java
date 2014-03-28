@@ -51,7 +51,7 @@ public class User_EquipmentTest {
 		user_Equipment.setOs("os");
 		user_Equipment.setUeType("ueType");
 		user_Equipment.setVendorName("vendorName");
-		user_Equipmentdao.addUser_Equipment(user_Equipment);
+		user_Equipmentdao.persist(user_Equipment);
 	}
 
 	@After
