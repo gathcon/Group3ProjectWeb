@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import model.EntityType;
 import model.TableRow;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;

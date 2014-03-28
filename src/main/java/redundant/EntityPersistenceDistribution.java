@@ -5,6 +5,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import model.Base_Data;
+import model.EntityType;
 import model.Event_Cause;
 import model.Failure;
 import model.Operator;

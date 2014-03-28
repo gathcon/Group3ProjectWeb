@@ -2,6 +2,8 @@ package redundant;
 
 import java.math.BigInteger;
 
+import model.EntityType;
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 
