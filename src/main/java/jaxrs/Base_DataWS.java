@@ -58,17 +58,18 @@ public class Base_DataWS {
 			throws ParseException {
 
 		SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-		SimpleDateFormat outFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		
-		Date startDateIn = inFormat.parse(startDateString);		
+		SimpleDateFormat outFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss.S");
+
+		Date startDateIn = inFormat.parse(startDateString);
 		String startDateOut = outFormat.format(startDateIn);
-		
-		Date endDateIn = inFormat.parse(endDateString);		
+
+		Date endDateIn = inFormat.parse(endDateString);
 		String endDateOut = outFormat.format(endDateIn);
-		
+
 		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-		.parse(startDateOut);
-		
+				.parse(startDateOut);
+
 		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
 				.parse(endDateOut);
 		return base_DatasDao.getIMSIByDateRange(startDate, endDate);
@@ -82,13 +83,23 @@ public class Base_DataWS {
 			@PathParam("startDate") String startDateString,
 			@PathParam("endDate") String endDateString) throws ParseException {
 
-		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-				.parse(startDateString);
-		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-				.parse(endDateString);
+		SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat outFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss.S");
 
-		return base_DatasDao.failureCountByModelBetweenDates(startDate, endDate,
-				model);
+		Date startDateIn = inFormat.parse(startDateString);
+		String startDateOut = outFormat.format(startDateIn);
+
+		Date endDateIn = inFormat.parse(endDateString);
+		String endDateOut = outFormat.format(endDateIn);
+
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+				.parse(startDateOut);
+
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+				.parse(endDateOut);
+		return base_DatasDao.failureCountByModelBetweenDates(startDate,
+				endDate, model);
 	}
 
 	@GET
@@ -125,6 +136,7 @@ public class Base_DataWS {
 		return base_DatasDao.imsiFailureCountBetweenDates(startD, endD,
 				imsibigint);
 	}
+
 	@GET
 	@Path("/top10ImsiFailureCount/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)

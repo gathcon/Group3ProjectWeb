@@ -38,19 +38,24 @@
 	<br>
 
 	<div>
-		<label for="model">Phone Model</label> <input id="model" name="model"
-			type="text" value=""> <br> <label for="startDate">Start
-			Date</label> <input id="startdatetime" name="startDate" type="text"
-			value="YYYY-MM-DD HH:mm:ss"> <br> <label for="endDate">End
-			Date</label> <input id="enddatetime" name="endDate" type="text"
-			value="YYYY-MM-DD HH:mm:ss">
+		<form name='inputForm'>
+			<fieldset>
+				<label for="model">Phone Model</label> 
+				<input id="model" name="model" type="text" value=""> <br> 
+				<label for="startdatetime">Start DateTime:</label> 
+				<input type="datetime-local" id="startdatetime" name="startDate">
+				<label for="enddatetime">End DateTime:</label> 
+				<input type="datetime-local" id="enddatetime" name="endDate"> 
+				<label for="submit"></label> 
+				<input type="button" name="submit" onclick="getJSON('jaxrs/base_Datas/FailureCountByModelAndByDateRange/' 
+						+ document.getElementById('model').value + '/' 
+						+ document.getElementById('startdatetime').value + '/' 
+						+ document.getElementById('enddatetime').value);"
+					value="Query" size="20">
+			</fieldset>
+		</form>
 	</div>
 
-	<button type="button"
-		onclick="validate(document.getElementById('startdatetime').value, document.getElementById('enddatetime').value);
-			getJSON('jaxrs/base_Datas/FailureCountByModelAndByDateRange/' + document.getElementById('model').value + '/' 
-			+ document.getElementById('startdatetime').value + '/' 
-			+ document.getElementById('enddatetime').value);">Query</button>
 	<br>
 	<p id="msg"></p>
 	<p id="count"></p>
