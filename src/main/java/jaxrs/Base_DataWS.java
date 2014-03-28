@@ -57,10 +57,20 @@ public class Base_DataWS {
 			@PathParam("endDateString") String endDateString)
 			throws ParseException {
 
+		SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat outFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		
+		Date startDateIn = inFormat.parse(startDateString);		
+		String startDateOut = outFormat.format(startDateIn);
+		
+		Date endDateIn = inFormat.parse(endDateString);		
+		String endDateOut = outFormat.format(endDateIn);
+		
 		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-				.parse(startDateString);
+		.parse(startDateOut);
+		
 		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-				.parse(endDateString);
+				.parse(endDateOut);
 		return base_DatasDao.getIMSIByDateRange(startDate, endDate);
 	}
 

@@ -3,16 +3,6 @@
 <head>
 <script>
 
-	function validate(startDate, endDate) {
-
-		if ((!(/^[0-9 -:.]+$/.test(startDate)))
-				|| (!(/^[0-9 -:.]+$/.test(endDate)))) {
-			alert("Invalid input characters.");
-		} else if (startDate.length != 21 || endDate.length != 21) {
-			alert("Invalid input length.");
-		}
-	}
-
 	function getJSON(url) {
 
 		try {
@@ -49,16 +39,20 @@
 	<hr>
 
 	<div>
-		<label for="startDate">Start Date</label> <input id="startdatetime"
-			name="startDate" type="text" value="YYYY-MM-DD HH:mm:ss.S"> <label
-			for="endDate">End Date</label> <input id="enddatetime" name="endDate"
-			type="text" value="YYYY-MM-DD HH:mm:ss.S">
+		<form name='inputForm'>
+			<fieldset>
+			<label for="startdatetime">Start DateTime:</label> 
+			<input type="datetime-local" id="startdatetime" name="startDate">
+			<label for="enddatetime">End DateTime:</label> 
+			<input type="datetime-local" id="enddatetime" name="endDate"> 
+			
+			<label for="submit"></label> 
+			<input type="button" name="submit" onclick="getJSON('jaxrs/base_Datas/IMSIByDateRange/' 
+			+ document.getElementById('startdatetime').value 
+			+ '/' + document.getElementById('enddatetime').value);" value="Query" size="20">
+			</fieldset>
+		</form>
 	</div>
-
-	<button type="button"
-		onclick="validate(document.getElementById('startdatetime').value, document.getElementById('enddatetime').value);
-			getJSON('jaxrs/base_Datas/IMSIByDateRange/' + document.getElementById('startdatetime').value 
-			+ '/' + document.getElementById('enddatetime').value);">Query</button>
 
 	<br>
 
