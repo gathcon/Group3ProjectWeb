@@ -74,7 +74,7 @@
 		<form name='inputForm'>
 			<fieldset>
 				
-				<label for=selectorspace>Phone Model</label> 
+				<label for=selectorspace>Phone Model:</label> 
 				<span id="selectorspace"></span> <br> 
 				<label for="startdatetime">Start DateTime:</label> 
 				<input type="datetime-local" id="startdatetime" name="startDate">
