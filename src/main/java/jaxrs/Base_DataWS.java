@@ -74,6 +74,13 @@ public class Base_DataWS {
 				.parse(endDateOut);
 		return base_DatasDao.getIMSIByDateRange(startDate, endDate);
 	}
+	
+	@GET
+	@Path("/allPhoneModels/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Base_Data> getAllPhoneModels() {
+		return base_DatasDao.getAllPhoneModels();
+	}
 
 	@GET
 	@Path("/FailureCountByModelAndByDateRange/{model}/{startDate}/{endDate}")

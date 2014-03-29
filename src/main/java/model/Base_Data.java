@@ -16,6 +16,7 @@ import java.util.Date;
 		@NamedQuery(name = "Base_Data.findById", query = "SELECT b FROM Base_Data b where b.dataId=:dataId"),
 		@NamedQuery(name = "Base_Data.findIMSIByFailureId", query = "SELECT b FROM Base_Data b where b.failure.failureId=:failureId GROUP BY b.imsi"),
 		@NamedQuery(name = "Base_Data.findIMSIByDateRange", query = "SELECT b FROM Base_Data b WHERE b.dateTime BETWEEN :startDate AND :endDate GROUP BY b.imsi"),
+		@NamedQuery(name = "Base_Data.findAllPhoneModels", query = "SELECT b FROM Base_Data b GROUP BY b.userEquipment.model"),
 		@NamedQuery(name = "Base_Data.findFailureCountByModelAndByDateRange", query = "SELECT COUNT(b) FROM Base_Data b WHERE (b.userEquipment.model=:model) AND (b.dateTime BETWEEN :startDate AND :endDate)"),
 		@NamedQuery(name = "Base_Data.findFailuresDurationForIMSIsBetweenDates", query = "SELECT b.imsi, COUNT(b), SUM(b.duration) FROM Base_Data b WHERE (b.dateTime BETWEEN :startDate AND :endDate) GROUP BY b.imsi"),
 		@NamedQuery(name = "Base_Data.findFailuresByImsiAndByDateRange", query = "SELECT COUNT(b) FROM Base_Data b WHERE (b.imsi=:imsi) AND (b.dateTime BETWEEN :startDate AND :endDate)"),

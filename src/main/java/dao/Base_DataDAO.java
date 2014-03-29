@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -62,6 +61,12 @@ public class Base_DataDAO {
 			return Base_Data;	
 	}
 	
+	public List<Base_Data> getAllPhoneModels() {
+		@SuppressWarnings("unchecked")
+		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAllPhoneModels").getResultList();
+		return base_Data;
+	}
+	
 	public Number failureCountByModelBetweenDates(Date startDate, Date endDate, String model){
 		Number number = null;
 		number = (Number) em.createNamedQuery("Base_Data.findFailureCountByModelAndByDateRange").setParameter("model", model).setParameter("startDate", startDate).setParameter("endDate", endDate).getSingleResult();
@@ -93,6 +98,7 @@ public class Base_DataDAO {
 			return base_Data;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Object[]> getTop10ImsisByDate(Date startDate, Date endDate) {
 		List<Object[]> queryResult = null;
 		queryResult =  (List<Object[]>) em.createNamedQuery("Base_Data.findTop10ImsisWithinDateRange").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
