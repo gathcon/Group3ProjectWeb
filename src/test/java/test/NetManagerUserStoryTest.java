@@ -346,7 +346,7 @@ public class NetManagerUserStoryTest {
 	}
 	
 	
-	
+	@Ignore
 	@Test
 	public void testTheQuery() throws ParseException {
 	
