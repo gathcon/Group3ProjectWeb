@@ -71,7 +71,7 @@ public class Base_DataTest {
 	private User_Equipment ue;
 	private Event_Cause ec;
 
-	@Before
+	
 	public void setupBaseData() {
 		f = new Failure();
 		f.setFailureId(0);
@@ -120,7 +120,7 @@ public class Base_DataTest {
 		baseDataDAO.addBase_Data(bd);
 	}
 
-	@After
+	
 	public void emptydb() {
 		baseDataDAO.removeBase_Data(bd);
 		failureDAO.removeFailure(f);
@@ -131,6 +131,7 @@ public class Base_DataTest {
 
 	@Test
 	public void testgetAllBase_Data() {
+		setupBaseData();
 		List<Base_Data> bds = baseDataWS.getAllBase_Data();
 		bd = bds.get(0);
 		assertNotNull(bd);
@@ -147,11 +148,13 @@ public class Base_DataTest {
 		assertNotNull(bd.getUserEquipment());
 		assertNotNull(bd.getEventCause());
 		assertNotNull(bd.getOperator());
+		 emptydb();
 	}
 	
 	@Test
 	public void testForFailuresCountByModelBetweenTwoDates()
 	throws ParseException {
+		setupBaseData();
 	Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 	.parse("2000-01-11 16:00:00");
 	Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -161,23 +164,22 @@ public class Base_DataTest {
 	assertEquals(number.intValue(), baseDataDAO
 	.failureCountByModelBetweenDates(startDate, endDate, model)
 	.intValue());
+	 emptydb();
 	}
-}
 
-// @Ignore
-// @Test
-// public void testThatBaseDataReturnsNORecords() throws ParseException {
-// Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-// .parse("2000-01-11 16:00:00");
-// Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-// .parse("2015-01-20 17:00:00");
-// BigInteger imsi = BigInteger.valueOf(Long.parseLong("344930000000011"));
-// Number number = new Integer(5);
-// assertEquals(number.intValue(), baseDataDao
-// .imsiFailureCountBetweenDates(startDate, endDate, imsi)
-// .intValue());
-// }
-//
+
+ @Ignore
+ @Test
+ public void testThatBaseDataReturnsNORecords() throws ParseException {
+ Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+ .parse("2000-01-11 16:00:00");
+ Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+ .parse("2015-01-20 17:00:00");
+ BigInteger imsi = BigInteger.valueOf(Long.parseLong("000000000000000"));
+ Number number = new Integer(0);
+ assertEquals(number.intValue(), baseDataDAO.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue());
+ }
+
 // @Test
 // public void testThroughTheLayers() throws ParseException {
 //
@@ -256,3 +258,4 @@ public class Base_DataTest {
 // .intValue());
 // }
 // }
+ }

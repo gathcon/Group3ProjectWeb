@@ -116,7 +116,7 @@ public class Base_DataDAO {
 		} else if (size >= 1 && size < 10) {
 			return queryResult.subList(0, size);
 		} else {
-			return new ArrayList<>();
+			return null;
 		}
 	}	
 }
