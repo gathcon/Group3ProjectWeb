@@ -31,28 +31,28 @@ public class EntityPersistenceDistribution {
 	@EJB
 	private Event_CauseDAO ec;
 
-	public void find(Object entity, EntityType e) {
-		System.out.println("in find");
-		switch (e) {
-		case BASEDATA:
-			bd.addBase_Data((Base_Data) entity);
-			break;
-		case FAILURE:
-			System.out.println("inside switch statement failure");
-			f.addFailure((Failure) entity);
-			break;
-		case EVENTCAUSE:
-			ec.addEvent_Cause((Event_Cause) entity);
-			break;
-		case OPERATOR:
-			op.addOperator((Operator) entity);
-			break;
-		case USEREQUIPMENT:
-			ue.addUser_Equipment((User_Equipment) entity);
-			break;
-		default:
-			System.out.println("no entities found");
-			break;
-		}
-	}
+//	public void find(Object entity, EntityType e) {
+//		System.out.println("in find");
+//		switch (e) {
+//		case BASEDATA:
+//			bd.addBase_Data((Base_Data) entity);
+//			break;
+//		case FAILURE:
+//			System.out.println("inside switch statement failure");
+//			f.persist((Failure) entity);
+//			break;
+//		case EVENTCAUSE:
+//			ec.addEvent_Cause((Event_Cause) entity);
+//			break;
+//		case OPERATOR:
+//			op.addOperator((Operator) entity);
+//			break;
+//		case USEREQUIPMENT:
+//			ue.addUser_Equipment((User_Equipment) entity);
+//			break;
+//		default:
+//			System.out.println("no entities found");
+//			break;
+//		}
+//	}
 }

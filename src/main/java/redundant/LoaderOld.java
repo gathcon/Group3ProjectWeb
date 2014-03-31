@@ -19,7 +19,7 @@ import validation.ErrorLogger;
 
 @Stateless
 @LocalBean
-public class Loader {
+public class LoaderOld {
       
     private DomainTableReader reader;
     private BaseDataTableReader baseReader;
@@ -104,7 +104,7 @@ public class Loader {
                 TableRow entity = EntityCreator.getEntity(convertedRow);
                
                 //persist here
-                epd.find(entity, e);
+                //epd.find(entity, e);
             }       
         }
         System.out.println(e.toString() + " Entities persisted");

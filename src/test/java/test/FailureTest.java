@@ -44,7 +44,7 @@ public class FailureTest {
 		failure = new Failure();
 		failure.setFailureId(failurePK);
 		failure.setDescription("Test Failure");
-		failuredao.addFailure(failure);
+		failuredao.persist(failure);
 	}
 
 	@After

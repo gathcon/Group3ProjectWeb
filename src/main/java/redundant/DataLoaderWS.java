@@ -20,7 +20,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 public class DataLoaderWS {
  
 	@EJB
-	private Loader loader;
+	private LoaderOld loader;
 	
 	@POST
 	@Path("/upload")

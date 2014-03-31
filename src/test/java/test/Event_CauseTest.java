@@ -45,7 +45,7 @@ public class Event_CauseTest {
 		event_Cause = new Event_Cause();
 		event_Cause.setId(event_CausePK);
 		event_Cause.setDescription("description");
-		event_Causedao.addEvent_Cause(event_Cause);
+		event_Causedao.persist(event_Cause);
 	}
 
 	@After

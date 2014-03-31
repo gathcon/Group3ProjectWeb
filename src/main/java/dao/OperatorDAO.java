@@ -10,10 +10,11 @@ import javax.persistence.PersistenceContext;
 
 import model.Operator;
 import model.OperatorPK;
+import model.TableRow;
 
 @Stateless
 @LocalBean
-public class OperatorDAO {
+public class OperatorDAO implements DAOInterface{
 	
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
@@ -23,7 +24,7 @@ public class OperatorDAO {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public DatabaseResponse addOperator(Operator operator) {
+	public DatabaseResponse persist(TableRow operator) {
 		try {
 			em.persist(operator);
 			return DatabaseResponse.OK;

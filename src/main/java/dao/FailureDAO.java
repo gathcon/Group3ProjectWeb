@@ -9,10 +9,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Failure;
+import model.TableRow;
 
 @Stateless
 @LocalBean
-public class FailureDAO {
+public class FailureDAO implements DAOInterface{
 
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
@@ -22,7 +23,7 @@ public class FailureDAO {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public DatabaseResponse addFailure(Failure failure) {
+	public DatabaseResponse persist(TableRow failure) {
 		try {
 			em.persist(failure);
 			return DatabaseResponse.OK;

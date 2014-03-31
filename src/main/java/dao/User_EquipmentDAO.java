@@ -8,11 +8,12 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.TableRow;
 import model.User_Equipment;
 
 @Stateless
 @LocalBean
-public class User_EquipmentDAO {
+public class User_EquipmentDAO implements DAOInterface{
 
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
@@ -22,7 +23,7 @@ public class User_EquipmentDAO {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public DatabaseResponse addUser_Equipment(User_Equipment user_Equipment) {
+	public DatabaseResponse persist(TableRow user_Equipment) {
 		try {
 			em.persist(user_Equipment);
 			return DatabaseResponse.OK;

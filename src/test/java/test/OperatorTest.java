@@ -46,7 +46,7 @@ public class OperatorTest {
 		Operator.setId(operatorPK);
 		Operator.setCountry("ireland");
 		Operator.setOperatorName("vodafone");
-		Operatordao.addOperator(Operator);
+		Operatordao.persist(Operator);
 	}
 
 	@After

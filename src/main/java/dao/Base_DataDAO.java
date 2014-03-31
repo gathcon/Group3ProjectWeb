@@ -14,16 +14,17 @@ import javax.persistence.PersistenceContext;
 
 import model.Base_Data;
 import model.Event_Cause;
+import model.TableRow;
 
 @Stateless
 @LocalBean
-public class Base_DataDAO {
+public class Base_DataDAO implements DAOInterface{
 
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public DatabaseResponse addBase_Data(Base_Data base_Data) {
+	public DatabaseResponse persist(TableRow base_Data) {
 		try {
 			em.persist(base_Data);
 			return DatabaseResponse.OK;

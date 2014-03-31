@@ -43,7 +43,7 @@ public class UserTest {
 		user.setUserName("Jane");
 		user.setPassword("password");
 		user.setUserType("sysAdmin");
-		userdao.addUser(user);
+		userdao.persist(user);
 		assertNotNull(userdao.getUser("Jane"));
 		userdao.removeUser(user);
 		assertNull(userdao.getUser("Jane"));
