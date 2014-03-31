@@ -56,7 +56,7 @@
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
 
-			document.getElementById("msg").innerHTML = "The number of failures for this phone model";
+			document.getElementById("msg").innerHTML = "The number of failures for this phone model and date range";
 			document.getElementById("count").innerHTML = obj;
 
 		} catch (err) {

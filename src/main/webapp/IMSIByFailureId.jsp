@@ -2,12 +2,16 @@
 <html>
 <head>
 <script>
-	function validate(failureId) {
 
-		if ((!(/^[0-9]+$/.test(failureId)))) {
-			alert("Invalid input characters.");
-		} 
-	}
+	function processData(){
+
+		var selector = document.getElementById("failureSelector");
+		var failureElement = selector.options[selector.selectedIndex].text.split(":");	
+		var failureClass = failureElement[0];
+		
+		getJSON('jaxrs/base_Datas/IMSIByFailureId/' 
+				+ failureClass);
+		}
 
 	function getJSON(url) {
 
@@ -22,15 +26,14 @@
 
 			var size = obj.length;
 
-			var myTable = "<table style=\'width: 500px\' border=\"1\">";
-			myTable += "<tr><td><u>Failure Description</u></td><td><u>Affected IMSIs</u></td></tr>";
+			var myTable = "<table style=\'width: 300px\' border=\"1\">";
+			myTable += "<tr><td><u>Affected IMSIs</u></td></tr>";
 
 			for (var i = 0; i < size; i++) {
 
-				var description = obj[i].failure.description;
 				var imsi = obj[i].imsi;
 				
-				myTable += "<tr><td>" + description + "</td><td>" + imsi
+				myTable += "<tr><td>" + imsi
 				+ "</td></tr>";
 			}
 			myTable += "</table>";
@@ -38,7 +41,7 @@
 			document.getElementById("tablespace").innerHTML = myTable;
 
 		} catch (err) {
-			document.getElementById("tablespace").innerHTML = "No record found for failure class submitted.";
+			document.getElementById("tablespace").innerHTML = "No records found for failure class submitted.";
 		}
 	}
 </script>
@@ -49,14 +52,22 @@
 	<hr>
 
 	<div>
-		<label for="failureId">Failure Class</label> <input id="failureId"
-			name="failureClass" type="text">  
+		<form name='inputForm'>
+			<fieldset>
+			<select id="failureSelector">
+			  <option value="0">0:EMERGENCY</option>
+			  <option value="1">1:HIGH PRIORITY ACCESS</option>
+			  <option value="2">2:MT ACCESS</option>
+			  <option value="3">3:MO SIGNALLING</option>
+			  <option value="4">4:MO DATA</option>
+			</select>	
+			
+			<label for="submit"></label> 
+			<input type="button" name="submit" onclick="processData();" value="Query" size="20">
+			</fieldset>
+		</form>
 	</div>
 
-	<button type="button"
-		onclick="validate(document.getElementById('failureId').value);
-			getJSON('jaxrs/base_Datas/IMSIByFailureId/' + document.getElementById('failureId').value);">Query
-	</button>
 	<br>
 
 	<div id="tablespace"></div>

@@ -28,7 +28,7 @@
 			document.getElementById("tablespace").innerHTML = myTable;
 
 		} catch (err) {
-			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted.";
+			document.getElementById("tablespace").innerHTML = "No records found for inputs submitted.";
 		}
 	}
 </script>
