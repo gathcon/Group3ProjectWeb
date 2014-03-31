@@ -188,4 +188,11 @@ public class Base_DataWS {
 				.parse(endDateOut);
 		return base_DatasDao.getTop10ImsisByDate(startDate, endDate);
 	}
+	
+	@GET
+	@Path("/allImsis/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<BigInteger> getAllImsis() {
+		return base_DatasDao.getAllImsis();
+	}
 }

@@ -2,6 +2,39 @@
 <html>
 <head>
 <script>
+function getAllImsis(url) {
+
+	try {
+		var JSONRequest = new XMLHttpRequest();
+
+		JSONRequest.open("GET", url, false);
+		JSONRequest.send(null);
+
+		var txt = JSONRequest.responseText;
+		//document.write(txt);
+		var obj = eval("(" + txt + ")");
+
+		var size = obj.length;
+
+		var mySelector = "<select id='modelSelector'>";
+
+		for (var i = 0; i < size; i++) {
+
+			//var holder = obj[i];
+			var model =  obj[i];
+				//holder.value
+
+			mySelector += "<option value=i>" + model+ "</option>";
+		}
+		mySelector += "</select>";
+
+		document.getElementById("selectorspace").innerHTML = mySelector;
+
+
+	} catch (err) {
+		document.getElementById("msg").innerHTML = "No imsis available.";
+	}
+}
 
 	function getJSON(url) {
 
@@ -20,37 +53,29 @@
 
 	function processData(){
 
-		if (validate( document.getElementById('imsi').value) ){
-			alert('You entered invalid content');
-		} else {
-			getJSON('jaxrs/base_Datas/imsifailure/' + 
-					document.getElementById('imsi').value + '/' + document.getElementById('startdatetime').value + '/' + document.getElementById('enddatetime').value);
-		}
+		var selector = document.getElementById("modelSelector");
+		var imsi = selector.options[selector.selectedIndex].text;	
+
+		getJSON('jaxrs/base_Datas/imsifailure/' 
+				+ imsi + '/' 
+				+ document.getElementById('startdatetime').value + '/' 
+				+ document.getElementById('enddatetime').value);
 	}
 
-	function validate(imsi) {
-				if(imsi == ' '){
-					return true;
-				}
-				else if(imsi.match(/^[0-9]+$/) == null){
-					return true;
-				} else {
-					return false;
-				}
-	}	
+
 	
 </script>
 </head>
 
-<body>
+<body onload="getAllImsis('jaxrs/base_Datas/allImsis/')">
 	<b>Get the count of failures for an imsi between date range.</b>
 	<br>
 
 	<div>
 		<form name='inputForm'>
 			<fieldset>
-				<label for="imsi">IMSI</label> <input id="imsi" name="imsi"
-					type="text" value=""> <br> <label for="startdatetime">Start
+					<label for=selectorspace>IMSI:</label> 
+					<span id="selectorspace"></span> <br> <label for="startdatetime">Start
 					DateTime:</label> <input type="datetime-local" id="startdatetime"
 					name="startDate"> <label for="enddatetime">End
 					DateTime:</label> <input type="datetime-local" id="enddatetime"

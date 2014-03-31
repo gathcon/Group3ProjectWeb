@@ -118,5 +118,15 @@ public class Base_DataDAO {
 		} else {
 			return null;
 		}
+	}
+
+	public List<BigInteger> getAllImsis() {
+		List<BigInteger> queryResult = null;
+		
+		queryResult =  (List<BigInteger>) em.createNamedQuery("Base_Data.findAllImsis").getResultList();
+	
+		System.out.println("IMSI: ====" + queryResult.get(0).toString());
+		
+		return queryResult;
 	}	
 }
