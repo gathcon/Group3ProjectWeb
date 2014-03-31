@@ -142,8 +142,7 @@ import dao.User_EquipmentDAO;
               
             assertEquals(expected.getClass(), actual.getClass());
         }
-        
-        
+               
         @Test
         public void testBaseDataCase() {
         
