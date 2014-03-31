@@ -338,30 +338,20 @@ public class NetManagerUserStoryTest {
 		event_CauseDAO.removeEvent_Cause(ec);
 	}
 
+	@Ignore
 	@Test
 	public void testTheQueryListSize() throws ParseException {
 		assertEquals(10,baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00")).size());
 		
 	}
 	
-	@Test
-	public void testSortingOfDates(){
-		//loop through the list
-		//check each number is greater than last
-		// first ignore
-		// size 1 ignore
-		
-	}
 	
-	@Test
-	public void testBadDates(){
-		
-	}
-	@Ignore
+	
 	@Test
 	public void testTheQuery() throws ParseException {
 	
-		List<Object[]> queryResult = baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00"));
+		List<Object[]> queryResult = baseDataWS.getTop10ImsiFailureCountBetweenDates("2013-01-10T17:00", "2013-01-12T17:00");
+				//baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00"));
 
 		BigInteger[] imsis =  new BigInteger[20];
 		Number[] numbers = new Number[20];
