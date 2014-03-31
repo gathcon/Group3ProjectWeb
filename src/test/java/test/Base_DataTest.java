@@ -65,14 +65,50 @@ public class Base_DataTest {
 	@EJB
 	private Base_DataWS baseDataWS;
 
-	private Base_Data bd;
+	private Base_Data bd,bd1,bd2;
 	private Failure f;
 	private Operator o;
 	private User_Equipment ue;
 	private Event_Cause ec;
 
 	
-	public void setupBaseData() {
+	public void addOneBaseDataRow() {
+		backingTables();
+
+		bd = new Base_Data();
+		bd.setCellId(1);
+		bd.setDateTime(new Date(1000));
+		bd.setDuration(1000);
+		bd.setHier3Id(new BigInteger("1234"));
+		bd.setHier32Id(new BigInteger("1234"));
+		bd.setHier321Id(new BigInteger("1234"));
+		bd.setImsi(new BigInteger("1234"));
+		bd.setNeVersion("neVersion");
+		bd.setFailure(f);
+		bd.setUserEquipment(ue);
+		bd.setEventCause(ec);
+		bd.setOperator(o);
+
+		addBackUpTables();
+		
+		baseDataDAO.addBase_Data(bd);
+	}
+	
+	public void addBackUpTables(){
+		failureDAO.addFailure(f);
+		operatorDAO.addOperator(o);
+		user_EquipmentDAO.addUser_Equipment(ue);
+		event_CauseDAO.addEvent_Cause(ec);		
+	}
+	
+	public void emptyBackUpTables(){
+		failureDAO.removeFailure(f);
+		operatorDAO.removeOperator(o);
+		user_EquipmentDAO.removeUser_Equipment(ue);
+		event_CauseDAO.removeEvent_Cause(ec);		
+	}
+	
+	public void backingTables(){
 		f = new Failure();
 		f.setFailureId(0);
 		f.setDescription("Test Failure");
@@ -97,41 +133,40 @@ public class Base_DataTest {
 		ue.setVendorName("vendorName");
 		ue.setUeType("ueType");
 		ue.setOs("os");
-		ue.setInputMode("inputMode");
-
-		bd = new Base_Data();
-		bd.setCellId(1);
-		bd.setDateTime(new Date(1000));
-		bd.setDuration(1000);
-		bd.setHier3Id(new BigInteger("1234"));
-		bd.setHier32Id(new BigInteger("1234"));
-		bd.setHier321Id(new BigInteger("1234"));
-		bd.setImsi(new BigInteger("1234"));
-		bd.setNeVersion("neVersion");
-		bd.setFailure(f);
-		bd.setUserEquipment(ue);
-		bd.setEventCause(ec);
-		bd.setOperator(o);
-
-		failureDAO.addFailure(f);
-		operatorDAO.addOperator(o);
-		user_EquipmentDAO.addUser_Equipment(ue);
-		event_CauseDAO.addEvent_Cause(ec);
-		baseDataDAO.addBase_Data(bd);
+		ue.setInputMode("inputMode");		
 	}
 
 	
 	public void emptydb() {
 		baseDataDAO.removeBase_Data(bd);
-		failureDAO.removeFailure(f);
-		operatorDAO.removeOperator(o);
-		user_EquipmentDAO.removeUser_Equipment(ue);
-		event_CauseDAO.removeEvent_Cause(ec);
+		emptyBackUpTables();
+	}
+	
+	private void emptyMultipleBaseDatas() {
+		// TODO Auto-generated method stub
+		baseDataDAO.removeBase_Data(bd);
+		baseDataDAO.removeBase_Data(bd1);
+		baseDataDAO.removeBase_Data(bd2);
+		emptyBackUpTables();	
+		
+	}
+
+
+	private void setUpMultipleBaseDatas() {
+		backingTables();
+		bd = new Base_Data();bd.setCellId(4);bd.setDateTime(new Date(113,0,11,17,46,1));bd.setDuration(1000);bd.setHier3Id(new BigInteger("1234"));bd.setHier32Id(new BigInteger("1234"));bd.setHier321Id(new BigInteger("1234"));bd.setImsi(new BigInteger("344930000000012"));bd.setNeVersion("neVersion");bd.setFailure(f);bd.setUserEquipment(ue);bd.setEventCause(ec);bd.setOperator(o);
+		bd1 = new Base_Data();bd1.setCellId(4);bd1.setDateTime(new Date(113,0,11,17,46,1));bd1.setDuration(1000);bd1.setHier3Id(new BigInteger("1234"));bd1.setHier32Id(new BigInteger("1234"));bd1.setHier321Id(new BigInteger("1234"));bd1.setImsi(new BigInteger("344930000000012"));bd1.setNeVersion("neVersion");bd1.setFailure(f);bd1.setUserEquipment(ue);bd1.setEventCause(ec);bd1.setOperator(o);
+		bd2 = new Base_Data();bd2.setCellId(4);bd2.setDateTime(new Date(113,0,11,17,46,1));bd2.setDuration(1000);bd2.setHier3Id(new BigInteger("1234"));bd2.setHier32Id(new BigInteger("1234"));bd2.setHier321Id(new BigInteger("1234"));bd2.setImsi(new BigInteger("344930000000012"));bd2.setNeVersion("neVersion");bd2.setFailure(f);bd2.setUserEquipment(ue);bd2.setEventCause(ec);bd2.setOperator(o);
+		addBackUpTables();
+		
+		baseDataDAO.addBase_Data(bd);	
+		baseDataDAO.addBase_Data(bd1);
+		baseDataDAO.addBase_Data(bd2);	
 	}
 
 	@Test
-	public void testgetAllBase_Data() {
-		setupBaseData();
+	public void WS_testgetAllBase_Data() {
+		addOneBaseDataRow();
 		List<Base_Data> bds = baseDataWS.getAllBase_Data();
 		bd = bds.get(0);
 		assertNotNull(bd);
@@ -148,114 +183,95 @@ public class Base_DataTest {
 		assertNotNull(bd.getUserEquipment());
 		assertNotNull(bd.getEventCause());
 		assertNotNull(bd.getOperator());
-		 emptydb();
+		emptydb();
+	}
+
+	@Test
+	public void DAO_testForFailuresCountByModelBetweenTwoDates()
+			throws ParseException {
+		addOneBaseDataRow();
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse("2000-01-11 16:00:00");
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse("2015-01-20 17:00:00");
+		String model = "Model That doesn't exist";
+		Number number = new Integer(0);
+		assertEquals(number.intValue(), baseDataDAO
+				.failureCountByModelBetweenDates(startDate, endDate, model)
+				.intValue());
+		emptydb();
+	}
+
+
+	@Ignore
+	@Test
+	public void DAO_testThatBaseDataReturnsNORecords() throws ParseException {
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse("2000-01-11 16:00:00");
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse("2015-01-20 17:00:00");
+		BigInteger imsi = BigInteger.valueOf(Long.parseLong("000000000000000"));
+		Number number = new Integer(0);
+		assertEquals(number.intValue(), baseDataDAO
+				.imsiFailureCountBetweenDates(startDate, endDate, imsi)
+				.intValue());
+	}
+
+	@Test
+	public void WS_testThroughTheLayers() throws ParseException {
+
+		Number number = new Integer(0);
+
+		String imsi = "000000000000000";
+		String startDate = "2000-01-11T16:00";
+		String endDate = "2000-01-11T16:00";
+		assertEquals(number.intValue(), baseDataWS
+				.checkForAnImsisFailuresBetweenDates(imsi, startDate, endDate)
+				.intValue());
+	}
+
+	@Test
+	public void WS_testgetBase_DataByFailureId() {
+		addOneBaseDataRow();
+		// pass in the failure id out of failure table
+		assertNotNull(baseDataWS.getIMSIByFailureId(0));
+		emptydb();
+	}
+
+	@Test
+	public void WS_testgetEventID_CauseCodeByImsi() {
+
+		addOneBaseDataRow();
+		BigInteger imsi = BigInteger.valueOf(Long.parseLong("1234"));
+		assertNotNull(baseDataWS.getEventID_CauseCodeByImsi(imsi));
+		emptydb();
 	}
 	
 	@Test
-	public void testForFailuresCountByModelBetweenTwoDates()
-	throws ParseException {
-		setupBaseData();
-	Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-	.parse("2000-01-11 16:00:00");
-	Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-	.parse("2015-01-20 17:00:00");
-	String model = "Model That doesn't exist";
-	Number number = new Integer(0);
-	assertEquals(number.intValue(), baseDataDAO
-	.failureCountByModelBetweenDates(startDate, endDate, model)
-	.intValue());
-	 emptydb();
+	public void WS_testgetIMSIByDateRange() throws ParseException {
+		setUpMultipleBaseDatas();
+		assertNotNull(baseDataWS.getIMSIByDateRange("2013-01-10T16:00",
+				"2013-01-12T16:00"));
+		emptyMultipleBaseDatas();
 	}
-
-
- @Ignore
- @Test
- public void testThatBaseDataReturnsNORecords() throws ParseException {
- Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
- .parse("2000-01-11 16:00:00");
- Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
- .parse("2015-01-20 17:00:00");
- BigInteger imsi = BigInteger.valueOf(Long.parseLong("000000000000000"));
- Number number = new Integer(0);
- assertEquals(number.intValue(), baseDataDAO.imsiFailureCountBetweenDates(startDate, endDate, imsi).intValue());
+	
+	@Test
+	public void DAO_testForAnImsisFailuresBetweenTwoDatesWithAGoodIMSI()
+			throws ParseException {
+		// use the code up above testthatbasedatareturnsNOrecords
+		setUpMultipleBaseDatas();
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse("2000-01-11 16:00:00");
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.parse("2015-01-20 17:00:00");
+		BigInteger imsi = BigInteger.valueOf(Long.parseLong("344930000000012"));
+		// give in a good imsi, specify that the returned number of records is
+		// not null
+		Number number = new Integer(3);
+		assertEquals(number.intValue(), baseDataDAO
+				.imsiFailureCountBetweenDates(startDate, endDate, imsi)
+				.intValue());
+		emptyMultipleBaseDatas();
+	}
  }
-
-// @Test
-// public void testThroughTheLayers() throws ParseException {
-//
-// Number number = new Integer(0);
-//
-// String imsi = "000000000000000";
-// String startDate = "2000-01-11 16:00:00";
-// String endDate = "2000-01-11 16:00:00";
-// assertEquals(number.intValue(), baseDataWs
-// .checkForAnImsisFailuresBetweenDates(imsi, startDate, endDate)
-// .intValue());
-// }
-//
-// @Test
-// public void testgetBase_DataByFailureId() {
-// // pass in the failure id out of failure table
-// assertNotNull(baseDataWs.getBase_DataByFailureId(0));
-// }
-//
-// @Test
-// public void testgetEventID_CauseCodeByImsi() {
-// // pass in BigInteger imsi
-// // returns event id and cause code
-// BigInteger imsi = BigInteger
-// .valueOf(Long.parseLong("0000000000000000"));
-// assertNull(baseDataWs.getEventID_CauseCodeByImsi(imsi));
-// }
-//
-// @Test
-// public void testgetIMSIByDateRange() throws ParseException {
-// // pass in the dates
-// // note the date format .0 seconds
-// // gets back a list of imsis
-// assertNull(baseDataWs.getIMSIByDateRange("1928-01-11 16:00:00.0",
-// "1928-01-11 17:00:00.0"));
-// }
-
-// @Test
-// public void testgetIMSIByFailureId() throws ParseException {
-// pass in the failureId
-// gets back a list of imsis
-// assertNull(baseDataWs.getIMSIByFailureId("9"));
-// }
-
-// @Test
-// public void testForAnImsisFailuresBetweenTwoDatesWithABadIMSI()
-// throws ParseException {
-// // use the code up above testthatbasedatareturnsNOrecords
-// Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-// .parse("2000-01-11 16:00:00");
-// Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-// .parse("2015-01-20 17:00:00");
-// BigInteger imsi = BigInteger
-// .valueOf(Long.parseLong("0000000000000000"));
-// Number number = new Integer(0);
-// assertEquals(number.intValue(), baseDataDao
-// .imsiFailureCountBetweenDates(startDate, endDate, imsi)
-// .intValue());
-// }
-//
-// @Test
-// public void testForAnImsisFailuresBetweenTwoDatesWithAGoodIMSI()
-// throws ParseException {
-// // use the code up above testthatbasedatareturnsNOrecords
-// Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-// .parse("2000-01-11 16:00:00");
-// Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-// .parse("2015-01-20 17:00:00");
-// BigInteger imsi = BigInteger
-// .valueOf(Long.parseLong("0000000000000000"));
-// // give in a good imsi, specify that the returned number of records is
-// // not null
-// Number number = new Integer(0);
-// assertEquals(number.intValue(), baseDataDao
-// .imsiFailureCountBetweenDates(startDate, endDate, imsi)
-// .intValue());
-// }
-// }
- }
+ 
