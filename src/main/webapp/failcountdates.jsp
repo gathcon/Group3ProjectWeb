@@ -67,7 +67,7 @@ function getAllImsis(url) {
 </script>
 </head>
 
-<body onload="getAllImsis('jaxrs/base_Datas/allImsis/')">
+<body onload="getAllImsis('jaxrs/base_Datas/allImsiS/')">
 	<b>Get the count of failures for an imsi between date range.</b>
 	<br>
 

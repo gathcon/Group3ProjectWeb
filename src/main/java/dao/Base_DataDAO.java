@@ -60,7 +60,11 @@ public class Base_DataDAO {
 		else 
 			return Base_Data;	
 	}
-	
+	public List<Base_Data> getImsisForDropdown() {
+		@SuppressWarnings("unchecked")
+		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAllImsis").getResultList();
+		return base_Data;
+	}
 	public List<Base_Data> getAllPhoneModels() {
 		@SuppressWarnings("unchecked")
 		List<Base_Data> base_Data = (List<Base_Data>) em.createNamedQuery("Base_Data.findAllPhoneModels").getResultList();
@@ -123,7 +127,7 @@ public class Base_DataDAO {
 	public List<BigInteger> getAllImsis() {
 		List<BigInteger> queryResult = null;
 		
-		queryResult =  (List<BigInteger>) em.createNamedQuery("Base_Data.findAllImsis").getResultList();
+		queryResult =  (List<BigInteger>) em.createNamedQuery("Base_Data.findAllImsiS").getResultList();
 	
 		System.out.println("IMSI: ====" + queryResult.get(0).toString());
 		

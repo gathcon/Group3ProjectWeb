@@ -74,6 +74,13 @@ public class Base_DataWS {
 				.parse(endDateOut);
 		return base_DatasDao.getIMSIByDateRange(startDate, endDate);
 	}
+
+	@GET
+	@Path("/allImsis/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Base_Data> getAllImsis() {
+		return base_DatasDao.getImsisForDropdown();
+	}
 	
 	@GET
 	@Path("/allPhoneModels/")
@@ -190,9 +197,9 @@ public class Base_DataWS {
 	}
 	
 	@GET
-	@Path("/allImsis/")
+	@Path("/allImsiS/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<BigInteger> getAllImsis() {
+	public List<BigInteger> getAllImsiS() {
 		return base_DatasDao.getAllImsis();
 	}
 }
