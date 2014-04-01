@@ -114,44 +114,34 @@ function getImsis(url) {
 	</div>
 
 	<div id="menu">
-		<a class="menulinks">Home</a>
-		<a class="menulinks">Logout</a>
+		<ul>
+			<li><a class="menulinks">Home</a></li>
+			<li><a class="menulinks">Logout</a></li>
+		</ul>
 	</div>
 
-	 <b>Get EventId and Cause Codes associated with the given
-		Imsi.</b></h>
-	<hr>
+	<div id="mainbody">
+		<div>
+			<form name='inputForm'>
+				<fieldset>
 
-	<!-- <div>
-		<input id="imsiInput" name="imsi" type="text" pattern="[0-9]{15}"
-			title="15 digit numbers only input required"> <label
-			for="imsi">Imsi</label>
+					<label for=selectorspace>
+						Imsi:
+					</label>
+					<span id="selectorspace"></span>
 
+					</br>
+
+					<label for="submit"></label>
+					<input type="button" name="submit" onclick="processData()" value="Query" size="20">
+				</fieldset>
+			</form>
+		</div>
+
+		</br>
+		</br>
+
+		<div id="tablespace"></div>
 	</div>
- -->	<div>
-		<form name='inputForm'>
-			<fieldset>
-
-				<label for=selectorspace>Imsi:</label>
-				<span id="selectorspace"></span> <br>
-				<label for="submit"></label>
-				<input type="button" name="submit" onclick="processData()"
-				value="Query" size="20">
-			</fieldset>
-		</form>
-	</div>
-	<!--<button type="button"
-		onclick="getJSON('jaxrs/base_Datas/eventID_CauseCodeByImsi/' + ; validate(document.getElementById('imsiInput').value)">Submit
-		Query</button>
-		
-		document.getElementById('imsiInput').value) var model = selector.options[selector.selectedIndex].text; -->
-
-	<br>
-
-	<br>
-
-	<div id="tablespace"></div>
-
-
 </body>
 </html>
