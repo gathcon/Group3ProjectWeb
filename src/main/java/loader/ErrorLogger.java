@@ -1,4 +1,4 @@
-package validation;
+package loader;
 
 
 import java.io.PrintWriter;
@@ -7,11 +7,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import org.apache.poi.hssf.usermodel.HSSFCell; 
 import org.apache.poi.hssf.usermodel.HSSFRow; 
 import org.apache.poi.ss.usermodel.Cell;
 
-
+@Stateless
+@LocalBean
 public class ErrorLogger implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -52,7 +56,7 @@ public class ErrorLogger implements Serializable
 		try
 		{
 			Date date = new Date();
-			name = "/home/log" + date.toString() + ".txt";
+			name = "/home/logs/log" + date.toString() + ".txt";
 			file = new PrintWriter(name);
 			for (int i = 0; i < cellVectorHolder.size(); i++)
 			{

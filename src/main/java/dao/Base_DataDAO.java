@@ -23,7 +23,6 @@ public class Base_DataDAO implements DAOInterface{
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public DatabaseResponse persist(TableRow base_Data) {
 		try {
 			em.persist(base_Data);
@@ -33,7 +32,6 @@ public class Base_DataDAO implements DAOInterface{
 		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void removeBase_Data(Base_Data base_Data) {
 		em.remove(em.merge(base_Data));
 	}

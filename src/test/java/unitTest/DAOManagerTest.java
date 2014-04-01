@@ -1,4 +1,4 @@
-package test;
+package unitTest;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -18,7 +18,6 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import dao.Base_DataDAO;
@@ -37,24 +36,16 @@ public class DAOManagerTest {
 		MavenDependencyResolver resolver = DependencyResolvers.use(
 				MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
 
-		return ShrinkWrap
-				.create(WebArchive.class, "test.war")
-				.addPackages(true, "dao", "jaxrs", "model", "restApp")
-				.addAsResource("META-INF/persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsLibraries(
-						resolver.artifact("org.mockito:mockito-all:1.9.5")
-								.resolveAsFiles());
+		return ShrinkWrap.create(WebArchive.class, "test.war")
+        		.addPackages(true, "dao", "jaxrs", "model", "restApp", "loader")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsLibraries(resolver.artifact("org.mockito:mockito-all:1.9.5").resolveAsFiles())
+                .addAsLibraries(resolver.artifact("org.apache.poi:poi").resolveAsFiles());
 	}
 
 	@EJB
 	DAOManager daoManager;
-
-	@Before
-	public void injectMockBase_DataDAO() {
-
-	}
 
 	// Behavior tests
 

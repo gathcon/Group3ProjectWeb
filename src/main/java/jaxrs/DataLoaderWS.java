@@ -1,4 +1,4 @@
-package redundant;
+package jaxrs;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,6 +12,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+import loader.FileUploadForm;
+import loader.Loader;
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
  
 @Path("/file")
@@ -20,7 +23,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 public class DataLoaderWS {
  
 	@EJB
-	private LoaderOld loader;
+	private Loader loader;
 	
 	@POST
 	@Path("/upload")

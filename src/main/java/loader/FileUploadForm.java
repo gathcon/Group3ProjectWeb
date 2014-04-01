@@ -1,4 +1,4 @@
-package redundant;
+package loader;
 
 import javax.ws.rs.FormParam;
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
