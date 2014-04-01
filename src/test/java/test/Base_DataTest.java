@@ -49,9 +49,10 @@ public class Base_DataTest {
 		MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
         
 		return ShrinkWrap.create(WebArchive.class, "test.war")
-        		.addPackages(true, "dao", "jaxrs", "model", "restApp")
+        		.addPackages(true, "dao", "jaxrs", "model", "restApp", "loader")
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsLibraries(resolver.artifact("org.apache.poi:poi").resolveAsFiles());
     }
 
 	@EJB private Base_DataDAO baseDataDAO;
