@@ -48,22 +48,10 @@
 </head>
 
 <body>
-	<div id="logo">
-		<img src="Ericsson.png">
-	</div>
+	<h><b>Get IMSIs by failure class.</b></h>
+	<hr>
 
-	<div id="heading">
-		<h1>Get IMSIs by failure class</h1>
-	</div>
-
-	<div id="menu">
-		<ul>
-			<li><a class="menulinks">Home</a></li>
-			<li><a class="menulinks">Logout</a></li>
-		</ul>
-	</div>
-	
-	<div id="mainbody">
+	<div>
 		<form name='inputForm'>
 			<fieldset>
 			<select id="failureSelector">
@@ -78,11 +66,11 @@
 			<input type="button" name="submit" onclick="processData();" value="Query" size="20">
 			</fieldset>
 		</form>
-
-		</br>
-		</br>
-
-		<div id="tablespace"></div>
 	</div>
+
+	<br>
+
+	<div id="tablespace"></div>
+
 </body>
 </html>

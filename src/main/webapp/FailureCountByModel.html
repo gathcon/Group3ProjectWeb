@@ -70,10 +70,22 @@
 </head>
 
 <body onload="getPhoneModels('jaxrs/base_Datas/allPhoneModels/')">
-	<b>Get the count of failures for a phone model between date range.</b>
-	<br>
+	<div id="logo">
+		<img src="Ericsson.png">
+	</div>
 
-	<div>
+	<div id="heading">
+		<h1>Get the count of failures for a phone model between date range</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a class="menulinks">Home</a></li>
+			<li><a class="menulinks">Logout</a></li>
+		</ul>
+	</div>
+	
+	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>
 				
@@ -88,11 +100,14 @@
 					value="Query" size="20">
 			</fieldset>
 		</form>
-	</div>
 
-	<br>
-	<p id="msg"></p>
-	<p id="count"></p>
+		</br>
+		</br>
+
+		<p id="msg"></p>
+		<p id="count"></p>
+	</div>
+</body>
 
 </body>
 </html>

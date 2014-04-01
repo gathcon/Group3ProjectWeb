@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Support Engineer Menu</title>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<h> <b></b></h>
+	<hr>
+	
+	<div><button type="button"
+		onclick="location.href='.jsp'">
+		</button>
+	</div>
+	
+	<div><button type="button"
+		onclick="location.href='.jsp'">
+		</button>
+	</div>
+	
+	<div><button type="button"
+		onclick="location.href='.jsp'">
+		</button>
+	</div>
+	
+
+	<div id="logo">
+		<img src="Ericsson.png">
+	</div>
+
+	<div id="heading">
+		<h1>Support Engineer Query Menu</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a class="menulinks">Home</a></li>
+			<li><a class="menulinks">Logout</a></li>
+		</ul>
+	</div>
+	
+	<div id="mainbody">
+		<ul>
+			<li><a class="querylinks" href="IMSIWithFailuresQuery.html">Find IMSIs with failures</a></li>
+			<li><a class="querylinks" href="IMSIByFailureId.html">Find IMSIs by failure class</a></li>
+			<li><a class="querylinks" href="FailureCountByModel.html">Find Failures by phone model</a></li>
+		</ul>
+	</div>
+</body>
+</html>

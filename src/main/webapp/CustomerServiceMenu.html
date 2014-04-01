@@ -2,11 +2,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>System Administrator</title>
+	<title>Customer Service Rep Query Menu</title>
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500' rel='stylesheet' type='text/css'>
-	<script src="js/loginandregister.js"></script>
 </head>
 <body>
 	<div id="logo">
@@ -14,7 +13,7 @@
 	</div>
 
 	<div id="heading">
-		<h1>System Administrator</h1>
+		<h1>Customer Service Rep Query Menu</h1>
 	</div>
 
 	<div id="menu">
@@ -25,16 +24,10 @@
 	</div>
 	
 	<div id="mainbody">
-		<form action="createUser.html" method="post">
-			<input type="submit" name="submit" value="Create a new user" size="20" />
-		</form>
-
-		<div id="userlist"></div>
-		<p id="error"></p>
-
-		<script>
-			populateUserTable();
-		</script>
+		<ul>
+			<li><a class="querylinks" href="CustomerServiceQuery1.html">All Event ID and Cause Codes associated by Imsi</a></li>
+			<li><a class="querylinks" href="failcountdates.html">Number of Failures by Date</a></li>
+		</ul>
 	</div>
 </body>
 </html>
