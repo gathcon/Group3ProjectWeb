@@ -30,15 +30,15 @@ function goToView(JSONObject) {
 		break;
 	case 'networkEng':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./NetworkManagementEngineerMenu.jsp");
+		window.location.replace("./NetworkManagementEngineerMenu.html");
 		break;
 	case 'customerServiceRep':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./CustomerServiceMenu.jsp");
+		window.location.replace("./CustomerServiceMenu.html");
 		break;
 	case 'supportEng':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./SupportEngineerMenu.jsp");
+		window.location.replace("./SupportEngineerMenu.html");
 		break;
 
 	default:
@@ -50,14 +50,16 @@ function goToView(JSONObject) {
 
 function populateUserTable() {
 	obj = getJSON("./jaxrs/users");
-	if(obj != null) {
-		document.write("<table><tr><th>Username</th><th>Password</th><th>Type</th></tr>");
+	if (obj != null) {
+		document
+				.write("<table><tr><th>Username</th><th>Password</th><th>Type</th></tr>");
 		for (var i = 0; i < obj.length; i++) {
-			document.write("<tr><td>" + obj[i].userName	+ "</td><td>" + obj[i].password	+ "</td><td>" + obj[i].userType	+ "</td></tr>");
+			document.write("<tr><td>" + obj[i].userName + "</td><td>"
+					+ obj[i].password + "</td><td>" + obj[i].userType
+					+ "</td></tr>");
 		}
 		document.write("</table>");
-	}
-	else {
+	} else {
 		document.getElementById("error").innerHTML = "Invalid Username";
 	}
 }
@@ -66,41 +68,44 @@ function register() {
 	var username = document.userForm.uname.value;
 	var password = document.userForm.pword.value;
 	var usertype = document.userForm.utype.value;
-	
+
 	if (username == "" || password == "") {
 		document.getElementById("error").innerHTML = "Fields cannot be empty";
-	}
-	else {
+	} else {
 		var request = new XMLHttpRequest();
-		var url = "./jaxrs/users/"+username+"/"+password+"/"+usertype;
+		var url = "./jaxrs/users/" + username + "/" + password + "/" + usertype;
 		request.open("GET", url, false);
 		request.send(null);
-		
+
 		if (request.status == 200) {
 			window.location.replace("./confirm.html");
-		}
-		else if (request.status == 500) {
+		} else if (request.status == 500) {
 			window.location.replace("./failed.html");
 		}
-	}	
+	}
 }
 
 function login() {
 	var username = document.myForm.uname.value;
 	var password = document.myForm.pword.value;
-	
+
 	if (username == "" || password == "") {
 		document.getElementById("error").innerHTML = "Fields cannot be empty";
-	}
-	else {
+	} else {
 		var JSONObject = getJSON("./jaxrs/users/" + username);
 
 		if (JSONObject != null) {
 			if (validatePassword(JSONObject, password)) {
+				createSession(JSONObject);
 				goToView(JSONObject);
 			}
 		} else {
 			document.getElementById("error").innerHTML = "Invalid Username";
 		}
 	}
+}
+
+function createSession(JSONObject) {
+	sessionStorage.setItem("userName", JSONObject.userName);
+	sessionStorage.setItem("userType", JSONObject.userType);
 }

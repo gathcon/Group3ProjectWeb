@@ -219,6 +219,21 @@ public class Base_DataTest {
 				.imsiFailureCountBetweenDates(startDate, endDate, imsi)
 				.intValue());
 	}
+	
+	@Test
+	public void DA0_testGetAllBase_Data(){
+		setUpMultipleBaseDatas();
+		assertEquals(3, baseDataDAO.getAllBase_Data().size());
+		emptyMultipleBaseDatas();
+	}
+	
+	@Test
+	public void DA0_testGetImsiByFailureIDbad(){
+		setUpMultipleBaseDatas();
+		assertNull(baseDataDAO.getIMSIByFailureId(-1));
+		emptyMultipleBaseDatas();
+	}
+		
 
 	@Test
 	public void WS_testThroughTheLayers() throws ParseException {

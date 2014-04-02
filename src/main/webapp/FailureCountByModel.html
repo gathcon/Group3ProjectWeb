@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500' rel='stylesheet' type='text/css'>
-	
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
+	rel='stylesheet' type='text/css'>
+
 <script>
+
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+	
+		if (currentUserType != "supportEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+	
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
 
 	function getPhoneModels(url) {
 
@@ -69,41 +84,38 @@
 </script>
 </head>
 
-<body onload="getPhoneModels('jaxrs/base_Datas/allPhoneModels/')">
+<body onload="checkUser(); getPhoneModels('jaxrs/base_Datas/allPhoneModels/')">
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
 
 	<div id="heading">
-		<h1>Get the count of failures for a phone model between date range</h1>
+		<h1>Get the count of failures for a phone model between date
+			range</h1>
 	</div>
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks">Home</a></li>
-			<li><a class="menulinks">Logout</a></li>
+			<li><a class="menulinks" href="SupportEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
 	</div>
-	
+
 	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>
-				
-				<label for=selectorspace>Phone Model:</label> 
-				<span id="selectorspace"></span> <br> 
-				<label for="startdatetime">Start DateTime:</label> 
-				<input type="datetime-local" id="startdatetime" name="startDate">
-				<label for="enddatetime">End DateTime:</label> 
-				<input type="datetime-local" id="enddatetime" name="endDate"> 
-				<label for="submit"></label> 
-				<input type="button" name="submit" onclick="processData()"
-					value="Query" size="20">
+				<label for=selectorspace>Phone Model:</label> <span
+					id="selectorspace"></span> <br> <label for="startdatetime">Start
+					DateTime:</label> <input type="datetime-local" id="startdatetime"
+					name="startDate"> <label for="enddatetime">End
+					DateTime:</label> <input type="datetime-local" id="enddatetime"
+					name="endDate"> <label for="submit"></label> <input
+					type="button" name="submit" onclick="processData()" value="Query"
+					size="20">
 			</fieldset>
 		</form>
-
-		</br>
-		</br>
-
+		<br>
 		<p id="msg"></p>
 		<p id="count"></p>
 	</div>

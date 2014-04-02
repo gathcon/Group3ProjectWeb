@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+		function checkUser() {
+			var currentUserType = sessionStorage.getItem("userType");
+			
+			if(currentUserType != "sysAdmin") { 
+				location.replace("wrongUser.html");
+				} else {
+				}
+			}
+
+		function logout() {
+			sessionStorage.removeItem("userName");
+			sessionStorage.removeItem("userType");
+			window.location.replace("./index.html");
+		}		
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
-	<h1>Failed to Register USer</h1>
+<body onload="checkUser();">
+	<h1>Failed to Register User</h1>
 	<form action="viewSysAdmin.html">
 		<input type="submit" value="Continue" size="20" />
 	</form>

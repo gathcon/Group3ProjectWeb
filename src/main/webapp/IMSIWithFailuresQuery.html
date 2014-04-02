@@ -6,6 +6,21 @@
 
 <script>
 
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+	
+		if (currentUserType != "supportEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+	
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
+
+
 	function getJSON(url) {
 
 		try {
@@ -37,7 +52,7 @@
 </script>
 </head>
 
-<body>
+<body onload="checkUser()">
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
@@ -48,8 +63,9 @@
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks">Home</a></li>
-			<li><a class="menulinks">Logout</a></li>
+			<li><a class="menulinks" href="SupportEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
 	</div>
 	
@@ -67,10 +83,7 @@
 			+ '/' + document.getElementById('enddatetime').value);" value="Query" size="20">
 			</fieldset>
 		</form>
-
-		</br>
-		</br>
-
+		<br>
 		<div id="tablespace"></div>
 	</div>
 </body>
