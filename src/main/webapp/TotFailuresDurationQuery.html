@@ -52,7 +52,16 @@
 				var failures = objects[1];
 				var duration = objects[2];
 
-				myTable += "<tr><td>" + imsi + "</td><td>" + failures
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+
+				myTable += "<td>" + imsi + "</td><td>" + failures
 						+ "</td><td>" + duration + "</td></tr>";
 			}
 			myTable += "</table>";
