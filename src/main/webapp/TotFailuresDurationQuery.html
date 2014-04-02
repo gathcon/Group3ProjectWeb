@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500' rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
+	rel='stylesheet' type='text/css'>
 <script>
-	function validate(startDate, endDate) {
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+	
+		if (currentUserType != "networkEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+	
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
+	
+	/* function validate(startDate, endDate) {
 
 		if ((!(/^[0-9 -:.]+$/.test(startDate)))
 				|| (!(/^[0-9 -:.]+$/.test(endDate)))) {
@@ -13,7 +27,7 @@
 		} else if (startDate.length != 21 || endDate.length != 21) {
 			alert("Invalid input length.");
 		}
-	}
+	} */
 
 	function getJSON(url) {
 
@@ -52,22 +66,24 @@
 </script>
 </head>
 
-<body>
+<body onload="checkUser();">
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
 
 	<div id="heading">
-		<h1>Get IMSIs with the number of call failures and their total duration between date range</h1>
+		<h1>Get IMSIs with the number of call failures and their total
+			duration between date range</h1>
 	</div>
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks">Home</a></li>
-			<li><a class="menulinks">Logout</a></li>
+			<li><a class="menulinks" href="NetworkManagementEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
 	</div>
-	
+
 	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>
@@ -81,10 +97,7 @@
 					value="Query" size="20">
 			</fieldset>
 		</form>
-
-		</br>
-		</br>
-
+		<br>
 		<div id="tablespace"></div>
 	</div>
 </body>

@@ -6,6 +6,20 @@
 
 <script>
 
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+	
+		if (currentUserType != "supportEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+	
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
+
 	function processData(){
 
 		var selector = document.getElementById("failureSelector");
@@ -50,7 +64,7 @@
 </script>
 </head>
 
-<body>
+<body onload="checkUser()">
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
@@ -61,8 +75,9 @@
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks">Home</a></li>
-			<li><a class="menulinks">Logout</a></li>
+			<li><a class="menulinks" href="SupportEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
 	</div>
 	
@@ -81,10 +96,7 @@
 			<input type="button" name="submit" onclick="processData();" value="Query" size="20">
 			</fieldset>
 		</form>
-
-		</br>
-		</br>
-
+		<br>
 		<div id="tablespace"></div>
 	</div>
 </body>
