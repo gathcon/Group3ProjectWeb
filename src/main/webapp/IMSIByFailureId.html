@@ -49,8 +49,17 @@
 			for (var i = 0; i < size; i++) {
 
 				var imsi = obj[i].imsi;
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
 				
-				myTable += "<tr><td>" + imsi
+				myTable += "<td>" + imsi
 				+ "</td></tr>";
 			}
 			myTable += "</table>";
