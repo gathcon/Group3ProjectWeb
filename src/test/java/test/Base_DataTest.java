@@ -231,7 +231,35 @@ public class Base_DataTest {
 		emptyMultipleBaseDatas();
 	}
 		
-
+	@Test
+	public void DA0_testGetImsiByDateRange(){
+		setUpMultipleBaseDatas();
+		assertNull(baseDataDAO.getIMSIByDateRange( new Date(113,1,11,17,46,1), new Date(113,1,11,17,46,1) ));
+		emptyMultipleBaseDatas();
+	}
+	
+	@Test
+	public void DA0_testGetAllPhoneModels(){
+		setUpMultipleBaseDatas();
+		assertEquals(1, baseDataDAO.getAllPhoneModels().size());
+		emptyMultipleBaseDatas();
+	}	
+	
+	@Test
+	public void DA0_testGetImsisForDropdown(){
+		setUpMultipleBaseDatas();
+		assertEquals(1, baseDataDAO.getImsisForDropdown().size());
+		emptyMultipleBaseDatas();
+	}	
+	
+	@Test
+	public void DA0_testFailureCouuntByMOdelBetweenDates(){
+		setUpMultipleBaseDatas();
+		assertEquals(new Long(3), baseDataDAO.failureCountByModelBetweenDates(new Date(112,1,11,17,46,1), new Date(114,1,11,17,46,1), "model"));
+		assertEquals(new Long(0), baseDataDAO.failureCountByModelBetweenDates(new Date(113,1,11,17,46,1), new Date(114,1,11,17,46,1), "nomodel"));
+		emptyMultipleBaseDatas();
+	}	
+		
 	@Test
 	public void WS_testThroughTheLayers() throws ParseException {
 
