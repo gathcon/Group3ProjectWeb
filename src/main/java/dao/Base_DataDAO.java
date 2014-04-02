@@ -87,6 +87,16 @@ public class Base_DataDAO {
 			return Event_Cause;
 	}
 	
+	public List<Event_Cause> getUniqueCauseCodesByImsi(BigInteger imsi) {
+		@SuppressWarnings("unchecked")
+		List<Event_Cause> Event_Cause = (List<Event_Cause>) em.createNamedQuery("Base_Data.findUniqueCauseCodesByIMSI").
+		setParameter("imsi", imsi).getResultList();
+		if (Event_Cause.size() == 0)
+			return null;
+		else 
+			return Event_Cause;
+	}
+	
 	public Number imsiFailureCountBetweenDates(Date startDate, Date endDate, BigInteger imsi){
 		Number number = null;
 		number = (Number) em.createNamedQuery("Base_Data.findFailuresByImsiAndByDateRange").setParameter("imsi", imsi).setParameter("startDate", startDate).setParameter("endDate", endDate).getSingleResult();

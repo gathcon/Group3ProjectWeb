@@ -16,8 +16,6 @@ import model.Operator;
 import model.OperatorPK;
 import model.User_Equipment;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import javax.ejb.EJB;
