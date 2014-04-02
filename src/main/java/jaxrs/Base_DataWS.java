@@ -149,6 +149,14 @@ public class Base_DataWS {
 		return base_DatasDao.totalFailuresDurationForImsiBetweenDates(startDate,
 				endDate);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/eventID_CauseCodeByModel/{model}")
+	public List<Object[]> getEventID_CauseCodeByModel(
+			@PathParam("model") String model) {
+		return base_DatasDao.getEventID_CauseCodeByModel(model);
+	}
 
 	@GET
 	@Path("/imsifailure/{imsi}/{startDate}/{endDate}")

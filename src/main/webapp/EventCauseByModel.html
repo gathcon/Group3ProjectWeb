@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
+	rel='stylesheet' type='text/css'>
+<script>
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+	
+		if (currentUserType != "networkEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+	
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
+
+	function getPhoneModels(url) {
+
+		try {
+			var JSONRequest = new XMLHttpRequest();
+
+			JSONRequest.open("GET", url, false);
+			JSONRequest.send(null);
+
+			var txt = JSONRequest.responseText;
+			var obj = eval("(" + txt + ")");
+
+			var size = obj.length;
+
+			var mySelector = "<select id='modelSelector'>";
+
+			for (var i = 0; i < size; i++) {
+
+				var model = obj[i].userEquipment.model;
+
+				mySelector += "<option value=i>" + model + "</option>";
+			}
+			mySelector += "</select>";
+
+			document.getElementById("selectorspace").innerHTML = mySelector;
+
+
+		} catch (err) {
+			document.getElementById("msg").innerHTML = "No phone models available.";
+		}
+	}
+
+	function processData(){
+
+		var selector = document.getElementById("modelSelector");
+		var model = selector.options[selector.selectedIndex].text;	
+
+		getJSON('jaxrs/base_Datas/eventID_CauseCodeByModel/' + model);
+		}
+
+	function getJSON(url) {
+
+		try {
+			var JSONRequest = new XMLHttpRequest();
+
+			JSONRequest.open("GET", url, false);
+			JSONRequest.send(null);
+
+			var txt = JSONRequest.responseText;
+			var obj = eval("(" + txt + ")");
+
+			var size = obj.length;
+
+			var myTable = "<table style=\'width: 500px\' border=\"1\">";
+			myTable += "<tr><td><u>Event Id</u></td><td><u>Cause Code</u></td><td><u>Count</u></td></tr>";
+
+			for (var i = 0; i < size; i++) {
+
+				var objects = obj[i];
+				var event = objects[0].id.eventId;
+				var causeCode = objects[0].id.causeCode;
+				var count = objects[1];
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+
+				myTable += "<td>" + event + "</td><td>" + causeCode
+						+ "</td><td>" + count + "</td></tr>";
+			}
+			myTable += "</table>";
+
+			document.getElementById("tablespace").innerHTML = myTable;
+
+		} catch (err) {
+			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
+		}
+	}
+</script>
+</head>
+
+<body onload="checkUser(); getPhoneModels('jaxrs/base_Datas/allPhoneModels/')">
+	<div id="logo">
+		<img src="Ericsson.png">
+	</div>
+
+	<div id="heading">
+		<h1>Get event Id-cause code combinations and number of
+			occurrences <br> for a given phone model</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a class="menulinks"
+				href="NetworkManagementEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+		</ul>
+	</div>
+
+	<div id="mainbody">
+		<form name='inputForm'>
+			<fieldset>
+
+				<label for=selectorspace> Phone Model: </label> <span id="selectorspace"></span>
+
+				<input type="button" name="submit"
+					onclick="processData();"
+					value="Query" size="20">
+			</fieldset>
+		</form>
+		<br>
+		<div id="tablespace"></div>
+	</div>
+</body>
+</html>

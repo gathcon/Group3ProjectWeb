@@ -116,6 +116,16 @@ public class Base_DataDAO implements DAOInterface{
 		else 
 			return base_Data;
 	}
+	
+	public List<Object[]> getEventID_CauseCodeByModel(String model) {
+		@SuppressWarnings("unchecked")
+		List<Object[]> results = (List<Object[]>) em.createNamedQuery("Base_Data.findEventID_CauseCodeByModel").
+		setParameter("model", model).getResultList();
+		if (results.size() == 0)
+			return null;
+		else 
+			return results;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getTop10ImsisByDate(Date startDate, Date endDate) {

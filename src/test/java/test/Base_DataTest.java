@@ -365,6 +365,15 @@ public class Base_DataTest {
 		assertEquals(new Long(3), res.get(0)[1]);
 		emptyMultipleBaseDatas();
 	}
+	
+	@Test
+	public void WS_checkForEventCauseByModel() throws ParseException{
+		setUpMultipleBaseDatas();
+		List<Object[]> res = baseDataWS.getEventID_CauseCodeByModel("model");
+
+		assertEquals(new Long(3), res.get(0)[1]);
+		emptyMultipleBaseDatas();
+	}
 
 	@Test
 	public void WS_checkForImsiFailureBetweenDates() throws ParseException{
