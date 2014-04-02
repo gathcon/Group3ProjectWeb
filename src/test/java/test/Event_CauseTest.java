@@ -11,7 +11,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,15 +23,17 @@ import dao.Event_CauseDAO;
 
 @RunWith(Arquillian.class)
 public class Event_CauseTest {
+	
 	@Deployment
-	public static JavaArchive createTestArchive() {
-		return ShrinkWrap
-				.create(JavaArchive.class, "test.jar")
-				.addPackages(true, "dao", "jaxrs", "model", "restApp")
-				.addAsResource("META-INF/persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
+    public static WebArchive createTestArchive() {
+		MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+        
+		return ShrinkWrap.create(WebArchive.class, "test.war")
+        		.addPackages(true, "dao", "jaxrs", "model", "restApp", "loader")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsLibraries(resolver.artifact("org.apache.poi:poi").resolveAsFiles());
+    }
 
 	@EJB
 	private Event_CauseDAO event_Causedao;
@@ -42,7 +46,7 @@ public class Event_CauseTest {
 		event_Cause = new Event_Cause();
 		event_Cause.setId(event_CausePK);
 		event_Cause.setDescription("description");
-		event_Causedao.addEvent_Cause(event_Cause);
+		event_Causedao.persist(event_Cause);
 	}
 
 	@After
