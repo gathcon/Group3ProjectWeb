@@ -4,14 +4,16 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Failure;
+import model.TableRow;
 
 @Stateless
 @LocalBean
-public class FailureDAO {
+public class FailureDAO implements DAOInterface{
 
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
@@ -20,12 +22,15 @@ public class FailureDAO {
 		return em.find(Failure.class, id);
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addFailure(Failure failure) {
-		em.persist(failure);
+	public DatabaseResponse persist(TableRow failure) {
+		try {
+			em.persist(failure);
+			return DatabaseResponse.OK;
+		} catch (EntityExistsException e) {
+			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
+		}
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void removeFailure(Failure failure) {
 		em.remove(em.merge(failure));
 	}

@@ -11,25 +11,30 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Base_Data;
 import model.Event_Cause;
+import model.TableRow;
 
 @Stateless
 @LocalBean
-public class Base_DataDAO {
+public class Base_DataDAO implements DAOInterface{
 
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addBase_Data(Base_Data base_Data) {
-		em.persist(base_Data);
+	public DatabaseResponse persist(TableRow base_Data) {
+		try {
+			em.persist(base_Data);
+			return DatabaseResponse.OK;
+		} catch (EntityExistsException e) {
+			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
+		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void removeBase_Data(Base_Data base_Data) {
 		em.remove(em.merge(base_Data));
 	}

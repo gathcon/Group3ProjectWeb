@@ -16,9 +16,14 @@ import model.Operator;
 import model.OperatorPK;
 import model.User_Equipment;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import jaxrs.Base_DataWS;
 
@@ -26,8 +31,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Ignore;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.runner.RunWith;
 
 import dao.Base_DataDAO;
@@ -38,16 +44,17 @@ import dao.User_EquipmentDAO;
 
 @RunWith(Arquillian.class)
 public class Base_DataTest {
-
+	
 	@Deployment
-	public static JavaArchive createTestArchive() {
-		return ShrinkWrap
-				.create(JavaArchive.class, "test.jar")
-				.addPackages(true, "dao", "jaxrs", "model", "restApp")
-				.addAsResource("META-INF/persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
+    public static WebArchive createTestArchive() {
+		MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+        
+		return ShrinkWrap.create(WebArchive.class, "test.war")
+        		.addPackages(true, "dao", "jaxrs", "model", "restApp", "loader")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsLibraries(resolver.artifact("org.apache.poi:poi").resolveAsFiles());
+    }
 
 	@EJB
 	private Base_DataDAO baseDataDAO;
@@ -59,16 +66,16 @@ public class Base_DataTest {
 	private User_EquipmentDAO user_EquipmentDAO;
 	@EJB
 	private Event_CauseDAO event_CauseDAO;
-
 	@EJB
 	private Base_DataWS baseDataWS;
+	@PersistenceContext(unitName = "project")
+    private EntityManager em;
 
 	private Base_Data bd,bd1,bd2;
 	private Failure f;
 	private Operator o;
 	private User_Equipment ue;
 	private Event_Cause ec;
-
 	
 	public void addOneBaseDataRow() {
 		backingTables();
@@ -89,14 +96,14 @@ public class Base_DataTest {
 
 		addBackUpTables();
 		
-		baseDataDAO.addBase_Data(bd);
+		baseDataDAO.persist(bd);
 	}
 	
 	public void addBackUpTables(){
-		failureDAO.addFailure(f);
-		operatorDAO.addOperator(o);
-		user_EquipmentDAO.addUser_Equipment(ue);
-		event_CauseDAO.addEvent_Cause(ec);		
+		failureDAO.persist(f);
+		operatorDAO.persist(o);
+		user_EquipmentDAO.persist(ue);
+		event_CauseDAO.persist(ec);		
 	}
 	
 	public void emptyBackUpTables(){
@@ -131,7 +138,7 @@ public class Base_DataTest {
 		ue.setVendorName("vendorName");
 		ue.setUeType("ueType");
 		ue.setOs("os");
-		ue.setInputMode("inputMode");		
+		ue.setInputMode("inputMode");
 	}
 
 	
@@ -141,7 +148,6 @@ public class Base_DataTest {
 	}
 	
 	private void emptyMultipleBaseDatas() {
-		// TODO Auto-generated method stub
 		baseDataDAO.removeBase_Data(bd);
 		baseDataDAO.removeBase_Data(bd1);
 		baseDataDAO.removeBase_Data(bd2);
@@ -157,9 +163,9 @@ public class Base_DataTest {
 		bd2 = new Base_Data();bd2.setCellId(4);bd2.setDateTime(new Date(113,0,11,17,46,1));bd2.setDuration(1000);bd2.setHier3Id(new BigInteger("1234"));bd2.setHier32Id(new BigInteger("1234"));bd2.setHier321Id(new BigInteger("1234"));bd2.setImsi(new BigInteger("344930000000012"));bd2.setNeVersion("neVersion");bd2.setFailure(f);bd2.setUserEquipment(ue);bd2.setEventCause(ec);bd2.setOperator(o);
 		addBackUpTables();
 		
-		baseDataDAO.addBase_Data(bd);	
-		baseDataDAO.addBase_Data(bd1);
-		baseDataDAO.addBase_Data(bd2);	
+		baseDataDAO.persist(bd);
+		baseDataDAO.persist(bd1);
+		baseDataDAO.persist(bd2);
 	}
 
 	@Test
@@ -185,8 +191,7 @@ public class Base_DataTest {
 	}
 
 	@Test
-	public void DAO_testForFailuresCountByModelBetweenTwoDates()
-			throws ParseException {
+	public void DAO_testForFailuresCountByModelBetweenTwoDates() throws ParseException {
 		addOneBaseDataRow();
 		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 				.parse("2000-01-11 16:00:00");
@@ -214,6 +219,21 @@ public class Base_DataTest {
 				.imsiFailureCountBetweenDates(startDate, endDate, imsi)
 				.intValue());
 	}
+	
+	@Test
+	public void DA0_testGetAllBase_Data(){
+		setUpMultipleBaseDatas();
+		assertEquals(3, baseDataDAO.getAllBase_Data().size());
+		emptyMultipleBaseDatas();
+	}
+	
+	@Test
+	public void DA0_testGetImsiByFailureIDbad(){
+		setUpMultipleBaseDatas();
+		assertNull(baseDataDAO.getIMSIByFailureId(-1));
+		emptyMultipleBaseDatas();
+	}
+		
 
 	@Test
 	public void WS_testThroughTheLayers() throws ParseException {
