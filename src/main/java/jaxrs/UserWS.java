@@ -48,7 +48,7 @@ public class UserWS {
     	Response.ResponseBuilder builder = null;
     	
     	try {
-    		usersDao.addUser(user);
+    		usersDao.persist(user);
     		builder = Response.ok();
     	}catch (Exception e) {
     		Map<String, String> responseObj = new HashMap<String, String>();

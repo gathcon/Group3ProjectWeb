@@ -5,16 +5,9 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
-
 import javax.ejb.EJB;
-import javax.inject.Inject;
-
 import jaxrs.Base_DataWS;
 import model.Base_Data;
 import model.Event_Cause;
@@ -28,7 +21,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -44,13 +39,14 @@ import dao.User_EquipmentDAO;
 @RunWith(Arquillian.class)
 public class NetManagerUserStoryTest {
 	@Deployment
-	public static JavaArchive createTestArchive() {
-		return ShrinkWrap
-				.create(JavaArchive.class, "test.jar")
-				.addPackages(true, "dao", "jaxrs", "model", "restApp")
-				.addAsResource("META-INF/persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+	public static WebArchive createTestArchive() {
+		MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+		
+		return ShrinkWrap.create(WebArchive.class, "test.war")
+        		.addPackages(true, "dao", "jaxrs", "model", "restApp", "loader")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsLibraries(resolver.artifact("org.apache.poi:poi").resolveAsFiles());
 	}
 	
 	
@@ -195,74 +191,74 @@ public class NetManagerUserStoryTest {
 		bd55 = new Base_Data();bd55.setCellId(4);bd55.setDateTime(new Date(113,0,11,17,46,1));bd55.setDuration(1000);bd55.setHier3Id(new BigInteger("1234"));bd55.setHier32Id(new BigInteger("1234"));bd55.setHier321Id(new BigInteger("1234"));bd55.setImsi(new BigInteger("344930000000015"));bd55.setNeVersion("neVersion");bd55.setFailure(f);bd55.setUserEquipment(ue);bd55.setEventCause(ec);bd55.setOperator(o);
 		bd56 = new Base_Data();bd56.setCellId(4);bd56.setDateTime(new Date(113,0,11,17,46,1));bd56.setDuration(1000);bd56.setHier3Id(new BigInteger("1234"));bd56.setHier32Id(new BigInteger("1234"));bd56.setHier321Id(new BigInteger("1234"));bd56.setImsi(new BigInteger("344930000000015"));bd56.setNeVersion("neVersion");bd56.setFailure(f);bd56.setUserEquipment(ue);bd56.setEventCause(ec);bd56.setOperator(o);
 		
-		failureDAO.addFailure(f);
-		operatorDAO.addOperator(o);
-		user_EquipmentDAO.addUser_Equipment(ue);
-		event_CauseDAO.addEvent_Cause(ec);
+		failureDAO.persist(f);
+		operatorDAO.persist(o);
+		user_EquipmentDAO.persist(ue);
+		event_CauseDAO.persist(ec);
 		
-		baseDataDAO.addBase_Data(bd);
-		baseDataDAO.addBase_Data(bd1);
-		baseDataDAO.addBase_Data(bd2);
-		baseDataDAO.addBase_Data(bd3);
-		baseDataDAO.addBase_Data(bd4);
-		baseDataDAO.addBase_Data(bd5);
-		baseDataDAO.addBase_Data(bd6);
-		baseDataDAO.addBase_Data(bd7);
-		baseDataDAO.addBase_Data(bd8);
-		baseDataDAO.addBase_Data(bd9);
-		baseDataDAO.addBase_Data(bd10);
+		baseDataDAO.persist(bd);
+		baseDataDAO.persist(bd1);
+		baseDataDAO.persist(bd2);
+		baseDataDAO.persist(bd3);
+		baseDataDAO.persist(bd4);
+		baseDataDAO.persist(bd5);
+		baseDataDAO.persist(bd6);
+		baseDataDAO.persist(bd7);
+		baseDataDAO.persist(bd8);
+		baseDataDAO.persist(bd9);
+		baseDataDAO.persist(bd10);
 		
-		baseDataDAO.addBase_Data(bd11);
-		baseDataDAO.addBase_Data(bd12);
-		baseDataDAO.addBase_Data(bd13);
-		baseDataDAO.addBase_Data(bd14);
-		baseDataDAO.addBase_Data(bd15);
-		baseDataDAO.addBase_Data(bd16);
-		baseDataDAO.addBase_Data(bd17);
-		baseDataDAO.addBase_Data(bd18);
-		baseDataDAO.addBase_Data(bd19);
-		baseDataDAO.addBase_Data(bd20);
+		baseDataDAO.persist(bd11);
+		baseDataDAO.persist(bd12);
+		baseDataDAO.persist(bd13);
+		baseDataDAO.persist(bd14);
+		baseDataDAO.persist(bd15);
+		baseDataDAO.persist(bd16);
+		baseDataDAO.persist(bd17);
+		baseDataDAO.persist(bd18);
+		baseDataDAO.persist(bd19);
+		baseDataDAO.persist(bd20);
 		
 		
-		baseDataDAO.addBase_Data(bd21);
-		baseDataDAO.addBase_Data(bd22);
-		baseDataDAO.addBase_Data(bd23);
-		baseDataDAO.addBase_Data(bd24);
-		baseDataDAO.addBase_Data(bd25);
-		baseDataDAO.addBase_Data(bd26);
-		baseDataDAO.addBase_Data(bd27);
-		baseDataDAO.addBase_Data(bd28);
-		baseDataDAO.addBase_Data(bd29);
-		baseDataDAO.addBase_Data(bd30);		
+		baseDataDAO.persist(bd21);
+		baseDataDAO.persist(bd22);
+		baseDataDAO.persist(bd23);
+		baseDataDAO.persist(bd24);
+		baseDataDAO.persist(bd25);
+		baseDataDAO.persist(bd26);
+		baseDataDAO.persist(bd27);
+		baseDataDAO.persist(bd28);
+		baseDataDAO.persist(bd29);
+		baseDataDAO.persist(bd30);		
 		
-		baseDataDAO.addBase_Data(bd31);
-		baseDataDAO.addBase_Data(bd32);
-		baseDataDAO.addBase_Data(bd33);
-		baseDataDAO.addBase_Data(bd34);
-		baseDataDAO.addBase_Data(bd35);
-		baseDataDAO.addBase_Data(bd36);
-		baseDataDAO.addBase_Data(bd37);
-		baseDataDAO.addBase_Data(bd38);
-		baseDataDAO.addBase_Data(bd39);
-		baseDataDAO.addBase_Data(bd40);	
+		baseDataDAO.persist(bd31);
+		baseDataDAO.persist(bd32);
+		baseDataDAO.persist(bd33);
+		baseDataDAO.persist(bd34);
+		baseDataDAO.persist(bd35);
+		baseDataDAO.persist(bd36);
+		baseDataDAO.persist(bd37);
+		baseDataDAO.persist(bd38);
+		baseDataDAO.persist(bd39);
+		baseDataDAO.persist(bd40);	
 		
-		baseDataDAO.addBase_Data(bd41);
-		baseDataDAO.addBase_Data(bd42);
-		baseDataDAO.addBase_Data(bd43);
-		baseDataDAO.addBase_Data(bd44);
-		baseDataDAO.addBase_Data(bd45);
-		baseDataDAO.addBase_Data(bd46);
-		baseDataDAO.addBase_Data(bd47);
-		baseDataDAO.addBase_Data(bd48);
-		baseDataDAO.addBase_Data(bd49);
-		baseDataDAO.addBase_Data(bd50);	
+		baseDataDAO.persist(bd41);
+		baseDataDAO.persist(bd42);
+		baseDataDAO.persist(bd43);
+		baseDataDAO.persist(bd44);
+		baseDataDAO.persist(bd45);
+		baseDataDAO.persist(bd46);
+		baseDataDAO.persist(bd47);
+		baseDataDAO.persist(bd48);
+		baseDataDAO.persist(bd49);
+		baseDataDAO.persist(bd50);	
 		
-		baseDataDAO.addBase_Data(bd51);
-		baseDataDAO.addBase_Data(bd52);
-		baseDataDAO.addBase_Data(bd53);
-		baseDataDAO.addBase_Data(bd54);
-		baseDataDAO.addBase_Data(bd55);
-		baseDataDAO.addBase_Data(bd56);
+		baseDataDAO.persist(bd51);
+		baseDataDAO.persist(bd52);
+		baseDataDAO.persist(bd53);
+		baseDataDAO.persist(bd54);
+		baseDataDAO.persist(bd55);
+		baseDataDAO.persist(bd56);
 		
 	}
 

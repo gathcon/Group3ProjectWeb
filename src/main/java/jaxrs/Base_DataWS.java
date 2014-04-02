@@ -48,6 +48,14 @@ public class Base_DataWS {
 			@PathParam("imsi") BigInteger imsi) {
 		return base_DatasDao.getEventID_CauseCodeByImsi(imsi);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/uniqueCauseCodeByImsi/{imsi}")
+	public List<Event_Cause> getUniqueCauseCodeByImsi(
+			@PathParam("imsi") BigInteger imsi) {
+		return base_DatasDao.getUniqueCauseCodesByImsi(imsi);
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

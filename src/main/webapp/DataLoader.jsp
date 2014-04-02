@@ -7,22 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<h1>JAX-RS Upload Form</h1>
 
 	<form action="jaxrs/file/upload" method="post"
 		enctype="multipart/form-data">
 
-		<p>
-			Select a file : <input type="file" name="uploadedFile" size="50" />
-		</p>
-
-		<input type="submit" value="Upload It" />
+		<label for="uploadedFile">Select a file : </label><input type="file"
+			name="uploadedFile" size="50" /> <input type="submit"
+			value="Upload It" />
 	</form>
 
+</body>
+</html>
 
-
-	<!-- 
+<!-- 
 
 <form onsubmit="location.href='jaxrs/dataLoader/upload'"
 enctype="multipart/form-data" method="post">
@@ -40,10 +38,3 @@ Please specify a file<br>
 </form>
 
  -->
-
-
-
-
-
-</body>
-</html>

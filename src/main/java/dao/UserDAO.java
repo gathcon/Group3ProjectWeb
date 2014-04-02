@@ -6,14 +6,16 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.TableRow;
 import model.User;
 
 @Stateless
 @LocalBean
-public class UserDAO {
+public class UserDAO implements DAOInterface{
 
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
@@ -28,8 +30,13 @@ public class UserDAO {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addUser(User user) {
-		em.persist(user);
+	public DatabaseResponse persist(TableRow user) {
+		try {
+			em.persist(user);
+			return DatabaseResponse.OK;
+		} catch (EntityExistsException e) {
+			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
+		}
 	}
 
 	public List<User> getAllUsers() {
