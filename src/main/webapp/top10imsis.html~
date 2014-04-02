@@ -63,10 +63,22 @@
 </head>
 
 <body>
-	<b>Get the top ten IMSIs with failures between date range.</b>
-	<br>
+	<div id="logo">
+		<img src="Ericsson.png">
+	</div>
 
-	<div>
+	<div id="heading">
+		<h1>Get the top ten IMSIs with failures between date range</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a class="menulinks">Home</a></li>
+			<li><a class="menulinks">Logout</a></li>
+		</ul>
+	</div>
+	
+	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>				
 			<label for="startdatetime">Start DateTime:</label> 
@@ -78,10 +90,11 @@
 			<input type="button" name="submit" onclick="processData()" value="Query" size="20">
 			</fieldset>
 		</form>
+
+		</br>
+		</br>
+
+		<div id="tablespace"></div>
 	</div>
-
-	<br>
-	<div id="tablespace"></div>
-
 </body>
 </html>

@@ -95,3 +95,35 @@ ul li
 {
 	list-style-type:none;
 }
+
+table
+{
+	border-collapse:collapse;
+}
+
+td
+{
+	padding:7px 7px 7px 7px;
+	border-right:1px solid white;
+}
+
+#header
+{
+	font-weight:bold;
+}
+
+.grey
+{
+	background:#C8C7C9;
+}
+
+tbody
+{
+	height: 350px;
+	overflow:auto;
+}
+
+thead > tr, tbody
+{
+	display: block;
+}

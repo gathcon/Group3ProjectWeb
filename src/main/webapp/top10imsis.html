@@ -27,7 +27,16 @@
 				var imsi = objects[0];
 				var failures = objects[1];
 
-				myTable += "<tr><td>" + imsi + "</td><td>" + failures
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+
+				myTable += "<td>" + imsi + "</td><td>" + failures
 						+ "</td></tr>";
 			}
 			myTable += "</table>";
