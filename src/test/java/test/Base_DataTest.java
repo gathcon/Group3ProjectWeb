@@ -256,6 +256,52 @@ public class Base_DataTest {
 	}
 	
 	@Test
+	public void WS_checkAllPhoneModels() throws ParseException {
+		setUpMultipleBaseDatas();
+		assertEquals(1,baseDataWS.getAllPhoneModels().size());
+		emptyMultipleBaseDatas();		
+		
+	}
+	
+	@Test
+	public void WS_checkAllImSis(){
+		setUpMultipleBaseDatas();
+		assertEquals(1,baseDataWS.getAllImsis().size());
+		emptyMultipleBaseDatas();			
+	}
+	
+	@Test
+	public void WS_checkFailureCountByModelAndDateRange() throws ParseException {
+		setUpMultipleBaseDatas();
+		Number number = new Integer(3);
+		assertEquals(number.intValue(),	baseDataWS.getFailureCountByModelAndByDateRange("model", "2013-01-10T16:00", "2013-01-12T16:00").intValue());
+		//baseDataWS.getFailureCountByModelAndByDateRange("model", "2013-01-10T16:00", "2013-01-12T16:00");
+		emptyMultipleBaseDatas();			
+	}
+	
+	@Test
+	public void WS_checkForImsiFailuresDurationBetweenDates() throws ParseException{
+		setUpMultipleBaseDatas();
+		List<Object[]> res = baseDataWS.checkForIMSIFailuresDurationBetweenDates("2013-01-10T16:00", "2013-01-12T16:00");
+
+		assertEquals(new Long(3000), res.get(0)[2]);
+		//assertEquals(1,baseDataWS.checkForIMSIFailuresDurationBetweenDates("2013-01-10T16:00", "2013-01-12T16:00").size());
+		emptyMultipleBaseDatas();
+	}
+	
+
+	@Test
+	public void WS_checkForImsiFailureBetweenDates() throws ParseException{
+		setUpMultipleBaseDatas();
+		//List<Object[]> res = baseDataWS.checkForIMSIFailuresDurationBetweenDates("2013-01-10T16:00", "2013-01-12T16:00");
+		Number n = new Integer(3);
+		assertEquals(n.intValue(), baseDataWS.checkForAnImsisFailuresBetweenDates("344930000000012", "2013-01-10T16:00","2013-01-12T16:00").intValue());
+		//assertEquals(1,baseDataWS.checkForIMSIFailuresDurationBetweenDates("2013-01-10T16:00", "2013-01-12T16:00").size());
+		emptyMultipleBaseDatas();
+	}
+		
+	
+	@Test
 	public void DAO_testForAnImsisFailuresBetweenTwoDatesWithAGoodIMSI()
 			throws ParseException {
 		// use the code up above testthatbasedatareturnsNOrecords
