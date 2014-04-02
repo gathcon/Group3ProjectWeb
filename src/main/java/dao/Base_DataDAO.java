@@ -92,9 +92,9 @@ public class Base_DataDAO implements DAOInterface{
 			return Event_Cause;
 	}
 	
-	public List<Event_Cause> getUniqueCauseCodesByImsi(BigInteger imsi) {
+	public List<Object[]> getUniqueCauseCodesByImsi(BigInteger imsi) {
 		@SuppressWarnings("unchecked")
-		List<Event_Cause> Event_Cause = (List<Event_Cause>) em.createNamedQuery("Base_Data.findUniqueCauseCodesByIMSI").
+		List<Object[]> Event_Cause = (List<Object[]>) em.createNamedQuery("Base_Data.findUniqueCauseCodesByIMSI").
 		setParameter("imsi", imsi).getResultList();
 		if (Event_Cause.size() == 0)
 			return null;

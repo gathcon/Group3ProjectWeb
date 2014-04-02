@@ -16,8 +16,6 @@ import model.Operator;
 import model.OperatorPK;
 import model.User_Equipment;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -335,15 +333,16 @@ public class Base_DataTest {
 		emptyMultipleBaseDatas();
 	}
 	
-	/*@Test
+	@Test
 	public void WS_checkForUniqueCauseCodesByImsi() throws ParseException{
 		setUpMultipleBaseDatas();
-		List<Object[]> res = baseDataWS.getUniqueCauseCodeByImsi(344930000000012);
+		BigInteger imsi = BigInteger.valueOf(Long.parseLong("344930000000012"));
+		List<Object[]> res = baseDataWS.getUniqueCauseCodeByImsi(imsi);
 
-		assertEquals(new Long(3000), res.get(0)[2]);
-		//assertEquals(1,baseDataWS.checkForIMSIFailuresDurationBetweenDates("2013-01-10T16:00", "2013-01-12T16:00").size());
+		assertEquals(1000, res.get(0)[0]);
+		assertEquals(new Long(3), res.get(0)[1]);
 		emptyMultipleBaseDatas();
-	}*/
+	}
 
 	@Test
 	public void WS_checkForImsiFailureBetweenDates() throws ParseException{
