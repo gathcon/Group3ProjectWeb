@@ -262,7 +262,29 @@ public class Base_DataTest {
 		assertEquals(new Long(0), baseDataDAO.failureCountByModelBetweenDates(new Date(113,1,11,17,46,1), new Date(114,1,11,17,46,1), "nomodel"));
 		emptyMultipleBaseDatas();
 	}	
+	
+	@Test
+	public void DA0_testGetUniqueCauseCodeByImsi(){
+		setUpMultipleBaseDatas();
+		assertNull(baseDataDAO.getUniqueCauseCodesByImsi(new BigInteger("344930000000032")));
+		emptyMultipleBaseDatas();
+	}	
+	
+	@Test
+	public void DA0_testGetEventID_CauseCOdeByImsi(){
+		setUpMultipleBaseDatas();
+		assertNull(baseDataDAO.getEventID_CauseCodeByImsi(new BigInteger("344930000000032")));
+		emptyMultipleBaseDatas();
+	}	
+	
+	@Test
+	public void DA0_testTOtalFailuresDurationFOrImsiBetweenDates(){
+		setUpMultipleBaseDatas();
+		assertNotNull(baseDataDAO.totalFailuresDurationForImsiBetweenDates(new Date(112,1,11,17,46,1), new Date(114,1,11,17,46,1)));
+		emptyMultipleBaseDatas();
+	}		
 		
+	
 	@Test
 	public void WS_testThroughTheLayers() throws ParseException {
 
