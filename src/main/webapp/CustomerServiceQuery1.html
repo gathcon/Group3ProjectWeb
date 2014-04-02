@@ -88,8 +88,17 @@ function getImsis(url) {
 				var causeCode = obj[i].id.causeCode;
 				var description = obj[i].description;
 				var num = i+1;
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
 				
-				myTable += "<tr><td>"+ num +"</td><td>"+ description +"</td><td>" + eventId + "</td><td>" + causeCode
+				myTable += "<td>"+ num +"</td><td>"+ description +"</td><td>" + eventId + "</td><td>" + causeCode
 						+ "</td></tr>";
 			}
 			myTable += "</table>";
