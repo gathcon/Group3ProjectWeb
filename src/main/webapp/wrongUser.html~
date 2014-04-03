@@ -16,9 +16,7 @@
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks" href="viewSysAdmin.html">Home</a></li>
-			<li><a class="menulinks" href="javascript:void(0);"
-				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+			<li><a class="menulinks" href="index.html">Home</a></li>
 		</ul>
 	</div>
 
