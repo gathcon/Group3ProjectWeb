@@ -46,11 +46,12 @@ public class FailureTest {
 		failure.setFailureId(failurePK);
 		failure.setDescription("Test Failure");
 		failuredao.persist(failure);
+
 	}
 
 	@After
 	public void removedb() {
-		failuredao.removeFailure(failure);
+		failuredao.remove(failure);
 	}
 
 	@Test

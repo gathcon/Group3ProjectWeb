@@ -1,8 +1,9 @@
 package dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,22 +16,28 @@ public class FailureDAO implements DAOInterface{
 
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
+
+	public void persist(TableRow failure) {
+		@SuppressWarnings("unchecked")
+		List<Failure> failures = (List<Failure>) em.createNamedQuery("Failure.findAll").getResultList();
+		if(!isValueInList(failures, ((Failure) failure).getFailureId())){
+			em.persist(failure);
+		}
+	}
+	
+	public boolean isValueInList(List<Failure> failures, int id) {
+		for(Failure f : failures) {
+			if(f.getFailureId() == id) return true;
+		}
+		return false;
+	}
+
+	public void remove(TableRow failure) {
+		em.remove(em.merge(failure));
+	}
 	
 	public Failure getFailure(int id) {
 		return em.find(Failure.class, id);
-	}
-
-	public DatabaseResponse persist(TableRow failure) {
-		try {
-			em.persist(failure);
-			return DatabaseResponse.OK;
-		} catch (EntityExistsException e) {
-			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
-		}
-	}
-
-	public void removeFailure(Failure failure) {
-		em.remove(em.merge(failure));
 	}
 
 }

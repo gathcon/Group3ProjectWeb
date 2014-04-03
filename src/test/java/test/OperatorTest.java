@@ -52,7 +52,7 @@ public class OperatorTest {
 
 	@After
 	public void removedb() {
-		Operatordao.removeOperator(Operator);
+		Operatordao.remove(Operator);
 	}
 
 	@Test

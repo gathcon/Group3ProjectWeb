@@ -2,10 +2,13 @@ package loader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.validation.ConstraintViolationException;
 
 import model.EntityType;
 import model.TableRow;
@@ -16,7 +19,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 
 import dao.DAOManager;
-import dao.DatabaseResponse;
 
 @Stateless
 @LocalBean
@@ -28,6 +30,8 @@ public class Loader {
 	RowConverter converter;
 	@EJB
 	DAOManager daoManager;
+	
+	private int duplicateCount = 0;
 	
 	public void loadFile(String excelWorkBookLocation) {
 		
@@ -48,14 +52,17 @@ public class Loader {
 	        persist(workbook.getSheet("Base Data"), EntityType.BASEDATA);
 			long split6 = System.currentTimeMillis();
 
+			PrintWriter file = new PrintWriter("/home/timing/timing" + new Date().toString() + ".txt");
 	        
-			System.out.println("Validation complete in " + (split1 - start) + "ms");
-			System.out.println("Failure persisted in " + (split2 - split1) + "ms");
-			System.out.println("Event Cause persisted in " + (split3 - split2) + "ms");
-			System.out.println("User Equipment persisted in " + (split4 - split3) + "ms");
-			System.out.println("Operator persisted in " + (split5 - split4) + "ms");
-			System.out.println("Base Data persisted in " + (split6 - split5) + "ms");
+			file.println("Validation complete in " + (split1 - start) + "ms");
+			file.println("Failure persisted in " + (split2 - split1) + "ms");
+			file.println("Event Cause persisted in " + (split3 - split2) + "ms");
+			file.println("User Equipment persisted in " + (split4 - split3) + "ms");
+			file.println("Operator persisted in " + (split5 - split4) + "ms");
+			file.println("Base Data persisted in " + (split6 - split5) + "ms");
+			file.println("Failed count " + duplicateCount);
 
+	        file.close();
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -67,9 +74,10 @@ public class Loader {
 		for(Row row: sheet) {
 			if(row.getRowNum() != 0) {
 				TableRow entity = converter.convert((HSSFRow) row, e);
-				DatabaseResponse response = daoManager.persist(entity);
-				if(response != DatabaseResponse.OK) {
-					System.out.println(response);
+				try{
+					daoManager.persist(entity);
+				} catch(ConstraintViolationException exception) {
+					duplicateCount++;
 				}
 			}
 		}

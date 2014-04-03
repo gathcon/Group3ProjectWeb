@@ -1,8 +1,9 @@
 package dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,21 +16,27 @@ public class User_EquipmentDAO implements DAOInterface{
 
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
+
+	public void persist(TableRow user_Equipment) {
+		@SuppressWarnings("unchecked")
+		List<User_Equipment> userEquipments = (List<User_Equipment>) em.createNamedQuery("User_Equipment.findAll").getResultList();
+		if(!isValueInList(userEquipments, ((User_Equipment) user_Equipment).getUser_EquipmentId())){
+			em.persist(user_Equipment);
+		}
+	}
+	
+	public boolean isValueInList(List<User_Equipment> userEquipments, int id) {
+		for(User_Equipment ue : userEquipments) {
+			if(ue.getUser_EquipmentId() == id) return true;
+		}
+		return false;
+	}
+
+	public void remove(TableRow user_Equipment) {
+		em.remove(em.merge(user_Equipment));
+	}
 	
 	public User_Equipment getUser_Equipment(int id) {
 		return em.find(User_Equipment.class, id);
-	}
-
-	public DatabaseResponse persist(TableRow user_Equipment) {
-		try {
-			em.persist(user_Equipment);
-			return DatabaseResponse.OK;
-		} catch (EntityExistsException e) {
-			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
-		}
-	}
-
-	public void removeUser_Equipment(User_Equipment user_Equipment) {
-		em.remove(em.merge(user_Equipment));
 	}
 }

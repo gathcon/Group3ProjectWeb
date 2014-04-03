@@ -51,7 +51,7 @@ public class Event_CauseTest {
 
 	@After
 	public void removedb() {
-		event_Causedao.removeEvent_Cause(event_Cause);
+		event_Causedao.remove(event_Cause);
 	}
 
 	@Test
