@@ -76,7 +76,16 @@ function getImsis(url) {
 				var objects = obj[i];
 				var causeCode = objects[0];
 				var failures = objects[1];
-				
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+
 				myTable += "<tr><td>" + causeCode + "</td><td>" + failures + "</td></tr>";
 			}
 			myTable += "</tbody></table>";

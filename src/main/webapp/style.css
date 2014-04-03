@@ -13,7 +13,8 @@ body
 	width:150px;
 	border-right:2px solid #336699;
 	border-bottom:2px solid #336699;
-	z-index:103;
+	z-index:1;
+	background-color:white;
 }
 
 img
@@ -31,14 +32,15 @@ img
 	height:150px;
 	width:100%;
 	border-bottom:2px solid #336699;
-	z-index:102;
+	z-index:1;
+	background-color:white;
 }
 
 h1
 {
 	position:fixed;
 	top:30px;
-	left:50px;
+	left:202px;
 }
 
 #menu
@@ -50,7 +52,8 @@ h1
 	width:150px;
 	border-right:2px solid #336699;
 	padding-top:58px;
-	z-index:101;
+	z-index:1;
+	background-color:white;
 }
 
 a
@@ -83,12 +86,13 @@ a:hover
 
 #mainbody
 {
-	position:fixed;
+	position:relative;
 	top:152px;
 	left:152px;
 	height:100%;
 	width:100%;
 	padding:50px;
+	z-index:0;
 }
 
 ul
@@ -121,7 +125,7 @@ td
 {
 	background:#C8C7C9;
 }
-
+/*
 thead
 {
 	font-weight:bold;
@@ -136,4 +140,4 @@ tbody
 thead > tr, tbody
 {
 	display: block;
-}
+}*/

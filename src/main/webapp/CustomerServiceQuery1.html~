@@ -79,8 +79,8 @@ function getImsis(url) {
 			var obj = eval("(" + txt + ")");
 			var size = obj.length;
 
-			var myTable = "<table style=\'width: 500px\' border=\"1\">";
-			myTable += "<tr><td>Number</td><td>Description</td><td><u>Event ID</u></td><td><u>Cause Code</u></td></tr>";
+			var myTable = "<table>";
+			myTable += "<tr><th>Number</th><th>Description</th><th>Event ID</th><th>Cause Code</th></tr>";
 
 			for (var i = 0; i < size; i++) {
 
@@ -101,7 +101,7 @@ function getImsis(url) {
 				myTable += "<td>"+ num +"</td><td>"+ description +"</td><td>" + eventId + "</td><td>" + causeCode
 						+ "</td></tr>";
 			}
-			myTable += "</table>";
+			myTable += "</tbody></table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 

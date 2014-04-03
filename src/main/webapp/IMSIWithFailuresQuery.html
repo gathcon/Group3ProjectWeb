@@ -35,7 +35,7 @@
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<thead><tr><td>IMSIs</td></tr></thead><tbody>";
+			myTable += "<tr><th>IMSIs</th></tr>";
 
 			for (var i = 0; i < size; i++) {
 				var imsi = obj[i].imsi;
@@ -51,7 +51,7 @@
 		
 				myTable += "<td>" + imsi + "</td></tr>";
 			}
-			myTable += "</tbody></table>";
+			myTable += "</table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 

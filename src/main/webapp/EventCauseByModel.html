@@ -72,7 +72,7 @@
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<thead><tr><td>Event Id</td><td>Cause Code</td><td>Count</td></tr></thead><tbody>";
+			myTable += "<tr><th>Event Id</th><th>Cause Code</th><th>Count</th></tr>";
 
 			for (var i = 0; i < size; i++) {
 
@@ -93,7 +93,7 @@
 				myTable += "<td>" + event + "</td><td>" + causeCode
 						+ "</td><td>" + count + "</td></tr>";
 			}
-			myTable += "</tbody></table>";
+			myTable += "</table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 

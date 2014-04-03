@@ -69,7 +69,7 @@ function getImsis(url) {
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<thead><tr><td>Cause Code</td><td>Failures</td></tr></thead><tbody>";
+			myTable += "<tr><th>Cause Code</th><th>Failures</th></tr>";
 
 			for (var i = 0; i < size; i++) {
 
@@ -88,7 +88,7 @@ function getImsis(url) {
 
 				myTable += "<tr><td>" + causeCode + "</td><td>" + failures + "</td></tr>";
 			}
-			myTable += "</tbody></table>";
+			myTable += "</table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 		}

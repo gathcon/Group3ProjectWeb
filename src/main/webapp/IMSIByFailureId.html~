@@ -43,7 +43,7 @@
 
 			var size = obj.length;
 
-			var myTable = "<table">";
+			var myTable = "<table>";
 			myTable += "<thead><tr><td>Affected IMSIs</td></tr></thead><tbody>";
 
 			for (var i = 0; i < size; i++) {
@@ -62,7 +62,7 @@
 				myTable += "<td>" + imsi
 				+ "</td></tr>";
 			}
-			myTable += "</table>";
+			myTable += "</tbody></table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 
@@ -102,7 +102,7 @@
 			</select>	
 			
 			<label for="submit"></label> 
-			<input type="button" name="submit" onclick="processData();" value="Query" size="20">
+			<input type="button" name="submit" onclick="processData()" value="Query" size="20">
 			</fieldset>
 		</form>
 		<br>
