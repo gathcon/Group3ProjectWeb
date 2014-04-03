@@ -36,7 +36,9 @@ img
 
 h1
 {
-	margin:50px 0px 0px 50px;
+	position:fixed;
+	top:30px;
+	left:50px;
 }
 
 #menu
@@ -81,7 +83,7 @@ a:hover
 
 #mainbody
 {
-	position:relative;
+	position:fixed;
 	top:152px;
 	left:152px;
 	height:100%;

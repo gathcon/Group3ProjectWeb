@@ -36,7 +36,9 @@ img
 
 h1
 {
-	margin:50px 0px 0px 50px;
+	position:fixed;
+	top:30px;
+	left:50px;
 }
 
 #menu
@@ -118,6 +120,11 @@ td
 .grey
 {
 	background:#C8C7C9;
+}
+
+thead
+{
+	font-weight:bold;
 }
 
 tbody
