@@ -127,7 +127,7 @@ public class Base_DataWS {
 	@GET
 	@Path("/TotalFailuresDurationForIMSIs/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List checkForIMSIFailuresDurationBetweenDates(
+	public List<?> checkForIMSIFailuresDurationBetweenDates(
 			@PathParam("startDate") String startDateString,
 			@PathParam("endDate") String endDateString) throws ParseException {
 

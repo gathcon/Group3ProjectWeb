@@ -1,7 +1,6 @@
 package dao;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -9,8 +8,6 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -108,9 +105,8 @@ public class Base_DataDAO implements DAOInterface{
 		return number;
 	}
 
-	public List totalFailuresDurationForImsiBetweenDates(Date startDate, Date endDate) {
-		@SuppressWarnings("unchecked")
-		List base_Data = em.createNamedQuery("Base_Data.findFailuresDurationForIMSIsBetweenDates").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+	public List<?> totalFailuresDurationForImsiBetweenDates(Date startDate, Date endDate) {
+		List<?> base_Data = em.createNamedQuery("Base_Data.findFailuresDurationForIMSIsBetweenDates").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
 		if (base_Data.size() == 0)
 			return null;
 		else 
@@ -149,13 +145,12 @@ public class Base_DataDAO implements DAOInterface{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<BigInteger> getAllImsis() {
 		List<BigInteger> queryResult = null;
 		
 		queryResult =  (List<BigInteger>) em.createNamedQuery("Base_Data.findAllImsiS").getResultList();
-	
-		System.out.println("IMSI: ====" + queryResult.get(0).toString());
-		
+			
 		return queryResult;
 	}	
 }
