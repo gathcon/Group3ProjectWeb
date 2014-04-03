@@ -18,16 +18,45 @@
 		sessionStorage.removeItem("userName");
 		sessionStorage.removeItem("userType");
 	}
-	
-	/* function validate(startDate, endDate) {
 
-		if ((!(/^[0-9 -:.]+$/.test(startDate)))
-				|| (!(/^[0-9 -:.]+$/.test(endDate)))) {
-			alert("Invalid input characters.");
-		} else if (startDate.length != 21 || endDate.length != 21) {
-			alert("Invalid input length.");
+	function getPhoneModels(url) {
+
+		try {
+			var JSONRequest = new XMLHttpRequest();
+
+			JSONRequest.open("GET", url, false);
+			JSONRequest.send(null);
+
+			var txt = JSONRequest.responseText;
+			var obj = eval("(" + txt + ")");
+
+			var size = obj.length;
+
+			var mySelector = "<select id='modelSelector'>";
+
+			for (var i = 0; i < size; i++) {
+
+				var model = obj[i].userEquipment.model;
+
+				mySelector += "<option value=i>" + model + "</option>";
+			}
+			mySelector += "</select>";
+
+			document.getElementById("selectorspace").innerHTML = mySelector;
+
+
+		} catch (err) {
+			document.getElementById("msg").innerHTML = "No phone models available.";
 		}
-	} */
+	}
+
+	function processData(){
+
+		var selector = document.getElementById("modelSelector");
+		var model = selector.options[selector.selectedIndex].text;	
+
+		getJSON('jaxrs/base_Datas/eventID_CauseCodeByModel/' + model);
+		}
 
 	function getJSON(url) {
 
@@ -43,14 +72,14 @@
 			var size = obj.length;
 
 			var myTable = "<table style=\'width: 500px\' border=\"1\">";
-			myTable += "<tr><td><u>IMSIs</u></td><td><u>Failures</u></td><td><u>Total Duration</u></td></tr>";
+			myTable += "<tr><td><u>Event Id</u></td><td><u>Cause Code</u></td><td><u>Count</u></td></tr>";
 
 			for (var i = 0; i < size; i++) {
 
 				var objects = obj[i];
-				var imsi = objects[0];
-				var failures = objects[1];
-				var duration = objects[2];
+				var event = objects[0].id.eventId;
+				var causeCode = objects[0].id.causeCode;
+				var count = objects[1];
 
 				if (i % 2 == 0)
 				{
@@ -61,8 +90,8 @@
 					myTable += "<tr>"
 				}
 
-				myTable += "<td>" + imsi + "</td><td>" + failures
-						+ "</td><td>" + duration + "</td></tr>";
+				myTable += "<td>" + event + "</td><td>" + causeCode
+						+ "</td><td>" + count + "</td></tr>";
 			}
 			myTable += "</table>";
 
@@ -75,19 +104,20 @@
 </script>
 </head>
 
-<body onload="checkUser();">
+<body onload="checkUser(); getPhoneModels('jaxrs/base_Datas/allPhoneModels/')">
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
 
 	<div id="heading">
-		<h1>Get IMSIs with the number of call failures and their total
-			duration between date range</h1>
+		<h1>Get event Id-cause code combinations and number of
+			occurrences <br> for a given phone model</h1>
 	</div>
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks" href="NetworkManagementEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks"
+				href="NetworkManagementEngineerMenu.html">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
@@ -96,13 +126,11 @@
 	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>
-				<label for="startdatetime">Start DateTime:</label> <input
-					type="datetime-local" id="startdatetime" name="startDate">
-				<label for="enddatetime">End DateTime:</label> <input
-					type="datetime-local" id="enddatetime" name="endDate"> <label
-					for="submit"></label> <input type="button" name="submit"
-					onclick="getJSON('jaxrs/base_Datas/TotalFailuresDurationForIMSIs/' + document.getElementById('startdatetime').value 
-				+ '/' + document.getElementById('enddatetime').value);"
+
+				<label for=selectorspace> Phone Model: </label> <span id="selectorspace"></span>
+
+				<input type="button" name="submit"
+					onclick="processData();"
 					value="Query" size="20">
 			</fieldset>
 		</form>

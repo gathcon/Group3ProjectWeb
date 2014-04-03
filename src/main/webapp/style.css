@@ -13,6 +13,7 @@ body
 	width:150px;
 	border-right:2px solid #336699;
 	border-bottom:2px solid #336699;
+	z-index:103;
 }
 
 img
@@ -30,6 +31,7 @@ img
 	height:150px;
 	width:100%;
 	border-bottom:2px solid #336699;
+	z-index:102;
 }
 
 h1
@@ -46,6 +48,7 @@ h1
 	width:150px;
 	border-right:2px solid #336699;
 	padding-top:58px;
+	z-index:101;
 }
 
 a
@@ -115,6 +118,11 @@ td
 .grey
 {
 	background:#C8C7C9;
+}
+
+thead
+{
+	font-weight:bold;
 }
 
 tbody

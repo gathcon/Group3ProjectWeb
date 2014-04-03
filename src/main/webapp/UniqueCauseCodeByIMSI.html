@@ -68,18 +68,27 @@ function getImsis(url) {
 			var obj = eval("(" + txt + ")");
 			var size = obj.length;
 
-			var myTable = "<table style=\'width: 500px\' border=\"1\">";
-			myTable += "<tr><td><u>Cause Code<u></td><td><u>Failures<u></td></tr>";
+			var myTable = "<table>";
+			myTable += "<thead><tr><td>Cause Code</td><td>Failures</td></tr></thead><tbody>";
 
 			for (var i = 0; i < size; i++) {
 
 				var objects = obj[i];
 				var causeCode = objects[0];
 				var failures = objects[1];
-				
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+
 				myTable += "<tr><td>" + causeCode + "</td><td>" + failures + "</td></tr>";
 			}
-			myTable += "</table>";
+			myTable += "</tbody></table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 		}

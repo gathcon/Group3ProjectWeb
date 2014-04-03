@@ -6,6 +6,21 @@
 
 <script>
 
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+	
+		if (currentUserType != "supportEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+	
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
+
+
 	function getJSON(url) {
 
 		try {
@@ -19,12 +34,22 @@
 
 			var size = obj.length;
 
-			var myTable = "<table style=\'width: 300px\' border=\"1\">";
-			myTable += "<tr><td><u>IMSIs</u></td></tr>";
+			var myTable = "<table>";
+			myTable += "<tr><td>IMSIs</td></tr>";
 
 			for (var i = 0; i < size; i++) {
 				var imsi = obj[i].imsi;
-				myTable += "<tr><td>" + imsi + "</td></tr>";
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+		
+				myTable += "<td>" + imsi + "</td></tr>";
 			}
 			myTable += "</table>";
 
@@ -37,7 +62,7 @@
 </script>
 </head>
 
-<body>
+<body onload="checkUser()">
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
@@ -48,8 +73,9 @@
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks">Home</a></li>
-			<li><a class="menulinks">Logout</a></li>
+			<li><a class="menulinks" href="SupportEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
 	</div>
 	
@@ -67,10 +93,7 @@
 			+ '/' + document.getElementById('enddatetime').value);" value="Query" size="20">
 			</fieldset>
 		</form>
-
-		</br>
-		</br>
-
+		<br>
 		<div id="tablespace"></div>
 	</div>
 </body>
