@@ -23,7 +23,7 @@ import java.util.Date;
 		@NamedQuery(name = "Base_Data.findFailuresByImsiAndByDateRange", query = "SELECT COUNT(b) FROM Base_Data b WHERE (b.imsi=:imsi) AND (b.dateTime BETWEEN :startDate AND :endDate)"),
 		@NamedQuery(name = "Base_Data.findUniqueCauseCodesByIMSI", query = "SELECT b.eventCause.id.causeCode, COUNT(b.eventCause.id.causeCode) FROM Base_Data b where b.imsi=:imsi GROUP BY b.eventCause.id.causeCode"),
 		@NamedQuery(name = "Base_Data.findTop10ImsisWithinDateRange", query = "SELECT b.imsi, COUNT( b.imsi) FROM Base_Data b WHERE b.dateTime BETWEEN :startDate AND :endDate GROUP BY b.imsi"),
-		@NamedQuery(name = "Base_Data.findAllImsiS", query = "SELECT DISTINCT b.imsi FROM Base_Data b "),
+		@NamedQuery(name = "Base_Data.findAllImsiS", query = "SELECT DISTINCT b.imsi FROM Base_Data b ORDER BY b.imsi"),
 		@NamedQuery(name = "Base_Data.findAllImsis", query = "SELECT b FROM Base_Data b GROUP BY b.imsi")
 
 })

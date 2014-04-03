@@ -198,6 +198,19 @@ public class Base_DataTest {
 		baseDataDAO.persist(bd1);
 		baseDataDAO.persist(bd2);
 	}
+	
+
+	private void setUpMultipleBaseDatasDifferent() {
+		backingTables();
+		bd = new Base_Data();bd.setCellId(4);bd.setDateTime(new Date(113,0,11,17,46,1));bd.setDuration(1000);bd.setHier3Id(new BigInteger("1234"));bd.setHier32Id(new BigInteger("1234"));bd.setHier321Id(new BigInteger("1234"));bd.setImsi(new BigInteger("344930000000012"));bd.setNeVersion("neVersion");bd.setFailure(f);bd.setUserEquipment(ue);bd.setEventCause(ec);bd.setOperator(o);
+		bd1 = new Base_Data();bd1.setCellId(4);bd1.setDateTime(new Date(113,0,11,17,46,1));bd1.setDuration(1000);bd1.setHier3Id(new BigInteger("1234"));bd1.setHier32Id(new BigInteger("1234"));bd1.setHier321Id(new BigInteger("1234"));bd1.setImsi(new BigInteger("344930000000013"));bd1.setNeVersion("neVersion");bd1.setFailure(f);bd1.setUserEquipment(ue);bd1.setEventCause(ec);bd1.setOperator(o);
+		bd2 = new Base_Data();bd2.setCellId(4);bd2.setDateTime(new Date(113,0,11,17,46,1));bd2.setDuration(1000);bd2.setHier3Id(new BigInteger("1234"));bd2.setHier32Id(new BigInteger("1234"));bd2.setHier321Id(new BigInteger("1234"));bd2.setImsi(new BigInteger("344930000000014"));bd2.setNeVersion("neVersion");bd2.setFailure(f);bd2.setUserEquipment(ue);bd2.setEventCause(ec);bd2.setOperator(o);
+		addBackUpTables();
+		
+		baseDataDAO.persist(bd);
+		baseDataDAO.persist(bd1);
+		baseDataDAO.persist(bd2);
+	}
 
 	@Test
 	public void WS_testgetAllBase_Data() {
@@ -302,10 +315,26 @@ public class Base_DataTest {
 	@Test
 	public void DA0_testTOtalFailuresDurationFOrImsiBetweenDates() {
 		setUpMultipleBaseDatas();
-		assertNotNull(baseDataDAO.totalFailuresDurationForImsiBetweenDates(new Date(112, 1, 11, 17, 46, 1), new Date(114, 1, 11, 17, 46, 1)));
+		assertNotNull(baseDataDAO.totalFailuresDurationForImsiBetweenDates(new Date(112,1,11,17,46,1), new Date(114,1,11,17,46,1)));
+		assertNull(baseDataDAO.totalFailuresDurationForImsiBetweenDates(new Date(112,1,11,17,46,1), new Date(111,1,11,17,46,1)));
+		emptyMultipleBaseDatas();
+	}		
+	
+	@Test
+	public void DAO_testComparatorMethodWithLessThan10(){
+		 setUpMultipleBaseDatasDifferent() ;
+		 assertEquals(3, baseDataDAO.getTop10ImsisByDate(new Date(110,1,11,17,46,1), new Date(114,1,11,17,46,1)).size());
+		 assertNull( baseDataDAO.getTop10ImsisByDate(new Date(110,1,11,17,46,1), new Date(110,1,11,17,46,1)));
+		 emptyMultipleBaseDatas();
+	}
+		
+	@Test
+	public void WS_testGetAllImsis() throws ParseException {
+		setUpMultipleBaseDatas();
+		assertNotNull(baseDataWS.getAllImsiS());
 		emptyMultipleBaseDatas();
 	}
-
+	
 	@Test
 	public void WS_testThroughTheLayers() throws ParseException {
 

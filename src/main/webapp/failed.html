@@ -22,9 +22,26 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body onload="checkUser();">
-	<h1>Failed to Register User</h1>
-	<form action="viewSysAdmin.html">
-		<input type="submit" value="Continue" size="20" />
-	</form>
+	<div id="logo">
+		<img src="Ericsson.png">
+	</div>
+
+	<div id="heading">
+		<h1>Failed to Register User</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a class="menulinks" href="NetworkManagementEngineerMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+		</ul>
+	</div>
+
+	<div id="mainbody">
+		<form action="viewSysAdmin.html">
+			<input type="submit" value="Continue" size="20" />
+		</form>
+	</div>
 </body>
 </html>
