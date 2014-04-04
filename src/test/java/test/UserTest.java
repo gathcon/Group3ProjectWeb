@@ -92,5 +92,7 @@ public class UserTest {
 		
 		assertEquals(expected.getStatus(), r1.getStatus());
 		assertNotEquals(r1.getStatus(), r2.getStatus());
+		
+		userdao.remove(userdao.getUser("user1"));
 	}
 }
