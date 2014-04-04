@@ -7,7 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import javax.ejb.EJB;
+
 import jaxrs.Base_DataWS;
 import model.Base_Data;
 import model.Event_Cause;
@@ -191,10 +193,12 @@ public class NetManagerUserStoryTest {
 		bd55 = new Base_Data();bd55.setCellId(4);bd55.setDateTime(new Date(113,0,11,17,46,1));bd55.setDuration(1000);bd55.setHier3Id(new BigInteger("1234"));bd55.setHier32Id(new BigInteger("1234"));bd55.setHier321Id(new BigInteger("1234"));bd55.setImsi(new BigInteger("344930000000015"));bd55.setNeVersion("neVersion");bd55.setFailure(f);bd55.setUserEquipment(ue);bd55.setEventCause(ec);bd55.setOperator(o);
 		bd56 = new Base_Data();bd56.setCellId(4);bd56.setDateTime(new Date(113,0,11,17,46,1));bd56.setDuration(1000);bd56.setHier3Id(new BigInteger("1234"));bd56.setHier32Id(new BigInteger("1234"));bd56.setHier321Id(new BigInteger("1234"));bd56.setImsi(new BigInteger("344930000000015"));bd56.setNeVersion("neVersion");bd56.setFailure(f);bd56.setUserEquipment(ue);bd56.setEventCause(ec);bd56.setOperator(o);
 		
+
 		failureDAO.persist(f);
 		operatorDAO.persist(o);
 		user_EquipmentDAO.persist(ue);
 		event_CauseDAO.persist(ec);
+
 		
 		baseDataDAO.persist(bd);
 		baseDataDAO.persist(bd1);
@@ -264,74 +268,74 @@ public class NetManagerUserStoryTest {
 
 	@After
 	public void emptydb() {
-		baseDataDAO.removeBase_Data(bd);
-		baseDataDAO.removeBase_Data(bd1);
-		baseDataDAO.removeBase_Data(bd2);
-		baseDataDAO.removeBase_Data(bd3);
-		baseDataDAO.removeBase_Data(bd4);
-		baseDataDAO.removeBase_Data(bd5);
-		baseDataDAO.removeBase_Data(bd6);
-		baseDataDAO.removeBase_Data(bd7);
-		baseDataDAO.removeBase_Data(bd8);
-		baseDataDAO.removeBase_Data(bd9);
-		baseDataDAO.removeBase_Data(bd10);
+		baseDataDAO.remove(bd);
+		baseDataDAO.remove(bd1);
+		baseDataDAO.remove(bd2);
+		baseDataDAO.remove(bd3);
+		baseDataDAO.remove(bd4);
+		baseDataDAO.remove(bd5);
+		baseDataDAO.remove(bd6);
+		baseDataDAO.remove(bd7);
+		baseDataDAO.remove(bd8);
+		baseDataDAO.remove(bd9);
+		baseDataDAO.remove(bd10);
 		
-		baseDataDAO.removeBase_Data(bd11);
-		baseDataDAO.removeBase_Data(bd12);
-		baseDataDAO.removeBase_Data(bd13);
-		baseDataDAO.removeBase_Data(bd14);
-		baseDataDAO.removeBase_Data(bd15);
-		baseDataDAO.removeBase_Data(bd16);
-		baseDataDAO.removeBase_Data(bd17);
-		baseDataDAO.removeBase_Data(bd18);
-		baseDataDAO.removeBase_Data(bd19);
-		baseDataDAO.removeBase_Data(bd20);
+		baseDataDAO.remove(bd11);
+		baseDataDAO.remove(bd12);
+		baseDataDAO.remove(bd13);
+		baseDataDAO.remove(bd14);
+		baseDataDAO.remove(bd15);
+		baseDataDAO.remove(bd16);
+		baseDataDAO.remove(bd17);
+		baseDataDAO.remove(bd18);
+		baseDataDAO.remove(bd19);
+		baseDataDAO.remove(bd20);
 		
 		
-		baseDataDAO.removeBase_Data(bd21);
-		baseDataDAO.removeBase_Data(bd22);
-		baseDataDAO.removeBase_Data(bd23);
-		baseDataDAO.removeBase_Data(bd24);
-		baseDataDAO.removeBase_Data(bd25);
-		baseDataDAO.removeBase_Data(bd26);
-		baseDataDAO.removeBase_Data(bd27);
-		baseDataDAO.removeBase_Data(bd28);
-		baseDataDAO.removeBase_Data(bd29);
-		baseDataDAO.removeBase_Data(bd30);		
+		baseDataDAO.remove(bd21);
+		baseDataDAO.remove(bd22);
+		baseDataDAO.remove(bd23);
+		baseDataDAO.remove(bd24);
+		baseDataDAO.remove(bd25);
+		baseDataDAO.remove(bd26);
+		baseDataDAO.remove(bd27);
+		baseDataDAO.remove(bd28);
+		baseDataDAO.remove(bd29);
+		baseDataDAO.remove(bd30);		
 		
-		baseDataDAO.removeBase_Data(bd31);
-		baseDataDAO.removeBase_Data(bd32);
-		baseDataDAO.removeBase_Data(bd33);
-		baseDataDAO.removeBase_Data(bd34);
-		baseDataDAO.removeBase_Data(bd35);
-		baseDataDAO.removeBase_Data(bd36);
-		baseDataDAO.removeBase_Data(bd37);
-		baseDataDAO.removeBase_Data(bd38);
-		baseDataDAO.removeBase_Data(bd39);
-		baseDataDAO.removeBase_Data(bd40);	
+		baseDataDAO.remove(bd31);
+		baseDataDAO.remove(bd32);
+		baseDataDAO.remove(bd33);
+		baseDataDAO.remove(bd34);
+		baseDataDAO.remove(bd35);
+		baseDataDAO.remove(bd36);
+		baseDataDAO.remove(bd37);
+		baseDataDAO.remove(bd38);
+		baseDataDAO.remove(bd39);
+		baseDataDAO.remove(bd40);	
 		
-		baseDataDAO.removeBase_Data(bd41);
-		baseDataDAO.removeBase_Data(bd42);
-		baseDataDAO.removeBase_Data(bd43);
-		baseDataDAO.removeBase_Data(bd44);
-		baseDataDAO.removeBase_Data(bd45);
-		baseDataDAO.removeBase_Data(bd46);
-		baseDataDAO.removeBase_Data(bd47);
-		baseDataDAO.removeBase_Data(bd48);
-		baseDataDAO.removeBase_Data(bd49);
-		baseDataDAO.removeBase_Data(bd50);	
+		baseDataDAO.remove(bd41);
+		baseDataDAO.remove(bd42);
+		baseDataDAO.remove(bd43);
+		baseDataDAO.remove(bd44);
+		baseDataDAO.remove(bd45);
+		baseDataDAO.remove(bd46);
+		baseDataDAO.remove(bd47);
+		baseDataDAO.remove(bd48);
+		baseDataDAO.remove(bd49);
+		baseDataDAO.remove(bd50);	
 		
-		baseDataDAO.removeBase_Data(bd51);
-		baseDataDAO.removeBase_Data(bd52);
-		baseDataDAO.removeBase_Data(bd53);
-		baseDataDAO.removeBase_Data(bd54);
-		baseDataDAO.removeBase_Data(bd55);
-		baseDataDAO.removeBase_Data(bd56);
+		baseDataDAO.remove(bd51);
+		baseDataDAO.remove(bd52);
+		baseDataDAO.remove(bd53);
+		baseDataDAO.remove(bd54);
+		baseDataDAO.remove(bd55);
+		baseDataDAO.remove(bd56);
 		
-		failureDAO.removeFailure(f);
-		operatorDAO.removeOperator(o);
-		user_EquipmentDAO.removeUser_Equipment(ue);
-		event_CauseDAO.removeEvent_Cause(ec);
+		failureDAO.remove(f);
+		operatorDAO.remove(o);
+		user_EquipmentDAO.remove(ue);
+		event_CauseDAO.remove(ec);
 	}
 
 	@Ignore

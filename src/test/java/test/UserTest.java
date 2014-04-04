@@ -46,7 +46,7 @@ public class UserTest {
 		user.setUserType("sysAdmin");
 		userdao.persist(user);
 		assertNotNull(userdao.getUser("Jane"));
-		userdao.removeUser(user);
+		userdao.remove(user);
 		assertNull(userdao.getUser("Jane"));
 	}
 
@@ -60,7 +60,7 @@ public class UserTest {
 		assertEquals(userWS.getUser("user").getUserName(), "user");
 		assertEquals(userWS.getUser("user").getPassword(), "password");
 		assertEquals(userWS.getUser("user").getUserType(), "sysAdmin");
-		userdao.removeUser(userdao.getUser("user"));
+		userdao.remove(userdao.getUser("user"));
 		assertNull(userdao.getUser("user"));
 	}
 
@@ -73,11 +73,11 @@ public class UserTest {
 		assertNotNull(userWS.getUser("user1"));
 		assertNotNull(userWS.getUser("user2"));
 		assertEquals(userWS.getUserList().size(), 3);
-		userdao.removeUser(userdao.getUser("user"));
+		userdao.remove(userdao.getUser("user"));
 		assertNull(userdao.getUser("user"));
-		userdao.removeUser(userdao.getUser("user1"));
+		userdao.remove(userdao.getUser("user1"));
 		assertNull(userdao.getUser("user1"));
-		userdao.removeUser(userdao.getUser("user2"));
+		userdao.remove(userdao.getUser("user2"));
 		assertNull(userdao.getUser("user2"));
 	}
 }

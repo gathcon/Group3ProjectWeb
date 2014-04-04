@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,16 +22,11 @@ public class Base_DataDAO implements DAOInterface{
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
-	public DatabaseResponse persist(TableRow base_Data) {
-		try {
-			em.persist(base_Data);
-			return DatabaseResponse.OK;
-		} catch (EntityExistsException e) {
-			return DatabaseResponse.ENTITY_ALREADY_EXISTS;
-		}
+	public void persist(TableRow base_Data) {
+		em.persist(base_Data);
 	}
 	
-	public void removeBase_Data(Base_Data base_Data) {
+	public void remove(TableRow base_Data) {
 		em.remove(em.merge(base_Data));
 	}
     

@@ -57,7 +57,7 @@ public class User_EquipmentTest {
 
 	@After
 	public void removedb() {
-		user_Equipmentdao.removeUser_Equipment(user_Equipment);
+		user_Equipmentdao.remove(user_Equipment);
 	}
 
 	@Test
