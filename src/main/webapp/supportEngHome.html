@@ -4,20 +4,20 @@
 <script>
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
-
-		if (currentUserType != "customerServiceRep" && currentUserType != "supportEng" && currentUserType != "networkEng") {
+	
+		if (currentUserType != "supportEng") {
 			location.replace("wrongUser.html");
 		} else {
 		}
 	}
-
+	
 	function logout() {
 		sessionStorage.removeItem("userName");
 		sessionStorage.removeItem("userType");
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Customer Service Rep Query Menu</title>
+<title>Support Engineer Menu</title>
 
 <link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
@@ -29,25 +29,27 @@
 	</div>
 
 	<div id="heading">
-		<h1>Customer Service Rep Query Menu</h1>
+		<h1>Support Engineer Query Home</h1>
 	</div>
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks" href="CustomerServiceMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
+
 	</div>
 
 	<div id="mainbody">
 		<ul>
-			<li><a class="querylinks" href="CustomerServiceQuery1.html">All
-					Event ID and Cause Codes associated by Imsi</a></li>
-			<li><a class="querylinks" href="failcountdates.html">Number
-					of Failures by Date</a></li>
-			<li><a class="querylinks" href="UniqueCauseCodeByIMSI.html">Unique
-					Cause Codes Associated with an IMSI</a></li>
+			<li><a class="querylinks" href="IMSIWithFailuresQuery.html">Find
+					IMSIs with failures</a></li>
+			<li><a class="querylinks" href="IMSIByFailureId.html">Find
+					IMSIs by failure class</a></li>
+			<li><a class="querylinks" href="FailureCountByModel.html">Find
+					Failures by phone model</a></li>
 		</ul>
 	</div>
 </body>

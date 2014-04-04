@@ -5,7 +5,7 @@
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
 
-		if (currentUserType != "customerServiceRep" && currentUserType != "supportEng" && currentUserType != "networkEng") {
+		if (currentUserType != "customerServiceRep") {
 			location.replace("wrongUser.html");
 		} else {
 		}
@@ -34,7 +34,8 @@
 
 	<div id="menu">
 		<ul>
-			<li><a class="menulinks" href="CustomerServiceMenu.html">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 		</ul>
