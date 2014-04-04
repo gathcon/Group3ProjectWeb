@@ -79,7 +79,7 @@ function register() {
 
 		if (request.status == 200) {
 			window.location.replace("./confirm.html");
-		} else if (request.status == 500) {
+		} else if (request.status == 400) {
 			window.location.replace("./failed.html");
 		}
 	}

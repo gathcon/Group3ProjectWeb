@@ -22,8 +22,9 @@ public class Base_DataDAO implements DAOInterface{
     @PersistenceContext(unitName = "project")
     private EntityManager em;
     
-	public void persist(TableRow base_Data) {
+	public CustomResponse persist(TableRow base_Data) {
 		em.persist(base_Data);
+		return CustomResponse.OK;
 	}
 	
 	public void remove(TableRow base_Data) {

@@ -4,7 +4,7 @@ import model.TableRow;
 
 public interface DAOInterface {
 	
-	public void persist(TableRow row);
+	public CustomResponse persist(TableRow row);
 	
 	public void remove(TableRow row);
 

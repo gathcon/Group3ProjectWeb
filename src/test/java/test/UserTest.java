@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
+import javax.ws.rs.core.Response;
 
 import jaxrs.UserWS;
 import model.User;
@@ -79,5 +80,17 @@ public class UserTest {
 		assertNull(userdao.getUser("user1"));
 		userdao.remove(userdao.getUser("user2"));
 		assertNull(userdao.getUser("user2"));
+	}
+	
+	@Test
+	public void testAddDuplicate() {
+		Response r1 = userWS.addUsers("user1", "password", "sysAdmin");
+		Response r2 = userWS.addUsers("user1", "password", "sysAdmin");
+		
+		Response.ResponseBuilder builder = Response.ok();
+		Response expected = builder.build();
+		
+		assertEquals(expected.getStatus(), r1.getStatus());
+		assertNotEquals(r1.getStatus(), r2.getStatus());
 	}
 }
