@@ -14,7 +14,7 @@
 	</div>
 
 	<div id="heading">
-		<h1>JAX-RS Upload Form</h1>
+		<h1>Upload Form</h1>
 	</div>
 
 	<div id="menu">
@@ -23,6 +23,7 @@
 				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+			<li><a class="menulinks" href="sysAdminHome.html">Back</a></li>
 		</ul>
 	</div>
 
@@ -30,8 +31,9 @@
 		<form class="form" action="jaxrs/file/upload" method="post"
 			enctype="multipart/form-data">
 
-			<label for="uploadedFile">Select a file : </label><input type="file"
-				name="uploadedFile" size="50" /> <input type="submit" class="button"
+			<label for="uploadedFile">Select a file : </label>
+			<input type="file" name="uploadedFile" size="50" />
+			<input type="submit" class="button"
 				value="Upload" />
 		</form>
 	</div>
