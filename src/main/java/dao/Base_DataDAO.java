@@ -144,7 +144,36 @@ public class Base_DataDAO implements DAOInterface{
 			return null;
 		}
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getTop10CombinationsByDate(Date startDate, Date endDate) {
+		List<Object[]> queryResult = null;
+		queryResult =  (List<Object[]>) em.createNamedQuery("Base_Data.findTop10CombinationsByDateRange").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+		
+		Collections.sort(queryResult, new Comparator<Object[]>(){
+			@Override
+			public int compare(Object[] o1, Object[] o2) {
+				return ((Long) o2[3]).compareTo( (Long) o1[3]);
+			}
+		});
+		
+		for(int i = 0; i < queryResult.size(); i++) {
+			Object[] o = queryResult.get(i);
+			for(int j = 0; j < o.length ; j++) {
+				System.out.println("o[j]" + j + " = " + o[j]);
+			}
+		}
+		
+		int size = queryResult.size(); 
+		if(size >= 10){
+			return queryResult.subList(0, 10);
+		} else if (size >= 1 && size < 10) {
+			return queryResult.subList(0, size);
+		} else {
+			return null;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<BigInteger> getAllImsis() {
 		List<BigInteger> queryResult = null;
