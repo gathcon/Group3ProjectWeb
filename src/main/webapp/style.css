@@ -90,7 +90,7 @@ a:hover
 	top:152px;
 	left:152px;
 	height:100%;
-	width:100%;
+	width:80%;
 	padding:50px;
 	z-index:0;
 }
@@ -125,6 +125,18 @@ td
 {
 	background:#C8C7C9;
 }
+
+.button {
+  color: #FFFFFF;
+  font-weight:bold;
+  padding: 7px 7px 7px 7px;
+  background: #47484A;
+}
+.button:hover {
+  color: #FFFFFF !important;
+  background: #336699;
+}
+
 /*
 thead
 {

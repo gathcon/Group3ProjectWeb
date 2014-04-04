@@ -9,36 +9,12 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-
-<!--  <script type="text/javascript">
-
-function waitForResponse(){
-
-	var request = new XMLHttpRequest();
-	var url = "jaxrs/file/upload";
-	request.open("POST", url, false);
-	request.send(null);
-
-	if (request.status == 200) {
-		window.location.replace("fileUploaded.html");
-	} else if (request.status == 400) {
-		window.location.replace("./failed.html");
-	}
-	
-}
-
-
-
-
-</script>-->
-
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
 
 	<div id="heading">
-		<h1>JAX-RS Upload Form</h1>
+		<h1>Upload Form</h1>
 	</div>
 
 	<div id="menu">
@@ -52,34 +28,15 @@ function waitForResponse(){
 	</div>
 
 	<div id="mainbody">
-		<form action="jaxrs/file/upload" method="post"
+		<form class="form" action="jaxrs/file/upload" method="post"
 			enctype="multipart/form-data">
 
-			<label for="uploadedFile">Select a file : </label><input type="file"
-				name="uploadedFile" size="50" /> <input type="submit"
-				value="Upload It" />
-				<!-- onclick="waitForResponse()" -->
+			<label for="uploadedFile">Select a file : </label>
+			<input type="file" name="uploadedFile" size="50" />
+			<input type="submit" class="button"
+				value="Upload" />
 		</form>
 	</div>
 
 </body>
 </html>
-
-<!-- 
-
-<form onsubmit="location.href='jaxrs/dataLoader/upload'"
-enctype="multipart/form-data" method="post">
-<p>
-Load in records<br>
-<input type="text" name="textline" size="30">
-</p>
-<p>
-Please specify a file<br>
-<input type="file" name="uploadedFile" size="40">
-</p>
-<div>
-<input type="submit" value="Send">
-</div>
-</form>
-
- -->
