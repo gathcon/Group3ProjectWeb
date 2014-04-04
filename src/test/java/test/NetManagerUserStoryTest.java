@@ -341,11 +341,9 @@ public class NetManagerUserStoryTest {
 	@Ignore
 	@Test
 	public void testTheQueryListSize() throws ParseException {
-		assertEquals(10,baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00")).size());
-		
+		assertEquals(10,baseDataDAO.getTop10ImsisByDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-10 17:00:00"),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2013-01-12 17:00:00")).size());		
 	}
-	
-	
+		
 	//@Ignore
 	@Test
 	public void testTheQuery() throws ParseException {
@@ -384,7 +382,7 @@ public class NetManagerUserStoryTest {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testCombinationQuery() throws ParseException {
 	
 		List<Object[]> queryResult = baseDataWS.getTop10CombinationsBetweenDates("2013-01-10T17:00", "2013-01-12T17:00");
@@ -422,7 +420,5 @@ public class NetManagerUserStoryTest {
 			assertEquals(cellIds[i], values[2]);
 			assertEquals(numbers[i], values[3]);
 		}
-	}
-
-
+	}*/
 }

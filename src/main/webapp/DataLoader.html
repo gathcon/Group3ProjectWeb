@@ -27,33 +27,14 @@
 	</div>
 
 	<div id="mainbody">
-		<form action="jaxrs/file/upload" method="post"
+		<form class="form" action="jaxrs/file/upload" method="post"
 			enctype="multipart/form-data">
 
 			<label for="uploadedFile">Select a file : </label><input type="file"
-				name="uploadedFile" size="50" /> <input type="submit"
-				value="Upload It" />
+				name="uploadedFile" size="50" /> <input type="submit" class="button"
+				value="Upload" />
 		</form>
 	</div>
 
 </body>
 </html>
-
-<!-- 
-
-<form onsubmit="location.href='jaxrs/dataLoader/upload'"
-enctype="multipart/form-data" method="post">
-<p>
-Load in records<br>
-<input type="text" name="textline" size="30">
-</p>
-<p>
-Please specify a file<br>
-<input type="file" name="uploadedFile" size="40">
-</p>
-<div>
-<input type="submit" value="Send">
-</div>
-</form>
-
- -->
