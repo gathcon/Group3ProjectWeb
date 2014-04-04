@@ -213,6 +213,31 @@ public class Base_DataWS {
 	}
 	
 	@GET
+	@Path("/top10CombinationsByDate/{startDate}/{endDate}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Object[]> getTop10CombinationsBetweenDates(
+			@PathParam("startDate") String startDateString,
+			@PathParam("endDate") String endDateString) throws ParseException {
+
+		SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat outFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss.S");
+
+		Date startDateIn = inFormat.parse(startDateString);
+		String startDateOut = outFormat.format(startDateIn);
+
+		Date endDateIn = inFormat.parse(endDateString);
+		String endDateOut = outFormat.format(endDateIn);
+
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+				.parse(startDateOut);
+
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+				.parse(endDateOut);
+		return base_DatasDao.getTop10CombinationsByDate(startDate, endDate);
+	}
+	
+	@GET
 	@Path("/allImsiS/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BigInteger> getAllImsiS() {
