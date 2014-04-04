@@ -26,19 +26,19 @@ function goToView(JSONObject) {
 	switch (JSONObject.userType) {
 	case 'sysAdmin':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./viewSysAdmin.html");
+		window.location.replace("./sysAdminHome.html");
 		break;
 	case 'networkEng':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./NetworkManagementEngineerMenu.html");
+		window.location.replace("./networkEngHome.html");
 		break;
 	case 'customerServiceRep':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./CustomerServiceMenu.html");
+		window.location.replace("./customerServiceRepHome.html");
 		break;
 	case 'supportEng':
 		document.write("Loading the page for a " + JSONObject.userType);
-		window.location.replace("./SupportEngineerMenu.html");
+		window.location.replace("./supportEngHome.html");
 		break;
 
 	default:
@@ -54,7 +54,17 @@ function populateUserTable() {
 		document
 				.write("<table><tr><th>Username</th><th>Password</th><th>Type</th></tr>");
 		for (var i = 0; i < obj.length; i++) {
-			document.write("<tr><td>" + obj[i].userName + "</td><td>"
+			
+			if (i % 2 == 0)
+			{
+				document.write("<tr class=\'grey\'>");
+			}
+			else
+			{
+				document.write("<tr>");
+			}
+			
+			document.write("<td>" + obj[i].userName + "</td><td>"
 					+ obj[i].password + "</td><td>" + obj[i].userType
 					+ "</td></tr>");
 		}

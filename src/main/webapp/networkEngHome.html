@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script>
+	function checkUser() {
+		var currentUserType = sessionStorage.getItem("userType");
+
+		if (currentUserType != "networkEng") {
+			location.replace("wrongUser.html");
+		} else {
+		}
+	}
+
+	function logout() {
+		sessionStorage.removeItem("userName");
+		sessionStorage.removeItem("userType");
+	}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Network Management Engineer Query Menu</title>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
+	rel='stylesheet' type='text/css'>
+</head>
+<body onload="checkUser()">
+	<div id="logo">
+		<img src="Ericsson.png">
+	</div>
+
+	<div id="heading">
+		<h1>Network Management Engineer Query Menu</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+		</ul>
+	</div>
+
+	<div id="mainbody">
+		<ul>
+			<li><a class="querylinks" href="TotFailuresDurationQuery.html">All
+					IMSIs with the number of call failures and their total duration
+					between date range</a></li>
+			<li><a class="querylinks" href="top10imsis.html">Get the top
+					ten IMSIs with failures between date range</a></li>
+			<li><a class="querylinks" href="EventCauseByModel.html">Get
+					event Id-cause code combinations and failure occurrences by phone
+					model</a></li>
+			<li><a class="querylinks" href="top10Combinations.html">Get
+					Top 10 Market/Operator/Cell ID combinations by date range</a></li>
+		</ul>
+	</div>
+</body>
+</html>
