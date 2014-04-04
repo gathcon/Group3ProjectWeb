@@ -17,12 +17,14 @@ public class FailureDAO implements DAOInterface{
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
 
-	public void persist(TableRow failure) {
+	public CustomResponse persist(TableRow failure) {
 		@SuppressWarnings("unchecked")
 		List<Failure> failures = (List<Failure>) em.createNamedQuery("Failure.findAll").getResultList();
 		if(!isValueInList(failures, ((Failure) failure).getFailureId())){
 			em.persist(failure);
+			return CustomResponse.OK;
 		}
+		return CustomResponse.ENTITY_ALREADY_EXISTS;
 	}
 	
 	public boolean isValueInList(List<Failure> failures, int id) {

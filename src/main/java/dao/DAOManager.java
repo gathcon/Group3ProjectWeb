@@ -25,22 +25,23 @@ public class DAOManager {
 	@EJB
 	private Event_CauseDAO event_CauseDAO;
 
-	public void persist(TableRow entity) {
+	public CustomResponse persist(TableRow entity) {
 		if (entity instanceof Base_Data) {
-			baseDataDAO.persist((Base_Data) entity);
+			return baseDataDAO.persist((Base_Data) entity);
 		}
 		if (entity instanceof Event_Cause) {
-			event_CauseDAO.persist((Event_Cause) entity);
+			return event_CauseDAO.persist((Event_Cause) entity);
 		}
 		if (entity instanceof Failure) {
-			failureDAO.persist(entity);	
+			return failureDAO.persist(entity);	
 		}
 		if (entity instanceof Operator) {
-			operatorDAO.persist((Operator) entity);
+			return operatorDAO.persist((Operator) entity);
 		}
 		if (entity instanceof User_Equipment) {
-			user_EquipmentDAO.persist((User_Equipment) entity);
+			return user_EquipmentDAO.persist((User_Equipment) entity);
 		}
+		return CustomResponse.UNKNOWN_TYPE;
 	}
 
 	public Base_DataDAO getBaseDataDAO() {

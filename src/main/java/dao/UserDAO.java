@@ -17,12 +17,14 @@ public class UserDAO implements DAOInterface{
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
 
-	public void persist(TableRow user) {
+	public CustomResponse persist(TableRow user) {
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>) em.createNamedQuery("User.findAll").getResultList();
 		if(!isValueInList(users, ((User) user).getUserName())){
 			em.persist(user);
+			return CustomResponse.OK;
 		}
+		return CustomResponse.ENTITY_ALREADY_EXISTS;
 	}
 	
 	public boolean isValueInList(List<User> users, String username) {

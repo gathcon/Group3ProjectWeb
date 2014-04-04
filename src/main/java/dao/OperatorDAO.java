@@ -18,13 +18,15 @@ public class OperatorDAO implements DAOInterface{
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
 
-	public void persist(TableRow operator) {
+	public CustomResponse persist(TableRow operator) {
 		@SuppressWarnings("unchecked")
 		List<Operator> operators = (List<Operator>) em.createNamedQuery("Operator.findAll").getResultList();
 		OperatorPK opk = ((Operator) operator).getId();
 		if(!isValueInList(operators, opk)){
 			em.persist(operator);
+			return CustomResponse.OK;
 		}
+		return CustomResponse.ENTITY_ALREADY_EXISTS;
 	}
 	
 	public boolean isValueInList(List<Operator> eventCauses, OperatorPK opk) {

@@ -18,13 +18,15 @@ public class Event_CauseDAO implements DAOInterface{
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
 
-	public void persist(TableRow event_Cause) {
+	public CustomResponse persist(TableRow event_Cause) {
 		@SuppressWarnings("unchecked")
 		List<Event_Cause> eventCauses = (List<Event_Cause>) em.createNamedQuery("Event_Cause.findAll").getResultList();
 		Event_CausePK epk = ((Event_Cause) event_Cause).getId();
 		if(!isValueInList(eventCauses, epk)){
 			em.persist(event_Cause);
+			return CustomResponse.OK;
 		}
+		return CustomResponse.ENTITY_ALREADY_EXISTS;
 	}
 	
 	public boolean isValueInList(List<Event_Cause> eventCauses, Event_CausePK epk) {

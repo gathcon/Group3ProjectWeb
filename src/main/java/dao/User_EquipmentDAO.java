@@ -17,12 +17,14 @@ public class User_EquipmentDAO implements DAOInterface{
 	@PersistenceContext(unitName = "project")
 	private EntityManager em;
 
-	public void persist(TableRow user_Equipment) {
+	public CustomResponse persist(TableRow user_Equipment) {
 		@SuppressWarnings("unchecked")
 		List<User_Equipment> userEquipments = (List<User_Equipment>) em.createNamedQuery("User_Equipment.findAll").getResultList();
 		if(!isValueInList(userEquipments, ((User_Equipment) user_Equipment).getUser_EquipmentId())){
 			em.persist(user_Equipment);
+			return CustomResponse.OK;
 		}
+		return CustomResponse.ENTITY_ALREADY_EXISTS;
 	}
 	
 	public boolean isValueInList(List<User_Equipment> userEquipments, int id) {

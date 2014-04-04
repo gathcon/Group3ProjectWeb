@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.User;
+import dao.CustomResponse;
 import dao.UserDAO;
 
 @Path("/users")
@@ -40,6 +41,7 @@ public class UserWS {
     //@Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addUsers(@PathParam("uname") String userName, @PathParam("pword") String password, @PathParam("type") String userType) {
+    	
     	User user = new User();
     	user.setUserName(userName);
     	user.setPassword(password);
@@ -47,13 +49,12 @@ public class UserWS {
     	
     	Response.ResponseBuilder builder = null;
     	
-    	try {
-    		usersDao.persist(user);
+    	CustomResponse response = usersDao.persist(user);
+    	if(response == CustomResponse.OK) {
     		builder = Response.ok();
-    	}catch (Exception e) {
-    		Map<String, String> responseObj = new HashMap<String, String>();
-            responseObj.put("error", e.getMessage());
-            builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+    	}
+    	else if(response == CustomResponse.ENTITY_ALREADY_EXISTS) {
+    		builder = Response.status(Response.Status.BAD_REQUEST).entity("Entity already exists");
     	}
     	return builder.build();
     }
