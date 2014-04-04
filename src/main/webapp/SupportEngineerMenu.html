@@ -5,7 +5,7 @@
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
 	
-		if (currentUserType != "supportEng") {
+		if (currentUserType != "supportEng" && currentUserType != "networkEng") {
 			location.replace("wrongUser.html");
 		} else {
 		}
