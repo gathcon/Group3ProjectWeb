@@ -381,44 +381,4 @@ public class NetManagerUserStoryTest {
 			assertEquals(numbers[i], values[1]);
 		}
 	}
-	
-	/*@Test
-	public void testCombinationQuery() throws ParseException {
-	
-		List<Object[]> queryResult = baseDataWS.getTop10CombinationsBetweenDates("2013-01-10T17:00", "2013-01-12T17:00");
-		
-		int[] mncs = new int[5];
-		int[] mccs = new int[5];
-		int[] cellIds = new int[5];
-		Number[] numbers = new Number[5];
-		
-		mccs[0] = new Integer(340);
-		mncs[0] = new Integer(930);
-		cellIds[0] = new Integer(4);
-		numbers[0] = new Long(5);
-		mccs[1] = new Integer(340);
-		mncs[1] = new Integer(930);
-		cellIds[1] = new Integer(4);
-		numbers[1] = new Long(4);
-		mccs[2] = new Integer(340);
-		mncs[2] = new Integer(930);
-		cellIds[2] = new Integer(4);
-		numbers[2] = new Long(3);
-		mccs[3] = new Integer(340);
-		mncs[3] = new Integer(930);
-		cellIds[3] = new Integer(4);
-		numbers[3] = new Long(2);
-		mccs[4] = new Integer(340);
-		mncs[4] = new Integer(930);
-		cellIds[4] = new Integer(4);
-		numbers[4] = new Long(1);
-		
-		for(int i=0; i< queryResult.size(); i++){
-			Object[] values =  queryResult.get(i);
-			assertEquals(mccs[i], values[0]);
-			assertEquals(mncs[i], values[1]);
-			assertEquals(cellIds[i], values[2]);
-			assertEquals(numbers[i], values[3]);
-		}
-	}*/
 }
