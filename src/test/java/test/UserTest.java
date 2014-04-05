@@ -73,7 +73,7 @@ public class UserTest {
 		assertNotNull(userWS.getUser("user"));
 		assertNotNull(userWS.getUser("user1"));
 		assertNotNull(userWS.getUser("user2"));
-		assertEquals(userWS.getUserList().size(), 3);
+		assertEquals(3, userWS.getUserList().size());
 		userdao.remove(userdao.getUser("user"));
 		assertNull(userdao.getUser("user"));
 		userdao.remove(userdao.getUser("user1"));
