@@ -327,6 +327,14 @@ public class Base_DataTest {
 		 assertNull( baseDataDAO.getTop10ImsisByDate(new Date(110,1,11,17,46,1), new Date(110,1,11,17,46,1)));
 		 emptyMultipleBaseDatas();
 	}
+	
+	@Test
+	public void DAO_testCombinationLessThan10(){
+		 setUpMultipleBaseDatasDifferent() ;
+		 assertEquals(1, baseDataDAO.getTop10CombinationsByDate(new Date(110,1,11,17,46,1), new Date(114,1,11,17,46,1)).size());	 
+		 assertNull( baseDataDAO.getTop10CombinationsByDate(new Date(110,1,11,17,46,1), new Date(110,1,11,17,46,1)));
+		 emptyMultipleBaseDatas();
+	}
 		
 	@Test
 	public void WS_testGetAllImsis() throws ParseException {
@@ -415,6 +423,17 @@ public class Base_DataTest {
 
 		assertEquals(1000, res.get(0)[0]);
 		assertEquals(new Long(3), res.get(0)[1]);
+		emptyMultipleBaseDatas();
+	}
+	
+	@Test
+	public void WS_checkFortop10Combinations() throws ParseException {
+		setUpMultipleBaseDatas();
+		List<Object[]> res = baseDataWS.getTop10CombinationsBetweenDates("2013-01-10T16:00", "2013-01-12T16:00");
+
+		assertEquals(100, res.get(0)[0]);
+		assertEquals(100, res.get(0)[1]);
+		assertEquals(4, res.get(0)[2]);
 		emptyMultipleBaseDatas();
 	}
 

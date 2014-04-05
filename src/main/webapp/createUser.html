@@ -18,11 +18,11 @@
 		}		
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Register User</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="js/loginandregister.js"></script>
 </head>
-<body onload="checkUser()">
+<body> <!-- onload="checkUser()" -->
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
@@ -37,32 +37,30 @@
 				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+			<li><a class="menulinks" href="sysAdminHome.html">Back</a></li>
 		</ul>
 	</div>
 
 	<div id="mainbody">
 		<form name="userForm">
 			<fieldset>
-				<label for="username">Username:</label> <input type="text"
-					name="username" size="27" maxlength="45" id="uname"> <label
-					for="password">Password:</label> <input type="password"
-					name="password" size="27" maxlength="45" id="pword"> <label
-					for="type">User Type:</label> <select name="type" id="utype">
+				<label for="username">Username:</label> 
+				<input type="text" name="username" size="27" maxlength="45" id="uname"> 
+				<label for="password">Password:</label> 
+				<input type="password" name="password" size="27" maxlength="45" id="pword"> 
+				<label for="type">User Type:</label> <select name="type" id="utype">
 					<option value="sysAdmin">System Administrator</option>
 					<option value="networkEng">Network Management Engineer</option>
 					<option value="customerServiceRep">Customer Service Rep</option>
 					<option value="supportEng">Support Engineer</option>
-				</select> <label for="submit"></label> <input type="button" name="submit"
-					onclick="register()" value="Submit" size="20">
+				</select> 
+				<br>
+				<label for="submit"></label> 
+				<input class="button" type="button" name="submit" onclick="register()" value="Submit" size="20">
 				<p id="error"></p>
 			</fieldset>
 		</form>
 
-		<br> <br>
-
-		<form action="index.html">
-			<input type="submit" name="logout" value="Logout" size="20" />
-		</form>
 	</div>
 </body>
 </html>

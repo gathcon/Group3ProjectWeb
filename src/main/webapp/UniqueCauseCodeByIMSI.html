@@ -86,7 +86,7 @@ function getImsis(url) {
 					myTable += "<tr>"
 				}
 
-				myTable += "<tr><td>" + causeCode + "</td><td>" + failures + "</td></tr>";
+				myTable += "<td>" + causeCode + "</td><td>" + failures + "</td></tr>";
 			}
 			myTable += "</table>";
 
@@ -127,6 +127,7 @@ function getImsis(url) {
 				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+			<li><a class="menulinks" href="customerServiceRepHome.html">Back</a></li>
 		</ul>
 	</div>
 

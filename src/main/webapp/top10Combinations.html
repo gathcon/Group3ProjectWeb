@@ -5,6 +5,11 @@
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 
+	<script src = "jquery-1.11.0.min.js"></script>
+	<script src="highcharts.js"></script>
+	<script src="exporting.js"></script>
+	<script src="graphMaker.js"></script>
+	
 <script>
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
@@ -28,6 +33,9 @@
 			JSONRequest.open("GET", url, false);
 			JSONRequest.send(null);
 
+			var names = new Array();
+			var numbers = new Array();
+			
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
 			
@@ -51,13 +59,15 @@
 				{
 					myTable += "<tr>"
 				}
-
+				names[i]=market+"-"+operator+"-"+cellId;
+				numbers[i]=count;
 				myTable += "<td>" + market + "</td><td>" + operator + "</td><td>" + cellId + "</td><td>" + count + "</td></tr>";
 			}
 			
 			myTable += "</table>";
  
 			document.getElementById("tablespace").innerHTML = myTable;
+			graph(names, numbers);
 
 		} catch (err) {
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
@@ -89,6 +99,7 @@
 				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+			<li><a class="menulinks" href="networkEngHome.html">Back</a></li>
 		</ul>
 	</div>
 
@@ -105,6 +116,8 @@
 		</form>
 		<br>
 		<div id="tablespace"></div>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		
 	</div>
 </body>
 </html>
