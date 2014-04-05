@@ -108,12 +108,14 @@ ul li
 table
 {
 	border-collapse:collapse;
+	float: left;
 }
 
-td
+td, th
 {
 	padding:7px 7px 7px 7px;
 	border-right:1px solid white;
+	text-align: center;
 }
 
 #header
@@ -137,19 +139,10 @@ td
   background: #336699;
 }
 
-/*
-thead
-{
-	font-weight:bold;
+#container {
+	min-width: 310px;
+	width: 70%; 
+	height: 400px; 
+	float: right;
+	margin: 0 auto; 
 }
-
-tbody
-{
-	height: 350px;
-	overflow:auto;
-}
-
-thead > tr, tbody
-{
-	display: block;
-}*/
