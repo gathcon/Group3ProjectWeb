@@ -16,8 +16,6 @@ import loader.FileUploadForm;
 import loader.Loader;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-
-import dao.CustomResponse;
  
 @Path("/file")
 @Stateless
