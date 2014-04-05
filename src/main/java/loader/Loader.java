@@ -3,10 +3,7 @@ package loader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -45,19 +42,19 @@ public class Loader {
 			validator.validate(workbook);
 			long split1 = System.currentTimeMillis();
 			
-			persist(workbook.getSheet("Failure Class Table"), EntityType.FAILURE);
+			persist(workbook.getSheetAt(1), EntityType.EVENTCAUSE);
 			long split2 = System.currentTimeMillis();
-	        
-			persist(workbook.getSheet("Event-Cause Table"), EntityType.EVENTCAUSE);
+			
+			persist(workbook.getSheetAt(2), EntityType.FAILURE);
 			long split3 = System.currentTimeMillis();
 	        
-			persist(workbook.getSheet("UE Table"), EntityType.USEREQUIPMENT);
+			persist(workbook.getSheetAt(3), EntityType.USEREQUIPMENT);
 			long split4 = System.currentTimeMillis();
 	        
-			persist(workbook.getSheet("MCC - MNC Table"), EntityType.OPERATOR);
+			persist(workbook.getSheetAt(4), EntityType.OPERATOR);
 			long split5 = System.currentTimeMillis();
 	        
-			persistBaseData(workbook.getSheet("Base Data"), EntityType.BASEDATA);
+			persist(workbook.getSheetAt(0), EntityType.BASEDATA);
 			long split6 = System.currentTimeMillis();
 
 			PrintWriter file = new PrintWriter("/home/timing/timing" + new Date().toString() + ".txt");
@@ -85,17 +82,6 @@ public class Loader {
 				daoManager.persist(entity);
 			}
 		}
-	}
-	
-	private void persistBaseData(HSSFSheet sheet, EntityType e) {
-		List<TableRow> rows = new ArrayList<TableRow>();
-		for(Row row: sheet) {
-			if(row.getRowNum() != 0) {
-				TableRow entity = converter.convert((HSSFRow) row, e);
-				rows.add(entity);
-			}
-		}
-		base_DataDAO.persist(rows);
 	}
 
 	public HSSFWorkbook getFileFrom(String excelWorkBookLocation) throws IOException  {

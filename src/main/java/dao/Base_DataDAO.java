@@ -27,19 +27,6 @@ public class Base_DataDAO implements DAOInterface{
 		return CustomResponse.OK;
 	}
 	
-	public void persist(List<TableRow> rows) {
-		int i = 0;
-		for(TableRow row : rows) {
-
-		    em.persist(row);
-
-		    if(++i % 100 == 0) {
-		        em.flush();
-		        em.clear();
-		    }
-		}
-	}
-	
 	public void remove(TableRow base_Data) {
 		em.remove(em.merge(base_Data));
 	}

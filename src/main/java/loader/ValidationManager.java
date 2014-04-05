@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -25,7 +26,7 @@ public class ValidationManager {
 	ErrorLogger errorLogger;
 
 	List<Integer> removalList;
-
+	
 	public ValidationManager() {
 		removalList = new ArrayList<Integer>();
 	}
@@ -38,10 +39,15 @@ public class ValidationManager {
 		}
 
 		HSSFSheet baseDataSheet = workbook.getSheet("Base Data");
-		validateForeignKeysOneCol(baseDataSheet, 2, workbook.getSheet("Failure Class Table"), 0);
-		validateForeignKeysOneCol(baseDataSheet, 3, workbook.getSheet("UE Table"), 0);
-		validateForeignKeysTwoCol(baseDataSheet, 1, 8, workbook.getSheet("Event-Cause Table"), 1, 0);
-		validateForeignKeysTwoCol(baseDataSheet, 4, 5, workbook.getSheet("MCC - MNC Table"), 0, 1);
+		validateForeignKeysTwoCol(baseDataSheet, 1, 8, workbook.getSheetAt(1), 1, 0);
+		validateForeignKeysOneCol(baseDataSheet, 2, workbook.getSheetAt(2), 0);
+		validateForeignKeysOneCol(baseDataSheet, 3, workbook.getSheetAt(3), 0);
+		validateForeignKeysTwoCol(baseDataSheet, 4, 5, workbook.getSheetAt(4), 0, 1);
+		
+//		validateForeignKeysTwoCol(baseDataSheet, 1, 8, workbook.getSheet("Event-Cause Table"), 1, 0);
+//		validateForeignKeysOneCol(baseDataSheet, 2, workbook.getSheet("Failure Class Table"), 0);
+//		validateForeignKeysOneCol(baseDataSheet, 3, workbook.getSheet("UE Table"), 0);
+//		validateForeignKeysTwoCol(baseDataSheet, 4, 5, workbook.getSheet("MCC - MNC Table"), 0, 1);
 
 		errorLogger.writeToFile();
 
@@ -134,21 +140,24 @@ public class ValidationManager {
 	public void validateTypeInAllCells(HSSFSheet sheet) {
 
 		int columnCount = sheet.getRow(0).getPhysicalNumberOfCells();
-
+		
 		for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
 			String header = sheet.getRow(0).getCell(columnIndex).getStringCellValue();
-
-			for (Row row : sheet) {
-				if(row.getRowNum() != 0) {
-					Cell cell = row.getCell(columnIndex);
-
-					if (isCellInvalid(cell, header)) {
-						errorLogger.addToLogVector((HSSFRow) row);
-						removalList.add(row.getRowNum());
+			
+			if(!header.equals("")) {
+				for (Row row : sheet) {
+					if(row.getRowNum() != 0) {
+						Cell cell = row.getCell(columnIndex);
+						//System.out.println("Sheet: " + sheet.getSheetName() + "C: " + columnIndex + " R: " + row.getRowNum());
+						if (isCellInvalid(cell, header)) {
+							errorLogger.addToLogVector((HSSFRow) row);
+							removalList.add(row.getRowNum());
+						}
 					}
 				}
+				removeBadRowsFromSheet(sheet);
 			}
-			removeBadRowsFromSheet(sheet);
+			
 		}
 	}
 
