@@ -1,12 +1,17 @@
 package loader;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import model.EntityType;
 import model.TableRow;
 
@@ -30,9 +35,7 @@ public class Loader {
 	DAOManager daoManager;
 	@EJB
 	Base_DataDAO base_DataDAO;
-	
-	private int duplicateCount = 0;
-	
+		
 	public void loadFile(String excelWorkBookLocation) {
 		
 		HSSFWorkbook workbook;
@@ -54,20 +57,34 @@ public class Loader {
 			persist(workbook.getSheetAt(4), EntityType.OPERATOR);
 			long split5 = System.currentTimeMillis();
 	        
-			persist(workbook.getSheetAt(0), EntityType.BASEDATA);
+			persistBase_Data(workbook.getSheetAt(0), EntityType.BASEDATA);
 			long split6 = System.currentTimeMillis();
+			
+			try {
+				
+				String filename = "/home/timing/timing.txt";
+				File file = new File(filename);
 
-			PrintWriter file = new PrintWriter("/home/timing/timing" + new Date().toString() + ".txt");
-	        
-			file.println("Validation complete in " + (split1 - start) + "ms");
-			file.println("Failure persisted in " + (split2 - split1) + "ms");
-			file.println("Event Cause persisted in " + (split3 - split2) + "ms");
-			file.println("User Equipment persisted in " + (split4 - split3) + "ms");
-			file.println("Operator persisted in " + (split5 - split4) + "ms");
-			file.println("Base Data persisted in " + (split6 - split5) + "ms");
-			file.println("Failed count " + duplicateCount);
+				if (!file.exists()) {
+					file.createNewFile();
+				}
 
-	        file.close();
+				FileWriter out = new FileWriter(filename, true);
+				out.write(new Date().toString() + "\n");
+				out.write("\nValidation complete:\t\t\t" + (split1 - start) + " ms");
+				out.write("\nEvent Cause persisted:\t\t" + (split3 - split2) + " ms");
+				out.write("\nFailure persisted:\t\t\t\t" + (split2 - split1) + " ms");
+				out.write("\nUser Equipment persisted:\t" + (split4 - split3) + " ms");
+				out.write("\nOperator persisted:\t\t\t" + (split5 - split4) + " ms");
+				out.write("\nBase Data persisted:\t\t\t" + (split6 - split5) + " ms");
+				out.write("\n\nTotal time:\t\t\t\t\t" + (split6 - start) + " ms");
+				out.write("\n\n#########################################################\n\n");
+				out.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,6 +99,17 @@ public class Loader {
 				daoManager.persist(entity);
 			}
 		}
+	}
+	
+	private void persistBase_Data(HSSFSheet sheet, EntityType e) {
+		List<TableRow> rows = new ArrayList<TableRow>();
+		for(Row row: sheet) {
+			if(row.getRowNum() != 0) {
+				TableRow entity = converter.convert((HSSFRow) row, e);
+				rows.add(entity);
+			}
+		}
+		base_DataDAO.persist(rows);
 	}
 
 	public HSSFWorkbook getFileFrom(String excelWorkBookLocation) throws IOException  {
