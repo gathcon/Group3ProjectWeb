@@ -8,7 +8,7 @@
 	<script src = "jquery-1.11.0.min.js"></script>
 	<script src="highcharts.js"></script>
 	<script src="exporting.js"></script>
-	<script src="graphMaker.js"></script>
+	<script src="chartMaker.js"></script>
 	
 <script>
 	function checkUser() {
@@ -35,6 +35,7 @@
 
 			var names = new Array();
 			var numbers = new Array();
+			var chartData = new Array();
 			
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
@@ -61,13 +62,17 @@
 				}
 				names[i]=market+"-"+operator+"-"+cellId;
 				numbers[i]=count;
+				chartData[i] = new Array(2);
+				chartData[i][0] = names[i];
+				chartData[i][1] = numbers[i];
 				myTable += "<td>" + market + "</td><td>" + operator + "</td><td>" + cellId + "</td><td>" + count + "</td></tr>";
 			}
 			
 			myTable += "</table>";
  
 			document.getElementById("tablespace").innerHTML = myTable;
-			graph(names, numbers);
+
+			chart(chartData);
 
 		} catch (err) {
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
@@ -116,7 +121,7 @@
 		</form>
 		<br>
 		<div id="tablespace"></div>
-		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div id="container"></div>
 		
 	</div>
 </body>
