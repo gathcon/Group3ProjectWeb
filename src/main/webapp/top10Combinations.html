@@ -65,9 +65,17 @@
 			}
 			
 			myTable += "</table>";
- 
+ 		
 			document.getElementById("tablespace").innerHTML = myTable;
-			graph(names, numbers);
+
+			var start = document.getElementById('startdatetime').value;
+			var end = document.getElementById('enddatetime').value;
+			var subtitle = "Between " + start + " and " + end;
+			var title = "Top 10 Nodes with Failures";
+			var xTitle = "Nodes";
+			var yTitle = "Failures";
+			
+			graph(names, numbers, title, subtitle, xTitle, yTitle);
 
 		} catch (err) {
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";

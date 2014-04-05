@@ -4,6 +4,12 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
+	
+	<script src = "jquery-1.11.0.min.js"></script>
+	<script src="highcharts.js"></script>
+	<script src="exporting.js"></script>
+	<script src="graphMaker.js"></script>
+	
 <script>
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
@@ -39,6 +45,7 @@
 				var model = obj[i].userEquipment.model;
 
 				mySelector += "<option value=i>" + model + "</option>";
+				
 			}
 			mySelector += "</select>";
 
@@ -68,9 +75,12 @@
 
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
-
+		
 			var size = obj.length;
 
+			var names = new Array();
+			var numbers = new Array();
+			
 			var myTable = "<table>";
 			myTable += "<tr><th>Event Id</th><th>Cause Code</th><th>Count</th></tr>";
 
@@ -92,10 +102,22 @@
 
 				myTable += "<td>" + event + "</td><td>" + causeCode
 						+ "</td><td>" + count + "</td></tr>";
+
+				names[i]=event+"-"+causeCode;
+				numbers[i]=count;
+				
 			}
 			myTable += "</table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
+
+			var title = "EventID-CauseCode Combinations";
+			var selector = document.getElementById("modelSelector");
+			var subtitle = selector.options[selector.selectedIndex].text;
+			var xTitle = "EventID-CauseCode";
+			var yTitle = "Failures";
+			
+			graph(names, numbers, title, subtitle, xTitle, yTitle);		
 
 		} catch (err) {
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
@@ -137,6 +159,7 @@
 		</form>
 		<br>
 		<div id="tablespace"></div>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</div>
 </body>
 </html>

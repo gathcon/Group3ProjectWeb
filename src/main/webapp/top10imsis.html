@@ -5,6 +5,11 @@
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 
+	<script src = "jquery-1.11.0.min.js"></script>
+	<script src="highcharts.js"></script>
+	<script src="exporting.js"></script>
+	<script src="graphMaker.js"></script>
+
 <script>
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
@@ -28,6 +33,9 @@
 			JSONRequest.open("GET", url, false);
 			JSONRequest.send(null);
 
+			var names = new Array();
+			var numbers = new Array();
+			
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
 
@@ -53,11 +61,24 @@
 
 				myTable += "<td>" + imsi + "</td><td>" + failures
 						+ "</td></tr>";
+				names[i]=imsi;
+				numbers[i]=failures;
+					
 			}
 			myTable += "</table>";
 
+		
 			document.getElementById("tablespace").innerHTML = myTable;
 
+			var start = document.getElementById('startdatetime').value;
+			var end = document.getElementById('enddatetime').value;
+			var subtitle = "Between " + start + " and " + end;
+			var title = "Top 10 Imsis with Failures";
+			var xTitle = "Imsis";
+			var yTitle = "Failures";
+			
+			graph(names, numbers, title, subtitle, xTitle, yTitle);
+			
 		} catch (err) {
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
 		}
@@ -118,6 +139,8 @@
 		</form>
 		<br>
 		<div id="tablespace"></div>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		
 	</div>
 </body>
 </html>
