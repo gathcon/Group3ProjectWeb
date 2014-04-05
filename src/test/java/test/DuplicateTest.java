@@ -1,4 +1,4 @@
-package unitTest;
+package test;
 
 import javax.ejb.EJB;
 

@@ -1,8 +1,11 @@
 package dao;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import model.Base_Data;
 import model.Event_Cause;
 import model.Failure;
@@ -83,5 +86,4 @@ public class DAOManager {
 	public void setEvent_CauseDAO(Event_CauseDAO event_CauseDAO) {
 		this.event_CauseDAO = event_CauseDAO;
 	}
-
 }
