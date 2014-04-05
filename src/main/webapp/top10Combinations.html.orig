@@ -8,8 +8,8 @@
 	<script src = "jquery-1.11.0.min.js"></script>
 	<script src="highcharts.js"></script>
 	<script src="exporting.js"></script>
-	<script src="graphMaker.js"></script>
-
+	<script src="chartMaker.js"></script>
+	
 <script>
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
@@ -35,20 +35,22 @@
 
 			var names = new Array();
 			var numbers = new Array();
+			var chartData = new Array();
 			
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
-
+			
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<tr><th>IMSIs</th><th>Failure Count</th></tr>";
+			myTable += "<tr><th>Market</th><th>Operator</th><th>Cell Id</th><th>Count</th></tr>";
 
 			for (var i = 0; i < size; i++) {
-
 				var objects = obj[i];
-				var imsi = objects[0];
-				var failures = objects[1];
+				var market = objects[0];
+				var operator = objects[1];
+				var cellId = objects[2];
+				var count = objects[3];
 
 				if (i % 2 == 0)
 				{
@@ -58,27 +60,31 @@
 				{
 					myTable += "<tr>"
 				}
-
-				myTable += "<td>" + imsi + "</td><td>" + failures
-						+ "</td></tr>";
-				names[i]=imsi;
-				numbers[i]=failures;
-					
+				names[i]=market+"-"+operator+"-"+cellId;
+				numbers[i]=count;
+				chartData[i] = new Array(2);
+				chartData[i][0] = names[i];
+				chartData[i][1] = numbers[i];
+				myTable += "<td>" + market + "</td><td>" + operator + "</td><td>" + cellId + "</td><td>" + count + "</td></tr>";
 			}
+			
 			myTable += "</table>";
-
-		
+ 		
 			document.getElementById("tablespace").innerHTML = myTable;
 
+<<<<<<< HEAD
+			chart(chartData);
+=======
 			var start = document.getElementById('startdatetime').value;
 			var end = document.getElementById('enddatetime').value;
 			var subtitle = "Between " + start + " and " + end;
-			var title = "Top 10 Imsis with Failures";
-			var xTitle = "Imsis";
+			var title = "Top 10 Nodes with Failures";
+			var xTitle = "Nodes";
 			var yTitle = "Failures";
 			
 			graph(names, numbers, title, subtitle, xTitle, yTitle);
-			
+>>>>>>> 1a7fc4388782c9bc95adfa037644e4a60ff11f59
+
 		} catch (err) {
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
 		}
@@ -86,22 +92,9 @@
 
 	function processData() {
 
-		if (validate(document.getElementById('startdatetime').value, document
-				.getElementById('enddatetime').value)) {
-			alert('You entered invalid content');
-		} else {
-			getJSON('jaxrs/base_Datas/top10ImsiFailureCount/'
+			getJSON('jaxrs/base_Datas/top10CombinationsByDate/'
 					+ document.getElementById('startdatetime').value + '/'
 					+ document.getElementById('enddatetime').value);
-		}
-	}
-
-	function validate(startDate, endDate) {
-		if (startDate == ' ' || endDate == ' ') {
-			return true;
-		} else {
-			return false;
-		}
 	}
 	
 </script>
@@ -113,7 +106,7 @@
 	</div>
 
 	<div id="heading">
-		<h1>Get the top ten IMSIs with failures between date range</h1>
+		<h1>Get the top 10 Market/Operator/Cell ID combinations between date range</h1>
 	</div>
 
 	<div id="menu">
@@ -139,7 +132,7 @@
 		</form>
 		<br>
 		<div id="tablespace"></div>
-		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div id="container"></div>
 		
 	</div>
 </body>

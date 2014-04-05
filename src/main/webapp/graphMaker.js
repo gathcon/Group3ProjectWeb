@@ -1,26 +1,26 @@
 
-function graph(names, numbers) {
+function graph(names, numbers, graphTitle, subTitle, xTitle, yTitle) {
         var options = {
             chart: {
                 renderTo: 'container',
 				type: 'bar'
             },
             title: {
-                text: 'Top 10 Nodes with Failures'
+                text: graphTitle
             },
             subtitle: {
-                text: 'Given Time Period'
+                text: subTitle
             },
             xAxis: {
                 categories: names,
                 title: {
-                    text: 'Nodes'
+                    text: xTitle
                 }
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Failures',
+                    text: yTitle,
                     align: 'high'
                 },
                 labels: {
@@ -28,7 +28,7 @@ function graph(names, numbers) {
                 }
             },
             tooltip: {
-                valueSuffix: ' failures'
+                valueSuffix: yTitle
             },
             plotOptions: {
                 bar: {
@@ -57,7 +57,7 @@ function graph(names, numbers) {
                 enabled: false
             },
             series: [ {
-                name: 'Failures',
+                name: yTitle,
                 data: numbers
             }]
         };
