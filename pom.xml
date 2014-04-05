@@ -56,7 +56,7 @@
 				<executions>
 					<!-- Undeploy the application on clean -->
 					<execution>
-						<id>undeploy</id>
+						<id>undeploy-local</id>
 						<phase>clean</phase>
 						<goals>
 							<goal>undeploy</goal>
@@ -69,12 +69,25 @@
 					</execution>
 					<!-- Deploy the application on install -->
 					<execution>
-						<id>deploy</id>
+						<id>deploy-local</id>
 						<phase>install</phase>
 						<goals>
 							<goal>deploy</goal>
 						</goals>
 						<configuration>
+							<username>group3</username>
+							<password>airwolf</password>
+						</configuration>
+					</execution>
+					<execution>
+						<id>deploy-remote</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<force>true</force>
+							<hostname>54.200.55.211</hostname>
 							<username>group3</username>
 							<password>airwolf</password>
 						</configuration>
@@ -116,12 +129,12 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.6.5.201403032054</version>
 				<executions>
-					 <execution>
+					<execution>
 						<id>reportinitialise</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
-					</execution> 
+					</execution>
 					<execution>
 						<id>report</id>
 						<phase>prepare-package</phase>
