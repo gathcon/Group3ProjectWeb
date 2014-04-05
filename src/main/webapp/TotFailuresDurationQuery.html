@@ -4,6 +4,12 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
+	
+	<script src = "jquery-1.11.0.min.js"></script>
+	<script src="highcharts.js"></script>
+	<script src="exporting.js"></script>
+	<script src="graphMaker.js"></script>
+	
 <script>
 	var selectedRows = new Array();
 	
@@ -53,7 +59,7 @@
 					myTable += "<tr>"
 				}
 
-				myTable += "<td id='Imsi-" + i + "' onclick='test(this)'>" + imsi + "</td><td id='Failure-" + i + "'>" + failures
+				myTable += "<td id='Imsi-" + i + "' onclick='addToArray(this)'>" + imsi + "</td><td id='Failure-" + i + "'>" + failures
 						+ "</td><td id='Duration-" + i + "'>" + duration + "</td></tr>";
 			}
 			myTable += "</table>";
@@ -65,7 +71,7 @@
 		}
 	}
 
-	function test(cell) {
+	function addToArray(cell) {
 		var id = cell.id;
 		var colRow = id.split("-");
 		var row = colRow[1];
@@ -78,23 +84,56 @@
 		selectedRow[1] = selectedFail.innerHTML;
 		selectedRow[2] = selectedDuration.innerHTML;
 
-		if checkSelected(selectedRow) {
+		if (checkSelected(selectedRow)){
 			selectedRows.push(selectedRow);
 			}
-		
-		alert("Number of selected rows is : " + selectedRows.length);
+		printGraph();
 	}	
 
-	/* function checkSelected(row) {
+	function checkSelected(row) {
 		selectedImsi = row[0];
 		
 		for(var i = 0; i < selectedRows.length; i++) {
-			if(selectedRows[i][0] == selectedImsi)
-				alert("Already selected");
+			if(selectedRows[i][0] == selectedImsi){
+				selectedRows.splice(i,1);
 				return false;
 			}
+			}
 		return true;
-	} */
+	}
+
+	function printGraph(){
+
+		var imsiArray = new Array();
+		var failureArray = new Array();
+		var durationArray = new Array();
+
+		for(var i = 0; i < selectedRows.length; i++) {
+
+			var thisimsi = selectedRows[i][0];
+			var thisfailure = parseFloat(selectedRows[i][1]);
+			var thisduration = parseFloat(selectedRows[i][2])/1000;
+			
+			imsiArray.push(thisimsi);
+			failureArray.push(thisfailure);
+			durationArray.push(thisduration);
+
+			}
+		var title = "Selected Imsis and durations";
+		var subtitle = selectedRows.length+ " Imsis selected";
+		var xAxis = "Imsi";
+		var yAxis = "Failures";
+
+		failuresGraph(imsiArray, failureArray, title, subtitle, xAxis, yAxis, durationArray);
+
+		}
+
+	function clearGraph(){
+		var length = selectedRows.length;
+		selectedRows.splice(0, length);
+		printGraph();
+		}
+	
 </script>
 </head>
 
@@ -129,10 +168,14 @@
 					onclick="getJSON('jaxrs/base_Datas/TotalFailuresDurationForIMSIs/' + document.getElementById('startdatetime').value 
 				+ '/' + document.getElementById('enddatetime').value);"
 					value="Query" size="20">
+					<input type="button" name="Clear"
+					onclick="clearGraph()" value ="Clear Selected Imsis" size="20">
 			</fieldset>
 		</form>
 		<br>
 		<div id="tablespace"></div>
+		<div id="failuresGraph"></div>
+		<div id="durationsGraph"></div>
 	</div>
 </body>
 </html>
