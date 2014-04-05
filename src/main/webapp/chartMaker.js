@@ -24,6 +24,10 @@ function chart(chartData) {
                 }
             }
         },
+        exporting: { enabled: false},
+        credits: {
+            enabled: false
+        },
         series: [{
             type: 'pie',
             name: 'Failures',

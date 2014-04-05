@@ -5,6 +5,8 @@
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 <script>
+	var selectedRows = new Array();
+	
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
 	
@@ -51,8 +53,8 @@
 					myTable += "<tr>"
 				}
 
-				myTable += "<td>" + imsi + "</td><td>" + failures
-						+ "</td><td>" + duration + "</td></tr>";
+				myTable += "<td id='Imsi-" + i + "' onclick='test(this)'>" + imsi + "</td><td id='Failure-" + i + "'>" + failures
+						+ "</td><td id='Duration-" + i + "'>" + duration + "</td></tr>";
 			}
 			myTable += "</table>";
 
@@ -62,6 +64,37 @@
 			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
 		}
 	}
+
+	function test(cell) {
+		var id = cell.id;
+		var colRow = id.split("-");
+		var row = colRow[1];
+		var selectedImsi = document.getElementById(id);
+		var selectedFail = document.getElementById("Failure-" + row);
+		var selectedDuration = document.getElementById("Duration-" + row);
+
+		var selectedRow = new Array(3);
+		selectedRow[0] = selectedImsi.innerHTML;
+		selectedRow[1] = selectedFail.innerHTML;
+		selectedRow[2] = selectedDuration.innerHTML;
+
+		if checkSelected(selectedRow) {
+			selectedRows.push(selectedRow);
+			}
+		
+		alert("Number of selected rows is : " + selectedRows.length);
+	}	
+
+	/* function checkSelected(row) {
+		selectedImsi = row[0];
+		
+		for(var i = 0; i < selectedRows.length; i++) {
+			if(selectedRows[i][0] == selectedImsi)
+				alert("Already selected");
+				return false;
+			}
+		return true;
+	} */
 </script>
 </head>
 
