@@ -4,7 +4,17 @@
 	<groupId>com.Project_Maven</groupId>
 	<artifactId>project</artifactId>
 	<version>Group3ProjectWeb</version>
+	<name>project</name>
 	<packaging>war</packaging>
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>repo</id>
+			<name>Project Repository</name>
+			<url>file:///home/repo</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
 	<profiles>
 		<profile>
 			<id>arquillian-jbossas-remote</id>
@@ -258,5 +268,4 @@
 			<version>1.9.5</version>
 		</dependency>
 	</dependencies>
-	<name>project</name>
 </project>
