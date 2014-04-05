@@ -44,11 +44,12 @@
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<tr><th>Affected IMSIs</th></tr>";
+			myTable += "<tr><th>Affected IMSIs</th><th>Phone Model</th></tr>";
 
 			for (var i = 0; i < size; i++) {
 
 				var imsi = obj[i].imsi;
+				var phoneModel = obj[i].userEquipment.marketingName;
 
 				if (i % 2 == 0)
 				{
@@ -60,7 +61,7 @@
 				}
 				
 				myTable += "<td>" + imsi
-				+ "</td></tr>";
+				+ "</td><td>" + phoneModel + "</td></tr>";
 			}
 			myTable += "</table>";
 
