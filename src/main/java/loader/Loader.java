@@ -100,17 +100,6 @@ public class Loader {
 			}
 		}
 	}
-	
-	private void persistBase_Data(HSSFSheet sheet, EntityType e) {
-		List<TableRow> rows = new ArrayList<TableRow>();
-		for(Row row: sheet) {
-			if(row.getRowNum() != 0) {
-				TableRow entity = converter.convert((HSSFRow) row, e);
-				rows.add(entity);
-			}
-		}
-		base_DataDAO.persist(rows);
-	}
 
 	public HSSFWorkbook getFileFrom(String excelWorkBookLocation) throws IOException  {
         return new HSSFWorkbook(new FileInputStream(excelWorkBookLocation));
