@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.Operator;
 import model.TableRow;
 import model.User_Equipment;
 

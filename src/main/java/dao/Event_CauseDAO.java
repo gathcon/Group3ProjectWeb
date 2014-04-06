@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.Base_Data;
 import model.Event_Cause;
 import model.Event_CausePK;
 import model.TableRow;
