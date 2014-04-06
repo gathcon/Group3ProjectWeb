@@ -7,6 +7,33 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+
+function validate() { 
+	var fileName = document.form.uploadedFile.value;
+	var length = fileName.length;
+	var index = length-4;
+	var fileType = fileName.substr(index,4);
+	if(fileName == ""){ 
+		window.location.replace('DataLoader.html');
+		alert("No file selected");
+		return false;
+	}
+	if(fileType != ".xls"){ 
+		window.location.replace('DataLoader.html'); 
+		alert("File must have a .xls extension");
+		return false;
+	}
+	return true;
+}
+
+function logout() {
+	sessionStorage.removeItem("userName");
+	sessionStorage.removeItem("userType");
+	window.location.replace("./index.html");
+}
+
+</script>
 </head>
 <body>
 	<div id="logo">
@@ -28,13 +55,12 @@
 	</div>
 
 	<div id="mainbody">
-		<form class="form" action="jaxrs/file/upload" method="post"
+		<form name="form" class="form" action="jaxrs/file/upload" method="post"
 			enctype="multipart/form-data">
 
 			<label for="uploadedFile">Select a file : </label>
-			<input type="file" name="uploadedFile" size="50" />
-			<input type="submit" class="button"
-				value="Upload" />
+			<input type="file" name="uploadedFile" size="50" onchange="if(validate()){document.form.submit.disabled=false}"/>
+			<input type="submit" name="submit" class="button" value="Upload" disabled/>
 		</form>
 	</div>
 
