@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500' rel='stylesheet' type='text/css'>
 
 <script>
@@ -20,15 +20,6 @@
 		sessionStorage.removeItem("userType");
 	}
 
-	function processData(){
-
-		var selector = document.getElementById("failureSelector");
-		var failureElement = selector.options[selector.selectedIndex].text.split(":");	
-		var failureClass = failureElement[0];
-		
-		getJSON('jaxrs/base_Datas/IMSIByFailureId/' 
-				+ failureClass);
-		}
 
 	function getJSON(url) {
 
@@ -44,10 +35,9 @@
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<tr><th>Affected IMSIs</th><th>Phone Model</th></tr>";
+			myTable += "<tr><th>IMSIs</th><th>Phone Model</th></tr>";
 
 			for (var i = 0; i < size; i++) {
-
 				var imsi = obj[i].imsi;
 				var phoneModel = obj[i].userEquipment.marketingName;
 
@@ -59,16 +49,15 @@
 				{
 					myTable += "<tr>"
 				}
-				
-				myTable += "<td>" + imsi
-				+ "</td><td>" + phoneModel + "</td></tr>";
+		
+				myTable += "<td>" + imsi + "</td><td>" + phoneModel + "</td></tr>";
 			}
 			myTable += "</table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
 
 		} catch (err) {
-			document.getElementById("tablespace").innerHTML = "No records found for failure class submitted.";
+			document.getElementById("tablespace").innerHTML = "No records found for inputs submitted.";
 		}
 	}
 </script>
@@ -80,7 +69,7 @@
 	</div>
 
 	<div id="heading">
-		<h1>Get IMSIs by failure class</h1>
+		<h1>Get IMSIs with failures between date range</h1>
 	</div>
 
 	<div id="menu">
@@ -96,16 +85,15 @@
 	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>
-			<select id="failureSelector">
-			  <option value="0">0:EMERGENCY</option>
-			  <option value="1">1:HIGH PRIORITY ACCESS</option>
-			  <option value="2">2:MT ACCESS</option>
-			  <option value="3">3:MO SIGNALLING</option>
-			  <option value="4">4:MO DATA</option>
-			</select>	
+			<label for="startdatetime">Start DateTime:</label> 
+			<input type="datetime-local" id="startdatetime" name="startDate">
+			<label for="enddatetime">End DateTime:</label> 
+			<input type="datetime-local" id="enddatetime" name="endDate"> 
 			
 			<label for="submit"></label> 
-			<input type="button" name="submit" onclick="processData()" value="Query" size="20">
+			<input type="button" name="submit" onclick="getJSON('jaxrs/base_Datas/IMSIByDateRange/' 
+			+ document.getElementById('startdatetime').value 
+			+ '/' + document.getElementById('enddatetime').value);" value="Query" size="20">
 			</fieldset>
 		</form>
 		<br>
