@@ -1,9 +1,9 @@
 $("#table").click(function(){
 	$("#tablespace").show();
-	$(".container").hide();
+	$("#container").hide();
 });
 
 $("#graph").click(function(){
-	$(".container").show();
+	$("#container").show();
 	$("#tablespace").hide();
 });

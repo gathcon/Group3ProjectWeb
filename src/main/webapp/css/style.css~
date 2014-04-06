@@ -139,7 +139,7 @@ td, th
   background: #336699;
 }
 
-.container {
+#container {
 	min-width: 310px;
 	width: 70%; 
 	height: 400px; 

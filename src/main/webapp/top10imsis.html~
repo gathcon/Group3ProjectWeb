@@ -85,7 +85,8 @@
 		}
 	}
 
-	function processData() {if (validate(document.getElementById('startdatetime').value, document
+	function processData() {
+		if (validate(document.getElementById('startdatetime').value, document
 				.getElementById('enddatetime').value)) {
 			alert('You entered invalid content');
 		} else {
@@ -141,7 +142,6 @@
 		<button id="table">Table</button>
 		<button id="graph">Graph</button>
 		<div id="tablespace"></div>
-		<div class="container"></div>
 	</div>
 </body>
 </html>
