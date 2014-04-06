@@ -4,13 +4,17 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
-
+	
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/exporting.js"></script>
+	<script src="js/graphMaker.js"></script>
+	
 <script>
-
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
 	
-		if (currentUserType != "supportEng" && currentUserType != "networkEng") {
+		if (currentUserType != "networkEng") {
 			location.replace("wrongUser.html");
 		} else {
 		}
@@ -41,6 +45,7 @@
 				var model = obj[i].userEquipment.model;
 
 				mySelector += "<option value=i>" + model + "</option>";
+				
 			}
 			mySelector += "</select>";
 
@@ -57,10 +62,7 @@
 		var selector = document.getElementById("modelSelector");
 		var model = selector.options[selector.selectedIndex].text;	
 
-		getJSON('jaxrs/base_Datas/FailureCountByModelAndByDateRange/' 
-				+ model + '/' 
-				+ document.getElementById('startdatetime').value + '/' 
-				+ document.getElementById('enddatetime').value);
+		getJSON('jaxrs/base_Datas/eventID_CauseCodeByModel/' + model);
 		}
 
 	function getJSON(url) {
@@ -73,12 +75,52 @@
 
 			var txt = JSONRequest.responseText;
 			var obj = eval("(" + txt + ")");
+		
+			var size = obj.length;
 
-			document.getElementById("msg").innerHTML = "The number of failures for this phone model and date range";
-			document.getElementById("count").innerHTML = obj;
+			var names = new Array();
+			var numbers = new Array();
+			
+			var myTable = "<table>";
+			myTable += "<tr><th>Event Id</th><th>Cause Code</th><th>Count</th></tr>";
+
+			for (var i = 0; i < size; i++) {
+
+				var objects = obj[i];
+				var event = objects[0].id.eventId;
+				var causeCode = objects[0].id.causeCode;
+				var count = objects[1];
+
+				if (i % 2 == 0)
+				{
+					myTable += "<tr class=\'grey\'>"
+				}
+				else
+				{
+					myTable += "<tr>"
+				}
+
+				myTable += "<td>" + event + "</td><td>" + causeCode
+						+ "</td><td>" + count + "</td></tr>";
+
+				names[i]=event+"-"+causeCode;
+				numbers[i]=count;
+				
+			}
+			myTable += "</table>";
+
+			document.getElementById("tablespace").innerHTML = myTable;
+
+			var title = "EventID-CauseCode Combinations";
+			var selector = document.getElementById("modelSelector");
+			var subtitle = selector.options[selector.selectedIndex].text;
+			var xTitle = "EventID-CauseCode";
+			var yTitle = "Failures";
+			
+			graph(names, numbers, title, subtitle, xTitle, yTitle);		
 
 		} catch (err) {
-			document.getElementById("msg").innerHTML = "No record found for inputs submitted.";
+			document.getElementById("tablespace").innerHTML = "No record found for inputs submitted";
 		}
 	}
 </script>
@@ -90,8 +132,8 @@
 	</div>
 
 	<div id="heading">
-		<h1>Get the count of failures for a phone model between date
-			range</h1>
+		<h1>Get event Id-cause code combinations and number of 
+			occurrences for a given phone model</h1>
 	</div>
 
 	<div id="menu">
@@ -100,28 +142,24 @@
 				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
-			<li><a class="menulinks" href="supportEngHome.html">Back</a></li>
+			<li><a class="menulinks" href="networkEngHome.html">Back</a></li>
 		</ul>
 	</div>
 
 	<div id="mainbody">
 		<form name='inputForm'>
 			<fieldset>
-				<label for=selectorspace>Phone Model:</label> <span
-					id="selectorspace"></span> <br> <label for="startdatetime">Start
-					DateTime:</label> <input type="datetime-local" id="startdatetime"
-					name="startDate"> <label for="enddatetime">End
-					DateTime:</label> <input type="datetime-local" id="enddatetime"
-					name="endDate"> <label for="submit"></label> <input
-					type="button" name="submit" onclick="processData()" value="Query"
-					size="20">
+
+				<label for=selectorspace> Phone Model: </label> <span id="selectorspace"></span>
+
+				<input type="button" name="submit"
+					onclick="processData();"
+					value="Query" size="20">
 			</fieldset>
 		</form>
 		<br>
-		<p id="msg"></p>
-		<p id="count"></p>
+		<div id="tablespace"></div>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</div>
-</body>
-
 </body>
 </html>

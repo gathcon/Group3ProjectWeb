@@ -5,7 +5,7 @@
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
 
-		if (currentUserType != "networkEng") {
+		if (currentUserType != "customerServiceRep" && currentUserType != "supportEng" && currentUserType != "networkEng") {
 			location.replace("wrongUser.html");
 		} else {
 		}
@@ -17,9 +17,9 @@
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Network Management Engineer Home</title>
+<title>Customer Service Rep Home</title>
 
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 </head>
@@ -29,7 +29,7 @@
 	</div>
 
 	<div id="heading">
-		<h1>Network Management Engineer Query Menu</h1>
+		<h1>Customer Service Rep Home</h1>
 	</div>
 
 	<div id="menu">
@@ -38,23 +38,17 @@
 				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
-			<li><a class="menulinks" href="customerServiceRepHome.html">Customer Service Queries</a></li>
-			<li><a class="menulinks" href="supportEngHome.html">Support Engineer Queries</a></li>
 		</ul>
 	</div>
 
 	<div id="mainbody">
 		<ul>
-			<li><a class="querylinks" href="TotFailuresDurationQuery.html">All
-					IMSIs with the number of call failures and their total duration
-					between date range</a></li>
-			<li><a class="querylinks" href="top10imsis.html">Get the top
-					ten IMSIs with failures between date range</a></li>
-			<li><a class="querylinks" href="EventCauseByModel.html">Get
-					event Id-cause code combinations and failure occurrences by phone
-					model</a></li>
-			<li><a class="querylinks" href="top10Combinations.html">Get
-					Top 10 Market/Operator/Cell ID combinations by date range</a></li>
+			<li><a class="querylinks" href="CustomerServiceQuery1.html">All
+					Event ID and Cause Codes associated by Imsi</a></li>
+			<li><a class="querylinks" href="failcountdates.html">Number
+					of Failures by Date</a></li>
+			<li><a class="querylinks" href="UniqueCauseCodeByIMSI.html">Unique
+					Cause Codes Associated with an IMSI</a></li>
 		</ul>
 	</div>
 </body>

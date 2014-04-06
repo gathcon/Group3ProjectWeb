@@ -1,5 +1,3 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,9 +17,9 @@
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EventID and Cause Code by IMSI</title>
+<title>Cause Code by IMSI</title>
 
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 
@@ -58,15 +56,6 @@ function getImsis(url) {
 	}
 	}
 
-	function validate(imsi) {
-
-		if ((!(/^[0-9 -:.]+$/.test(imsi)))) {
-			alert("Invalid input characters.");
-		} else if (imsi.length != 15) {
-			alert("Invalid input length.");
-		}
-	}
-
 	function getJSON(url) {
 
 		try {
@@ -80,14 +69,13 @@ function getImsis(url) {
 			var size = obj.length;
 
 			var myTable = "<table>";
-			myTable += "<tr><th>Number</th><th>Description</th><th>Event ID</th><th>Cause Code</th></tr>";
+			myTable += "<tr><th>Cause Code</th><th>Failures</th></tr>";
 
 			for (var i = 0; i < size; i++) {
 
-				var eventId = obj[i].id.eventId;
-				var causeCode = obj[i].id.causeCode;
-				var description = obj[i].description;
-				var num = i+1;
+				var objects = obj[i];
+				var causeCode = objects[0];
+				var failures = objects[1];
 
 				if (i % 2 == 0)
 				{
@@ -97,14 +85,12 @@ function getImsis(url) {
 				{
 					myTable += "<tr>"
 				}
-				
-				myTable += "<td>"+ num +"</td><td>"+ description +"</td><td>" + eventId + "</td><td>" + causeCode
-						+ "</td></tr>";
+
+				myTable += "<td>" + causeCode + "</td><td>" + failures + "</td></tr>";
 			}
 			myTable += "</table>";
 
 			document.getElementById("tablespace").innerHTML = myTable;
-
 		}
 
 		catch (err) {
@@ -119,10 +105,9 @@ function getImsis(url) {
 		var selector = document.getElementById("ImsiSelector");
 		var imsiText = selector.options[selector.selectedIndex].text;
 		var imsi = new Number(imsiText);
-		getJSON('jaxrs/base_Datas/eventID_CauseCodeByImsi/'
+		getJSON('jaxrs/base_Datas/uniqueCauseCodeByImsi/'
 		+ imsi);
 		}
-
 	
 </script>
 </head>
@@ -133,7 +118,7 @@ function getImsis(url) {
 	</div>
 
 	<div id="heading">
-		<h1>Get EventId and Cause Codes associated with the given Imsi</h1>
+		<h1>Get unique Cause Codes and corresponding number of failures associated with an Imsi</h1>
 	</div>
 
 	<div id="menu">

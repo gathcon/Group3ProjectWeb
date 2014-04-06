@@ -4,22 +4,22 @@
 <script>
 	function checkUser() {
 		var currentUserType = sessionStorage.getItem("userType");
-
-		if (currentUserType != "networkEng") {
+	
+		if (currentUserType != "supportEng" && currentUserType != "networkEng") {
 			location.replace("wrongUser.html");
 		} else {
 		}
 	}
-
+	
 	function logout() {
 		sessionStorage.removeItem("userName");
 		sessionStorage.removeItem("userType");
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Network Management Engineer Home</title>
+<title>Support Engineer Menu</title>
 
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 </head>
@@ -29,7 +29,7 @@
 	</div>
 
 	<div id="heading">
-		<h1>Network Management Engineer Query Menu</h1>
+		<h1>Support Engineer Home</h1>
 	</div>
 
 	<div id="menu">
@@ -39,22 +39,18 @@
 			<li><a class="menulinks" href="javascript:void(0);"
 				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
 			<li><a class="menulinks" href="customerServiceRepHome.html">Customer Service Queries</a></li>
-			<li><a class="menulinks" href="supportEngHome.html">Support Engineer Queries</a></li>
 		</ul>
+
 	</div>
 
 	<div id="mainbody">
 		<ul>
-			<li><a class="querylinks" href="TotFailuresDurationQuery.html">All
-					IMSIs with the number of call failures and their total duration
-					between date range</a></li>
-			<li><a class="querylinks" href="top10imsis.html">Get the top
-					ten IMSIs with failures between date range</a></li>
-			<li><a class="querylinks" href="EventCauseByModel.html">Get
-					event Id-cause code combinations and failure occurrences by phone
-					model</a></li>
-			<li><a class="querylinks" href="top10Combinations.html">Get
-					Top 10 Market/Operator/Cell ID combinations by date range</a></li>
+			<li><a class="querylinks" href="IMSIWithFailuresQuery.html">Find
+					IMSIs with failures</a></li>
+			<li><a class="querylinks" href="IMSIByFailureId.html">Find
+					IMSIs by failure class</a></li>
+			<li><a class="querylinks" href="FailureCountByModel.html">Find
+					Failures by phone model</a></li>
 		</ul>
 	</div>
 </body>

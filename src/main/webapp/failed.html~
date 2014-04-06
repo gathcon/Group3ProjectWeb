@@ -19,12 +19,11 @@
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
+	rel='stylesheet' type='text/css'>
 </head>
 <body onload="checkUser();">
-	<h1></h1>
-
-
 	<div id="logo">
 		<img src="Ericsson.png">
 	</div>
@@ -42,7 +41,7 @@
 	</div>
 
 	<div id="mainbody">
-		<form action="viewSysAdmin.html">
+		<form action="sysAdminHome.html">
 			<input type="submit" value="Continue" size="20" />
 		</form>
 	</div>
