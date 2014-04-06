@@ -11,6 +11,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import model.EntityType;
 import model.TableRow;
@@ -33,8 +35,6 @@ public class Loader {
 	RowConverter converter;
 	@EJB
 	DAOManager daoManager;
-	@EJB
-	Base_DataDAO base_DataDAO;
 		
 	public void loadFile(String excelWorkBookLocation) {
 		
@@ -104,4 +104,30 @@ public class Loader {
 	public HSSFWorkbook getFileFrom(String excelWorkBookLocation) throws IOException  {
         return new HSSFWorkbook(new FileInputStream(excelWorkBookLocation));
     }
+
+	public ValidationManager getValidator() {
+		return validator;
+	}
+
+	public void setValidator(ValidationManager validator) {
+		this.validator = validator;
+	}
+
+	public RowConverter getConverter() {
+		return converter;
+	}
+
+	public void setConverter(RowConverter converter) {
+		this.converter = converter;
+	}
+
+	public DAOManager getDaoManager() {
+		return daoManager;
+	}
+
+	public void setDaoManager(DAOManager daoManager) {
+		this.daoManager = daoManager;
+	}
+	
+	
 }

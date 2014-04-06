@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.Base_Data;
 import model.Failure;
 import model.TableRow;
 
@@ -40,6 +41,12 @@ public class FailureDAO implements DAOInterface{
 	
 	public Failure getFailure(int id) {
 		return em.find(Failure.class, id);
+	}
+
+	public List<Failure> getAllFailure() {
+		@SuppressWarnings("unchecked")
+		List<Failure> failure = (List<Failure>) em.createNamedQuery("Failure.findAll").getResultList();
+		return failure;
 	}
 
 }

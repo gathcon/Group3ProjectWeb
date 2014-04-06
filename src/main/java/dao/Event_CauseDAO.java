@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.Base_Data;
 import model.Event_Cause;
 import model.Event_CausePK;
 import model.TableRow;
@@ -42,5 +43,11 @@ public class Event_CauseDAO implements DAOInterface{
 	
 	public Event_Cause getEvent_Cause(Event_CausePK id) {
 		return em.find(Event_Cause.class, id);
+	}
+	
+	public List<Event_Cause> getAllEvent_Cause() {
+		@SuppressWarnings("unchecked")
+		List<Event_Cause> event_Cause = (List<Event_Cause>) em.createNamedQuery("Event_Cause.findAll").getResultList();
+		return event_Cause;
 	}
 }

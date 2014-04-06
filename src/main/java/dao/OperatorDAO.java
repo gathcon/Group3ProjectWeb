@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.Base_Data;
 import model.Operator;
 import model.OperatorPK;
 import model.TableRow;
@@ -42,5 +43,11 @@ public class OperatorDAO implements DAOInterface{
 	
 	public Operator getOperator(OperatorPK id) {
 		return em.find(Operator.class, id);
+	}
+
+	public List<Operator> getAllOperator() {
+		@SuppressWarnings("unchecked")
+		List<Operator> operator = (List<Operator>) em.createNamedQuery("Operator.findAll").getResultList();
+		return operator;
 	}
 }

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.Operator;
 import model.TableRow;
 import model.User_Equipment;
 
@@ -40,5 +41,11 @@ public class User_EquipmentDAO implements DAOInterface{
 	
 	public User_Equipment getUser_Equipment(int id) {
 		return em.find(User_Equipment.class, id);
+	}
+
+	public List<User_Equipment> getAllUser_Equipment() {
+		@SuppressWarnings("unchecked")
+		List<User_Equipment> user_Equipment = (List<User_Equipment>) em.createNamedQuery("User_Equipment.findAll").getResultList();
+		return user_Equipment;
 	}
 }
