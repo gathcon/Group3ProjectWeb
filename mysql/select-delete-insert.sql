@@ -4,6 +4,7 @@ delete from Event_Cause;
 delete from Operator;
 delete from User_Equipment;
 delete from User;
+INSERT INTO User (user_name, password, user_type) VALUES ('conor','conor','sysAdmin');
 
 select * from Base_Data;
 select * from Failure;

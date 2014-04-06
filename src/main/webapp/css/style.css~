@@ -146,3 +146,41 @@ td, th
 	float: right;
 	margin: 0 auto; 
 }
+
+.toggle
+{
+	display:none;
+}
+<<<<<<< HEAD
+=======
+
+#durationsGraph {
+	min-width: 310px;
+	width: 70%; 
+	height: 400px; 
+	float: right;
+	margin: 0 auto; 
+}
+
+#loginFieldset {
+	border: none;
+	margin: 0px auto;
+}
+
+#loginButton {
+	margin: 5px;
+	min-width: 100px;
+}
+
+.loginLabel {
+	display: inline-block;
+	width: 100px;
+	margin-right: 30px;
+	margin-bottom: 5px;
+	text-align: right;
+}
+
+.loginInput {
+	width:200px;
+}
+>>>>>>> ea9e4a97c38db93e94447ab329566b0f4c0b1b6a
