@@ -30,6 +30,8 @@ public class DataLoaderWS {
 	@Consumes("multipart/form-data")
 	public Response uploadFile(@MultipartForm FileUploadForm form) {
 		
+		long start = System.currentTimeMillis();
+		
 		String fileName = "/home/uploadedData.xls";
 		
 		try {
@@ -40,6 +42,8 @@ public class DataLoaderWS {
 		}
 
 		loader.loadFile(fileName);
+		
+		long time = System.currentTimeMillis() - start;
 		
 		return Response.status(200)
 				.entity("<!DOCTYPE html><html><head><meta charset='UTF-8'>"
@@ -53,6 +57,9 @@ public class DataLoaderWS {
 						+ "<div id='menu'><ul></ul></div>"
 						+ "<div id='mainbody'>"
 						+ "<form action='../../sysAdminHome.html'><input type='submit' value='Continue' size='20' /></form>"
+						+ "<p>Time taken: "
+						+ time
+						+ "</p>"
 						+ "</div>"
 						+ "</body>"
 						+ "</html>").build();

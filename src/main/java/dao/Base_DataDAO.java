@@ -33,7 +33,7 @@ public class Base_DataDAO implements DAOInterface{
 
 		    em.persist(row);
 
-		    if(++i % 100 == 0) {
+		    if(++i % 200 == 0) {
 		        em.flush();
 		        em.clear();
 		    }

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -30,10 +32,11 @@ import java.util.Date;
 })
 public class Base_Data extends TableRow implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "data_id")
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "data_id", nullable = false)
 	private int dataId;
 
 	@Column(name = "cell_id")

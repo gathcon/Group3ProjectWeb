@@ -57,7 +57,7 @@ public class Loader {
 			persist(workbook.getSheetAt(4), EntityType.OPERATOR);
 			long split5 = System.currentTimeMillis();
 	        
-			persistBase_Data(workbook.getSheetAt(0), EntityType.BASEDATA);
+			persist(workbook.getSheetAt(0), EntityType.BASEDATA);
 			long split6 = System.currentTimeMillis();
 			
 			try {
