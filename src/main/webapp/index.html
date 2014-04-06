@@ -24,10 +24,10 @@
 	
 	<div id="mainbody">
 		<form name="myForm">
-		<fieldset>
-			<label for="username">Username:</label> <input type="text" name="username" maxlength="45" id="uname"><br>
-			<label for="password">Password:</label> <input type="password" name="password" maxlength="45" id="pword"><br>
-			<label for="button"></label><input type="button" name="button" onclick="login()" value="Login" />
+		<fieldset id="loginFieldset">
+			<label for="username" class="loginLabel">Username:</label> <input class="loginInput" type="text" name="username" maxlength="45" id="uname"><br>
+			<label for="password" class="loginLabel">Password:</label> <input class="loginInput" type="password" name="password" maxlength="45" id="pword"><br>
+			<label for="button" class="loginLabel"></label><input id="loginButton" type="button" name="button" onclick="login()" value="Login" />
 			<p id="error"></p>
 		</fieldset>
 	</form>
