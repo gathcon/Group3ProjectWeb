@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 
@@ -119,7 +119,7 @@
 		</form>
 		<br>
 		<div id="tablespace"></div>
-		<div id="container"></div>
+		<div class="container"></div>
 		
 	</div>
 </body>

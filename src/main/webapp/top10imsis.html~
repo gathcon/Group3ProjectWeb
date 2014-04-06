@@ -5,10 +5,11 @@
 <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,500'
 	rel='stylesheet' type='text/css'>
 
-	<script src="jquery-1.11.0.min.js"></script>
-	<script src="highcharts.js"></script>
-	<script src="exporting.js"></script>
-	<script src="graphMaker.js"></script>
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/exporting.js"></script>
+	<script src="js/graphMaker.js"></script>
+	<script src="js/showHide.js"></script>
 
 <script>
 	function checkUser() {
@@ -85,6 +86,7 @@
 	}
 
 	function processData() {
+		$(".toggle").show();
 
 		if (validate(document.getElementById('startdatetime').value, document
 				.getElementById('enddatetime').value)) {
@@ -138,9 +140,18 @@
 			</fieldset>
 		</form>
 		<br>
+		<br>
+		<ul>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
+			<li><a class="menulinks" href="javascript:void(0);"
+				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
+			<li><a class="menulinks" href="networkEngHome.html">Back</a></li>
+		</ul>
+		<a class="toggle">Table</a>
+		<a class="toggle">Graph</a>
 		<div id="tablespace"></div>
-		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		
+		<div class="container"></div>
 	</div>
 </body>
 </html>
