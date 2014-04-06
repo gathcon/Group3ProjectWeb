@@ -140,17 +140,12 @@ td, th
 }
 
 .container {
+	display:none;
 	min-width: 310px;
 	width: 70%; 
 	height: 400px; 
 	float: right;
 	margin: 0 auto; 
-}
-<<<<<<< HEAD
-
-.toggle
-{
-	display:none;
 }
 
 #durationsGraph {
@@ -182,5 +177,3 @@ td, th
 .loginInput {
 	width:200px;
 }
-=======
->>>>>>> show

@@ -147,14 +147,6 @@ td, th
 	margin: 0 auto; 
 }
 
-<<<<<<< HEAD
-.toggle
-{
-	display:none;
-}
-<<<<<<< HEAD
-=======
-
 #durationsGraph {
 	min-width: 310px;
 	width: 70%; 
@@ -184,10 +176,3 @@ td, th
 .loginInput {
 	width:200px;
 }
->>>>>>> ea9e4a97c38db93e94447ab329566b0f4c0b1b6a
-=======
-#toggle
-{
-	display:none;
-}
->>>>>>> show
