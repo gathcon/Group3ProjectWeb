@@ -86,8 +86,6 @@
 	}
 
 	function processData() {
-		$(".toggle").show();
-
 		if (validate(document.getElementById('startdatetime').value, document
 				.getElementById('enddatetime').value)) {
 			alert('You entered invalid content');
@@ -141,17 +139,8 @@
 		</form>
 		<br>
 		<br>
-		<ul>
-			<li><a class="menulinks" href="javascript:void(0);"
-				onclick="window.location.replace(sessionStorage.getItem('userType') + 'Home.html'); return false;">Home</a></li>
-			<li><a class="menulinks" href="javascript:void(0);"
-				onclick="logout(); window.location.replace('index.html'); return false;">Logout</a></li>
-			<li><a class="menulinks" href="networkEngHome.html">Back</a></li>
-		</ul>
-		<ul>
-			<li><a class="toggle">Table</a></li>
-			<li><a class="toggle">Graph</a></li>
-		</ul>
+		<button id="table">Table</button>
+		<button id="graph">Graph</button>
 		<div id="tablespace"></div>
 		<div class="container"></div>
 	</div>
