@@ -146,3 +146,8 @@ td, th
 	float: right;
 	margin: 0 auto; 
 }
+
+#toggle
+{
+	display:none;
+}
