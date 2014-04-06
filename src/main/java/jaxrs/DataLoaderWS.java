@@ -59,14 +59,13 @@ public class DataLoaderWS {
 						+ "<form action='../../sysAdminHome.html'><input type='submit' value='Continue' size='20' /></form>"
 						+ "<p>Time taken: "
 						+ time
-						+ "</p>"
+						+ " ms</p>"
 						+ "</div>"
 						+ "</body>"
 						+ "</html>").build();
 
 	}
  
-	// save to somewhere
 	private void writeFile(byte[] content, String filename) throws IOException {
  
 		File file = new File(filename);
