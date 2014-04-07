@@ -141,34 +141,26 @@ td, th
 
 #container {
 	min-width: 310px;
-	width: 70%; 
+	width: 55%; 
 	height: 400px; 
 	float: right;
-	margin: 0 auto; 
+	margin: 0 auto;
 }
 
 #failuresGraph {
 	min-width: 310px;
-	width: 70%; 
+	width: 55%; 
 	height: 400px; 
 	float: right;
-	margin: 0 auto; 
+	margin: 0 auto;
 }
 
 #durationsGraph {
 	min-width: 310px;
-	width: 70%; 
+	width: 55%; 
 	height: 400px; 
 	float: right;
-	margin: 0 auto; 
-}
-
-#durationsGraph {
-	min-width: 310px;
-	width: 70%; 
-	height: 400px; 
-	float: right;
-	margin: 0 auto; 
+	margin: 0 auto;
 }
 
 #loginFieldset {
